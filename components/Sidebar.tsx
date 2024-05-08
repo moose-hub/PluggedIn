@@ -1,5 +1,9 @@
 // components/Sidebar.tsx
 import Link from "next/link";
+import { FaHeart, } from "react-icons/fa";
+import { PiMusicNotesPlusFill, PiMicrophoneStageFill } from "react-icons/pi";
+import Image from "next/image";
+
 
 const Sidebar = () => {
   return (
@@ -9,7 +13,13 @@ const Sidebar = () => {
     >
       <div className="px-4 py-4 overflow-y-auto">
         <div className="flex items-center p-3 mb-5">
-          <img src="logo.svg" className="h-20 mr-3" alt="Logo" />
+          <Image
+            width="100"
+            height="100"
+            src="/plug.png"
+            className="mr-5"
+            alt="Logo"
+          />
           <span className="self-center text-4xl font-semibold whitespace-nowrap text-plugged-in-purple">
             Plugged in
           </span>
@@ -17,30 +27,28 @@ const Sidebar = () => {
         <ul className="space-y-5">
           <li>
             <Link
-              href="/discover"
-              className="block p-3 text-2xl font-medium text-gray-900 bg-white rounded-lg dark:bg-gray-700 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-600 transition duration-150 ease-in-out w-full text-center"
+              href="/protected/discover"
+              className="block p-3 text-2xl font-medium text-gray-900 bg-white rounded-lg dark:bg-gray-700 dark:text-white transition duration-150 ease-in-out w-full text-center transform hover:scale-105 shadow-md"
             >
-              <img
-                src="discover.svg"
-                alt="Discover"
-                className="inline-block mr-2 h-6 w-6"
-              />{" "}
+              <PiMusicNotesPlusFill className="inline-block mr-2 h-6 w-6" />{" "}
               Discover
             </Link>
           </li>
           <li>
             <Link
-              href="/likes"
-              className="block p-3 text-2xl font-medium text-gray-900 bg-white rounded-lg dark:bg-gray-700 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-600 transition duration-150 ease-in-out w-full text-center"
+              href="/protected/likes"
+              className="block p-3 text-2xl font-medium text-gray-900 bg-white rounded-lg dark:bg-gray-700 dark:text-white transition duration-150 ease-in-out w-full text-center transform hover:scale-105 shadow-md"
             >
+              <FaHeart className="inline-block mr-2 h-6 w-6" />
               Likes
             </Link>
           </li>
           <li>
             <Link
-              href="/create-music"
-              className="block p-3 text-2xl font-medium text-gray-900 bg-white rounded-lg dark:bg-gray-700 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-600 transition duration-150 ease-in-out w-full text-center"
+              href="/protected/create-music"
+              className="block p-3 text-2xl font-medium text-white bg-plugged-in-purple rounded-lg dark:bg-gray-700 dark:text-white transition duration-150 ease-in-out w-full text-center transform hover:scale-105 shadow-md"
             >
+              <PiMicrophoneStageFill className="inline-block mr-2 h-6 w-6" />
               Create Music
             </Link>
           </li>
