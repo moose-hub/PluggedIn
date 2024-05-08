@@ -18,7 +18,7 @@ const Sidebar = () => {
           <li>
             <Link
               href="/discover"
-              className="block p-3 text-2xl font-medium text-gray-900 bg-white rounded-lg dark:bg-gray-700 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-600 transition duration-150 ease-in-out w-full text-center"
+              className="block p-3 text-2xl font-medium text-gray-900 bg-white rounded-lg dark:bg-gray-700 dark:text-white transition duration-150 ease-in-out w-full text-center transform hover:scale-105 shadow-md"
             >
               <img
                 src="discover.svg"
@@ -31,16 +31,26 @@ const Sidebar = () => {
           <li>
             <Link
               href="/likes"
-              className="block p-3 text-2xl font-medium text-gray-900 bg-white rounded-lg dark:bg-gray-700 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-600 transition duration-150 ease-in-out w-full text-center"
+              className="block p-3 text-2xl font-medium text-gray-900 bg-white rounded-lg dark:bg-gray-700 dark:text-white transition duration-150 ease-in-out w-full text-center transform hover:scale-105 shadow-md"
             >
+              <img
+                src="purple-heart.svg"
+                alt="purple heart"
+                className="inline-block mr-2 h-6 w-6"
+              />{" "}
               Likes
             </Link>
           </li>
           <li>
             <Link
               href="/create-music"
-              className="block p-3 text-2xl font-medium text-gray-900 bg-white rounded-lg dark:bg-gray-700 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-600 transition duration-150 ease-in-out w-full text-center"
+              className="block p-3 text-2xl font-medium text-white bg-plugged-in-purple rounded-lg dark:bg-gray-700 dark:text-white transition duration-150 ease-in-out w-full text-center transform hover:scale-105 shadow-md"
             >
+              <img
+                src="microphone-white.svg"
+                alt="microphone"
+                className="inline-block mr-2 h-6 w-6"
+              />{" "}
               Create Music
             </Link>
           </li>
