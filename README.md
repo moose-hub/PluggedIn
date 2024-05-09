@@ -32,6 +32,8 @@
 - <a href="#Solution" style="color: #8962ed;">Solution</a>
 - <a href="#Tech-Stack" style="color: #8962ed;">Tech Stack</a>
 - <a href="#Problems-faced-and-solutions" style="color: #8962ed;">Problems faced and solutions</a>
+- <a href="#Future-scope" style="color: #8962ed;">Future Scope</a>
+- <a href="#Acknowledgments" style="color: #8962ed;">Acknowledgments</a>
 
 ## Problem Statement
 
@@ -46,6 +48,7 @@ Our solution is a Tinder-swipe style application that presents random music from
 ### Frontend
 
 <p>
+<img width="50" height="50" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" />
 <img width="50" height="50" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" />
 <img width="50" height="50" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" />
 <img width="50" height="50" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" />
@@ -53,21 +56,23 @@ Our solution is a Tinder-swipe style application that presents random music from
 </p>
 
 ### Backend & Database
+
 <p>
-<img width="50" height="50" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" />
 <img width="50" height="50" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/supabase/supabase-original.svg" />
 <img width="50" height="50" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-original.svg" />
 </p>
 
 ### Design & Collaboration
+
 <p>
 <img width="50" height="50" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/figma/figma-original.svg" />
 <img width="50" height="50" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/canva/canva-original.svg" />
 <img width="50" height="50" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/trello/trello-original.svg" />
 <img width="50" height="50" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/slack/slack-original.svg" />
-</p>   
+</p>
 
 ### Version Control & Deployment
+
 <p>
 <img width="50" height="50" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/github/github-original.svg" />
 <img width="50" height="50" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vercel/vercel-original.svg" />
@@ -92,3 +97,51 @@ Our solution is a Tinder-swipe style application that presents random music from
     <td>what we did/ chose to do to solve the problem</td>
   </tr>
 </table>
+
+## Future Scope
+
+<table>
+  <tr>
+    <th><strong>Feature</strong></th>
+    <th><strong>Description</strong></th>
+ 
+  </tr>
+  <tr>
+    <td>Listening Rooms</td>
+    <td>Description of the problem</td>
+  </tr>
+  <tr>
+    <td>Live Streaming</td>
+    <td>description of problem</td>
+  </tr>
+  <tr>
+    <td>Contributions</td>
+    <td>description of problem</td>
+  </tr>
+  <tr>
+    <td>Spotlight</td>
+    <td>description of problem</td>
+  </tr>
+  <tr>
+    <td>User Tailored Algorithm(s)</td>
+    <td>description of problem</td>
+  </tr>
+</table>
+
+## Acknowledgments
+
+### School of Code:
+
+Thank you for XYZ
+
+### Nathan & Nasa (Stakeholders):
+
+Thank you for XYZ
+
+### Nadeem:
+
+Thank you for XYZ
+
+### Our respective Mentors
+
+Thank you for XYZ
