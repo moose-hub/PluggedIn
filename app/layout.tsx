@@ -23,10 +23,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={GeistSans.className}>
       <body
-        className={`flex bg-pi-offwhite-main text-black ${inter.className}`}
+        className={`grid grid-cols-25/75 bg-pi-offwhite-main text-black ${inter.className}`}
       >
         <Sidebar />
-        <main className="min-h-screen min-w-full flex flex-col">
+        <main className="min-h-screen flex flex-col">
           {children}
         </main>
       </body>

@@ -20,6 +20,9 @@ module.exports = {
           "background-hover": "hsl(var(--btn-background-hover))",
         },
       },
+      gridTemplateColumns: {
+        "25/75": "1fr 4fr",
+      },
     },
   },
   plugins: [],
