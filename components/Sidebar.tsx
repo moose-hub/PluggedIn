@@ -13,19 +13,19 @@ const Sidebar = () => {
     {
       name: "Discover",
       icon: <FaMagnifyingGlass className="inline-block mr-2 h-6 w-6" />,
-      href: "discover",
+      href: "/discover",
       aria: "Link to discover page",
     },
     {
       name: "Likes",
       icon: <FaHeart className="inline-block mr-2 h-6 w-6" />,
-      href: "likes",
+      href: "/likes",
       aria: "Link to liked tracks",
     },
     {
       name: "Upload Track",
       icon: <PiMusicNotesPlusFill className="inline-block mr-2 h-6 w-6" />,
-      href: "create-music",
+      href: "/create-music",
       aria: "Link to upload music",
     },
   ];
@@ -44,7 +44,7 @@ const Sidebar = () => {
               <li key={item.name}>
                 <Link
                   href={item.href}
-                  className={` ${pathName === item.name ? "bg-white text-black shadow-sm" : ""} block p-3 text-2xl font-bold tracking-normal text-black/60 rounded-lg transition duration-150 ease-in-out w-full transform hover:text-black hover:bg-white`}
+                  className={` ${pathName === item.href ? "bg-white text-black/100 shadow-sm" : ""} block p-3 text-2xl font-bold tracking-normal text-black/60 rounded-lg transition duration-150 ease-in-out w-full transform hover:text-black hover:bg-white`}
                   aria-label={item.aria}
                 >
                   {item.icon} {item.name}
