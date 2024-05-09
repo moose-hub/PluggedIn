@@ -1,59 +1,62 @@
-// components/Sidebar.tsx
+"use client"
 import Link from "next/link";
-import { FaHeart, } from "react-icons/fa";
-import { PiMusicNotesPlusFill, PiMicrophoneStageFill } from "react-icons/pi";
-import Image from "next/image";
-
+import { FaHeart } from "react-icons/fa";
+import { FaMagnifyingGlass } from "react-icons/fa6";
+import { PiMusicNotesPlusFill } from "react-icons/pi";
+import Logo from "./Logo";
+import UserSpotlight from "./UserSpotlight";
+import { usePathname } from "next/navigation";
 
 const Sidebar = () => {
+  const pathName = usePathname();
+  const menuList = [
+    {
+      name: "Discover",
+      icon: <FaMagnifyingGlass className="inline-block mr-2 h-6 w-6" />,
+      href: "discover",
+      aria: "Link to discover page",
+    },
+    {
+      name: "Likes",
+      icon: <FaHeart className="inline-block mr-2 h-6 w-6" />,
+      href: "likes",
+      aria: "Link to liked tracks",
+    },
+    {
+      name: "Upload Track",
+      icon: <PiMusicNotesPlusFill className="inline-block mr-2 h-6 w-6" />,
+      href: "create-music",
+      aria: "Link to upload music",
+    },
+  ];
   return (
     <aside
-      className="fixed top-0 left-0 z-40 w-96 h-screen bg-gray-50 dark:bg-gray-800 shadow"
-      aria-label="Sidebar"
+      className="relative z-40 w-96 min-h-screen min-w-80 bg-pi-offwhite-main p-4 flex flex-col justify-between"
+      aria-label="Sidebar navigation"
     >
-      <div className="px-4 py-4 overflow-y-auto">
-        <div className="flex items-center p-3 mb-5">
-          <Image
-            width="100"
-            height="100"
-            src="/plug.png"
-            className="mr-5"
-            alt="Logo"
-          />
-          <span className="self-center text-4xl font-semibold whitespace-nowrap text-plugged-in-purple">
-            Plugged in
-          </span>
+      <header>
+        <div className="flex items-center mb-16">
+          <Logo />
         </div>
-        <ul className="space-y-5">
-          <li>
-            <Link
-              href="/protected/discover"
-              className="block p-3 text-2xl font-medium text-gray-900 bg-white rounded-lg dark:bg-gray-700 dark:text-white transition duration-150 ease-in-out w-full text-center transform hover:scale-105 shadow-md"
-            >
-              <PiMusicNotesPlusFill className="inline-block mr-2 h-6 w-6" />{" "}
-              Discover
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/protected/likes"
-              className="block p-3 text-2xl font-medium text-gray-900 bg-white rounded-lg dark:bg-gray-700 dark:text-white transition duration-150 ease-in-out w-full text-center transform hover:scale-105 shadow-md"
-            >
-              <FaHeart className="inline-block mr-2 h-6 w-6" />
-              Likes
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/protected/create-music"
-              className="block p-3 text-2xl font-medium text-white bg-plugged-in-purple rounded-lg dark:bg-gray-700 dark:text-white transition duration-150 ease-in-out w-full text-center transform hover:scale-105 shadow-md"
-            >
-              <PiMicrophoneStageFill className="inline-block mr-2 h-6 w-6" />
-              Create Music
-            </Link>
-          </li>
-        </ul>
-      </div>
+        <nav>
+          <ul className="flex flex-col gap-4">
+            {menuList.map((item) => (
+              <li key={item.name}>
+                <Link
+                  href={item.href}
+                  className={` ${pathName === item.name ? "bg-white text-black shadow-sm" : ""} block p-3 text-2xl font-bold tracking-normal text-black/60 rounded-lg transition duration-150 ease-in-out w-full transform hover:text-black hover:bg-white`}
+                  aria-label={item.aria}
+                >
+                  {item.icon} {item.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </header>
+      <footer className="mb-28">
+        <UserSpotlight />
+      </footer>
     </aside>
   );
 };

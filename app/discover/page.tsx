@@ -1,6 +1,6 @@
 const Discover = () => {
   return (
-      <div>Discover</div>
+      <h1 className="text-6xl p-8 font-extrabold">Discover</h1>
   )
 };
 

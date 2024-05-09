@@ -4,15 +4,15 @@ export default function Logo() {
     return (
     <>
         <Image
-          width="10"
-          height="10"
+          width={75}
+          height={75}
           src="/plug.png"
-          className="h-20 mr-3"
+          className="mr-3"
           alt="Logo"
         />
-        <span className="self-center text-4xl font-semibold whitespace-nowrap text-plugged-in-purple">
-          Plugged in
-            </span>
+        <span className="text-4xl font-extrabold whitespace-nowrap text-pi-purple-main">
+          Plugged In
+        </span>
     </>
     );
 }
