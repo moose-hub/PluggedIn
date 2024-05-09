@@ -6,17 +6,17 @@ export interface Leader {
 
 export const leaders: Leader[] = [
   {
-    image: "/public/avatars/cat.svg",
+    image: "/avatars/cat.svg",
     name: "Joeben",
     numberOfSwipes: 6924739,
   },
   {
-    image: "/public/avatars/puppy.png",
+    image: "/avatars/puppy.png",
     name: "Kevin",
     numberOfSwipes: 4654657,
   },
   {
-    image: "/public/avatars/mouse.jpg",
+    image: "/avatars/mouse.jpg",
     name: "Bruce",
     numberOfSwipes: 2354688,
   },
