@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import Link from "next/link";
 import { FaHeart } from "react-icons/fa";
 import { FaMagnifyingGlass } from "react-icons/fa6";
