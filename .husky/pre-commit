@@ -1,1 +1,1 @@
-echo "npm run format"
+npm run format
