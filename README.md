@@ -44,6 +44,7 @@ Our solution is a Tinder-swipe style application that presents random music from
 ## Tech Stack
 
 ### Frontend
+
 <p>
 <img width="50" height="50" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" />
 <img width="50" height="50" src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" />

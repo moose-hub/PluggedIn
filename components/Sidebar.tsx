@@ -3,6 +3,7 @@ import Link from "next/link";
 import { FaHeart } from "react-icons/fa";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import { PiMusicNotesPlusFill } from "react-icons/pi";
+import { MdLeaderboard } from "react-icons/md";
 import Logo from "./Logo";
 import UserSpotlight from "./UserSpotlight";
 import { usePathname } from "next/navigation";
@@ -27,6 +28,12 @@ const Sidebar = () => {
       icon: <PiMusicNotesPlusFill className="inline-block mr-2 h-6 w-6" />,
       href: "/create-music",
       aria: "Link to upload music",
+    },
+    {
+      name: "Leaderboard",
+      icon: <MdLeaderboard className="inline-block mr-2 h-6 w-6" />,
+      href: "/leaderboards",
+      aria: "Link to leaderboard page",
     },
   ];
   return (
