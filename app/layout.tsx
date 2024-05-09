@@ -2,6 +2,7 @@ import { GeistSans } from "geist/font/sans";
 import "./globals.css";
 import Sidebar from "@/components/Sidebar";
 import { Inter } from "next/font/google";
+import MusicBar from "@/components/MusicBar/MusicBar";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -23,10 +24,17 @@ export default function RootLayout({
   return (
     <html lang="en" className={GeistSans.className}>
       <body
-        className={`grid grid-cols-25/75 bg-pi-offwhite-main text-black ${inter.className}`}
+        className={`
+          grid grid-cols-25/75 
+          bg-pi-offwhite-main text-black 
+          max-w-[100vw]
+          ${inter.className}
+          overflow-hidden
+        `}
       >
         <Sidebar />
         <main className="min-h-screen flex flex-col">{children}</main>
+        <MusicBar />
       </body>
     </html>
   );
