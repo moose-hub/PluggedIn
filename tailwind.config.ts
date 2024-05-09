@@ -20,6 +20,13 @@ module.exports = {
           "background-hover": "hsl(var(--btn-background-hover))",
         },
       },
+      minWidth: {
+        0: "0",
+        "1/4": "25%",
+        "1/2": "50%",
+        "3/4": "75%",
+        musicBar: "95%",
+      },
       gridTemplateColumns: {
         "25/75": "1fr 4fr",
       },

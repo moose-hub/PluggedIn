@@ -13,8 +13,11 @@ export default function TrackSeeker({
   duration,
 }: {
   duration: number;
+  audioRef: React.RefObject<HTMLAudioElement>;
 }) {
   const [value, setValue] = useState(calculateTime(duration));
+
+  const temp = audioRef;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
