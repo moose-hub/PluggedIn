@@ -26,9 +26,7 @@ export default function RootLayout({
         className={`grid grid-cols-25/75 bg-pi-offwhite-main text-black ${inter.className}`}
       >
         <Sidebar />
-        <main className="min-h-screen flex flex-col">
-          {children}
-        </main>
+        <main className="min-h-screen flex flex-col">{children}</main>
       </body>
     </html>
   );

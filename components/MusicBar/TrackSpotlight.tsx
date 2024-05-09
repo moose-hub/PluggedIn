@@ -1,5 +1,3 @@
 export default function TrackSpotlight() {
-  return (
-    <div>TrackSpotlight</div>
-  )
+  return <div>TrackSpotlight</div>;
 }

@@ -1,5 +1,3 @@
 export default function MusicControls() {
-  return (
-    <div>MusicControls</div>
-  )
+  return <div>MusicControls</div>;
 }
