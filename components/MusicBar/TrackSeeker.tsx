@@ -8,7 +8,12 @@ const calculateTime = (secs: number) => {
   return `${minutes}:${returnedSeconds}`;
 };
 
-export default function TrackSeeker({ audioRef, duration }: { duration: number }) {
+export default function TrackSeeker({
+  audioRef,
+  duration,
+}: {
+  duration: number;
+}) {
   const [value, setValue] = useState(calculateTime(duration));
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
