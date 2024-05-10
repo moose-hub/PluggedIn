@@ -145,7 +145,7 @@ Thank you to <a href="https://www.linkedin.com/in/nadeemshabir/">Nadeem</a> for 
 
 ### Our respective Mentors
 
-We also want to express and gratitude towards our mentors for helping us along the way and being that voice in our corner:
+We also want to express our gratitude towards our mentors for helping us along the way and being that voice in our corner:
 - <a href="https://www.linkedin.com/search/results/all/?fetchDeterministicClustersOnly=true&heroEntityKey=urn%3Ali%3Afsd_profile%3AACoAACwLBQsBTgfHCqQtaf1fA--CukPS6rfSfgg&keywords=guy%20dunton&origin=RICH_QUERY_SUGGESTION&position=0&searchId=ce3b62f9-0615-4098-b112-e9583516e62c&sid=bhi&spellCorrectionEnabled=false">Guy Dunton</a>
 - <a href="https://www.linkedin.com/in/azlancuttilan/">Azlan Cuttilan
 </a>
