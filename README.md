@@ -108,23 +108,24 @@ Our solution is a Tinder-swipe style application that presents random music from
   </tr>
   <tr>
     <td>Listening Rooms</td>
-    <td>Description of the problem</td>
+    <td>Set up a room with your friends and enjoy the blissful ambiance of your favourite songs</td>
   </tr>
   <tr>
     <td>Live Streaming</td>
-    <td>description of problem</td>
+    <td>Bringing the electric, passionate atmosphere of concert going live to you from the comfort of your home</td>
   </tr>
   <tr>
     <td>Contributions</td>
-    <td>description of problem</td>
+    <td>Using thrid party finantial systems like paypal to support the artist</td>
   </tr>
   <tr>
     <td>Spotlight</td>
-    <td>description of problem</td>
+    <td>Recognition for being one of the first few people to discover new up and coming artists</td>
   </tr>
   <tr>
     <td>User Tailored Algorithm(s)</td>
-    <td>description of problem</td>
+    <td>For Users: A system that adjusts your discovry page to expose you to artists that fit your tastes <br> 
+        For Artists: A system to distribute their music to people who are more likley to enjoy it</td>
   </tr>
 </table>
 
@@ -132,16 +133,21 @@ Our solution is a Tinder-swipe style application that presents random music from
 
 ### School of Code:
 
-Thank you for XYZ
+Big thank you to school of code for the all the support thus far! 
 
 ### Nathan & Nasa (Stakeholders):
 
-Thank you for XYZ
+A Very big thank you to <a href="https://www.linkedin.com/in/nathan-anderson-5613a6162/">Nathan</a> and Nasa for giving us the trust and opportunity to work on this project. 
 
 ### Nadeem:
 
-Thank you for XYZ
+Thank you to <a href="https://www.linkedin.com/in/nadeemshabir/">Nadeem</a> for constanly checking in on us and reminding us of common pitfalls we could run into.
 
 ### Our respective Mentors
 
-Thank you for XYZ
+We also want to express our gratitude towards our mentors for helping us along the way and being that voice in our corner:
+- <a href="https://www.linkedin.com/search/results/all/?fetchDeterministicClustersOnly=true&heroEntityKey=urn%3Ali%3Afsd_profile%3AACoAACwLBQsBTgfHCqQtaf1fA--CukPS6rfSfgg&keywords=guy%20dunton&origin=RICH_QUERY_SUGGESTION&position=0&searchId=ce3b62f9-0615-4098-b112-e9583516e62c&sid=bhi&spellCorrectionEnabled=false">Guy Dunton</a>
+- <a href="https://www.linkedin.com/in/azlancuttilan/">Azlan Cuttilan
+</a>
+- <a href="https://www.linkedin.com/in/bashley1/">Ben Ashle</a>
+- <a href="https://www.linkedin.com/in/fitzpatrickandrew/">Andrew Fitzpatrick</a>
