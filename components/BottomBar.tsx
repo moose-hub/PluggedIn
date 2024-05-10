@@ -34,13 +34,13 @@ const BottomBar = () => {
     },
   ];
   return (
-    <nav className="fixed bottom-0 left-0 z-50 w-[100vw] bg-pi-offwhite-main shadow-lg flex justify-around items-center h-16">
+    <nav className="bottom-bar fixed bottom-0 left-0 z-50 w-[100vw]  flex justify-around items-center h-16 hidden">
       {/* <ul className="flex flex-row justify-evenly"> */}
       {menuList.map((item) => (
         <Link
           key={item.href}
           href={item.href}
-          className={`flex items-center justify-center h-full w-full ${pathName === item.href ? "text-black shadow-md" : "text-gray-500"} hover:text-black transition duration-150 ease-in-out`}
+          className={`flex items-center justify-center h-full w-full ${pathName === item.href ? "text-pi-purple-main" : "text-gray-500"} hover:text-pi-purple-main transition duration-150 ease-in-out`}
         >
           {item.icon}
         </Link>
