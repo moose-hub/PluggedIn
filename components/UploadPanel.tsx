@@ -1,8 +1,34 @@
 import { createClient } from "@/utils/supabase/server";
-import { redirect } from "next/navigation";
+import { ChangeEvent } from "react";
 
 export default async function UploadPanel() {
   const supabase = createClient();
+
+  const handleUpload = async (e: ChangeEvent<HTMLInputElement>) => {
+    let uploadData = {
+      audioFile: null as File | null,
+      albumCover: null as File | null,
+      songName: "",
+    };
+
+    if (e.target.files) {
+      uploadData.audioFile = e.target.files[0];
+      uploadData.albumCover = e.target.files[1];
+    }
+
+    const { data, error } = await supabase.storage
+      .from("songs")
+      .upload(
+        "public" + uploadData.audioFile?.name,
+        uploadData.audioFile as File,
+      );
+
+    if (data) {
+      console.log("Uploaded successfully");
+    } else if (error) {
+      console.error(error);
+    }
+  };
 
   const {
     data: { user },
@@ -24,6 +50,7 @@ export default async function UploadPanel() {
             id="mp3File"
             className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
             accept=".mp3"
+            onChange={(e) => {}}
           />
         </div>
         <div>
@@ -35,6 +62,7 @@ export default async function UploadPanel() {
             id="albumCover"
             className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
             accept="image/*"
+            onChange={(e) => {}}
           />
         </div>
         <div>

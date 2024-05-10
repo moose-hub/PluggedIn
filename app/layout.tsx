@@ -25,8 +25,8 @@ export default function RootLayout({
     <html lang="en" className={GeistSans.className}>
       <body
         className={`
-          grid grid-cols-25/75 
-          bg-pi-offwhite-main text-black 
+          grid grid-cols-25/75
+          bg-pi-offwhite-main text-black justify-even
           max-w-[100vw]
           ${inter.className}
           overflow-hidden
