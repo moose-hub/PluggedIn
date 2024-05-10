@@ -2,6 +2,7 @@
 
 import { FaHeart } from "react-icons/fa";
 import { FaMagnifyingGlass } from "react-icons/fa6";
+import { IoPersonSharp } from "react-icons/io5";
 import Link from "next/link";
 import Logo from "./Logo";
 import { MdLeaderboard } from "react-icons/md";
@@ -31,6 +32,11 @@ const BottomBar = () => {
       icon: <MdLeaderboard className="inline-block mr-2 h-6 w-6" />,
       href: "/leaderboards",
       aria: "Link to leaderboard page",
+    },
+    {
+      icon: <IoPersonSharp className="inline-block mr-2 h-6 w-6" />,
+      href: "/profile",
+      aria: "Link to profile",
     },
   ];
   return (
