@@ -1,33 +1,90 @@
 import { createClient } from "@/utils/supabase/server";
-import { ChangeEvent } from "react";
+import * as tus from "tus-js-client";
+import { UploadDataTypes } from "@/models/interfaces/uploadPanel";
+import UploadForm from "./UploadPanel/UploadForm";
+
+const projectId = process.env.NEXT_PUBLIC_SUPABASE_PROJECT_ID;
+
+if (!projectId) {
+  throw new Error("Missing env var NEXT_PUBLIC_SUPABASE_PROJECT_ID");
+
+  console.error("projectId", projectId);
+}
 
 export default async function UploadPanel() {
   const supabase = createClient();
 
-  const handleUpload = async (e: ChangeEvent<HTMLInputElement>) => {
-    let uploadData = {
-      audioFile: null as File | null,
-      albumCover: null as File | null,
-      songName: "",
-    };
+  const handleUpload = async (
+    bucketName: string,
+    uploadData: UploadDataTypes,
+  ) => {
+    "use server";
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
 
-    if (e.target.files) {
-      uploadData.audioFile = e.target.files[0];
-      uploadData.albumCover = e.target.files[1];
-    }
+    const uploadPromises = [];
 
-    const { data, error } = await supabase.storage
-      .from("songs")
-      .upload(
-        "public" + uploadData.audioFile?.name,
-        uploadData.audioFile as File,
-      );
+    console.log(session);
 
-    if (data) {
-      console.log("Uploaded successfully");
-    } else if (error) {
-      console.error(error);
-    }
+    console.log("starting audio upload");
+    const audioUpload = new tus.Upload(uploadData.audioFile, {
+      endpoint: `https://${projectId}.supabase.co/storage/v1/upload/resumable`,
+      retryDelays: [0, 3000, 5000, 10000, 20000],
+      headers: {
+        authorization: `Bearer ${session?.access_token}`,
+      },
+      metadata: {
+        bucketName: bucketName,
+        objectName: uploadData.audioFile.name,
+        contentType: uploadData.audioFile.type,
+        cacheControl: "3600",
+        songName: uploadData.songName,
+      },
+      onError: (error) => {
+        console.log("Failed because: " + error);
+      },
+      onProgress: (bytesUploaded, bytesTotal) => {
+        const percentage = ((bytesUploaded / bytesTotal) * 100).toFixed(2);
+        console.log(bytesUploaded, bytesTotal, percentage + "%");
+      },
+      onSuccess: () => {
+        console.log("Audio upload successful");
+      },
+    });
+    console.log("audio uploaded");
+
+    console.log("starting album art upload");
+    const albumArtUpload = new tus.Upload(uploadData.albumArt, {
+      endpoint: `https://${projectId}.supabase.co/storage/v1/upload/resumable`,
+      retryDelays: [0, 3000, 5000, 10000, 20000],
+      headers: {
+        authorisation: `Bearer ${session?.access_token}`,
+      },
+      metadata: {
+        bucketName: bucketName,
+        objectName: uploadData.albumArt.name,
+        contentType: uploadData.albumArt.type,
+        cacheControl: "3600",
+        songName: uploadData.songName,
+      },
+      onError: (error) => {
+        console.log("Failed because: " + error);
+        return error;
+      },
+      onProgress: (bytesUploaded, bytesTotal) => {
+        const percentage = ((bytesUploaded / bytesTotal) * 100).toFixed(2);
+        console.log(bytesUploaded, bytesTotal, percentage + "%");
+      },
+      onSuccess: () => {
+        console.log("Album art upload successful");
+      },
+    });
+
+    uploadPromises.push(audioUpload.start());
+    uploadPromises.push(albumArtUpload.start());
+
+    await Promise.all(uploadPromises);
   };
 
   const {
@@ -40,48 +97,7 @@ export default async function UploadPanel() {
   return (
     <div className="max-w-md mx-auto bg-gray-100 p-6 rounded-lg shadow-lg">
       <h2 className="text-2xl font-semibold mb-4">Upload your song</h2>
-      <form className="space-y-4">
-        <div>
-          <label htmlFor="mp3File" className="block text-gray-700">
-            MP3 File:
-          </label>
-          <input
-            type="file"
-            id="mp3File"
-            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
-            accept=".mp3"
-            onChange={(e) => {}}
-          />
-        </div>
-        <div>
-          <label htmlFor="albumCover" className="block text-gray-700">
-            Album Cover Art:
-          </label>
-          <input
-            type="file"
-            id="albumCover"
-            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
-            accept="image/*"
-            onChange={(e) => {}}
-          />
-        </div>
-        <div>
-          <label htmlFor="songName" className="block text-gray-700">
-            Song Name:
-          </label>
-          <input
-            type="text"
-            id="songName"
-            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
-          />
-        </div>
-        <button
-          type="submit"
-          className="py-2 px-4 bg-pi-purple-main text-white rounded-md hover:bg-blue-600 w-full"
-        >
-          Upload
-        </button>
-      </form>
+      <UploadForm handleUpload={handleUpload} />
     </div>
   );
 }
