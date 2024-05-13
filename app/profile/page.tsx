@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import ContributionForm from "@/components/ContributeBtn";
 
 interface UserProfileProps {
   profileImage: string;
@@ -17,8 +18,8 @@ const Profile = () => {
       // Simulated fetch response
       const dummyData: UserProfileProps = {
         profileImage: "https://i.pravatar.cc/300",
-        name: "Rhy$ Po$tan$",
-        bio: "Giver of RNC's",
+        name: "Monty Postans",
+        bio: "Lorem givsum",
         username: "RhMoPo",
       };
 
@@ -37,19 +38,25 @@ const Profile = () => {
 
   return (
     <div className="container mx-auto p-4">
-      <div className="grid grid-cols-2 items-start gap-1">
+      <div className="flex items-start gap-4">
+        {" "}
+        {/* Change to flex for inline layout */}
         <img
           src={userData.profileImage}
           alt="Profile"
-          className="rounded-xl w-64 h-64 object-cover col-span-1"
+          className="rounded-xl w-64 h-64 object-cover mb-6" // Removed col-span-1
         />
-        <div className="flex flex-col col-span-1">
+        <div className="flex flex-col justify-start">
+          {" "}
+          {/* Adjusted for vertical alignment */}
           <h1 className="text-6xl font-bold">{userData.name}</h1>
           <p className="text-sm text-gray-600">@{userData.username}</p>
-          <p className="text-center mt-2">{userData.bio}</p>
-          <div className="mt-4 h-1 bg-gray"></div>
+          <p className="text-md mt-2">{userData.bio}</p>
         </div>
       </div>
+      <ContributionForm />
+      <div className="mt-4 h-1 bg-gray-300 w-full"></div>{" "}
+      {/* Adjusted bg color for visibility */}
     </div>
   );
 };
