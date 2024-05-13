@@ -1,6 +1,9 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import ContributionForm from "@/components/ContributeBtn";
+import UploadedSongs from "@/components/Library";
+import Review from "@/components/Reviews";
+import Followbtn from "@/components/Follow";
 
 interface UserProfileProps {
   profileImage: string;
@@ -54,9 +57,23 @@ const Profile = () => {
           <p className="text-md mt-2">{userData.bio}</p>
         </div>
       </div>
-      <ContributionForm />
-      <div className="mt-4 h-1 bg-gray-300 w-full"></div>{" "}
-      {/* Adjusted bg color for visibility */}
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+        }}
+      >
+        <div>
+          <UploadedSongs />
+          <Review />
+          <ContributionForm />
+        </div>
+        <div className="flex items-center">
+          <Followbtn />
+        </div>
+      </div>
+      <div className="mt-4 h-1 bg-gray-300 w-full"></div>
     </div>
   );
 };
