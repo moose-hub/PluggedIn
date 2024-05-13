@@ -6,6 +6,7 @@ export default function Leaderboard() {
     <>
       {leaders.map((leader: Leader) => (
         <LeadingArtist
+          key={leader.key}
           image={leader.image}
           name={leader.name}
           numberOfSwipes={leader.numberOfSwipes}
