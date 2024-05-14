@@ -47,11 +47,10 @@ const Profile = () => {
         <img
           src={userData.profileImage}
           alt="Profile"
-          className="rounded-xl w-64 h-64 object-cover mb-6" // Removed col-span-1
+          className="rounded-3xl w-64 h-64 object-cover mb-6 border-4 border-pi-purple-main" // Removed col-span-1
         />
-        <div className="flex flex-col justify-start">
+        <div className="flex flex-col justify-start mt-5">
           {" "}
-          {/* Adjusted for vertical alignment */}
           <h1 className="text-6xl font-bold">{userData.name}</h1>
           <p className="text-sm text-gray-600">@{userData.username}</p>
           <p className="text-md mt-2">{userData.bio}</p>
