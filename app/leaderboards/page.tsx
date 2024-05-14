@@ -1,5 +1,4 @@
 import Leaderboard from "@/components/Leaderboard/Leaderboard";
-import mobileLBorder from "@/components/Leaderboard/mobileLBorder";
 
 const Leaderboards = () => {
   return (
