@@ -16,7 +16,7 @@ export const leaders: Leader[] = [
     key: 2,
     image: "/avatars/puppy.png",
     name: "Kevin",
-    numberOfSwipes: 1,
+    numberOfSwipes: 56,
   },
   {
     key: 3,

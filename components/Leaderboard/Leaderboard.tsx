@@ -8,7 +8,7 @@ export default function Leaderboard() {
   );
   return (
     <>
-      <div className="flex items-center visible sm:invisible">
+      <div className="flex items-center ">
         <div className="bg-[#e6e6e6] rounded ">
           {sortedLeaders.map((leader: Leader) => (
             <LeadingArtist
