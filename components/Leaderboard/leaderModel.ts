@@ -9,19 +9,19 @@ export const leaders: Leader[] = [
   {
     key: 1,
     image: "/avatars/cat.svg",
-    name: "Joeben",
-    numberOfSwipes: 5,
+    name: "Joeben alexander the 3rd",
+    numberOfSwipes: 2,
   },
   {
     key: 2,
     image: "/avatars/puppy.png",
     name: "Kevin",
-    numberOfSwipes: 10,
+    numberOfSwipes: 1,
   },
   {
     key: 3,
     image: "/avatars/mouse.jpg",
     name: "Bruce",
-    numberOfSwipes: 11,
+    numberOfSwipes: 55,
   },
 ];

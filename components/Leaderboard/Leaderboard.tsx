@@ -1,7 +1,6 @@
 import { Leader, leaders } from "./leaderModel";
 
 import LeadingArtist from "./LeadingArtist";
-import { sortedLeaders } from "./leaderModel";
 
 export default function Leaderboard() {
   const sortedLeaders = [...leaders].sort(
@@ -9,14 +8,18 @@ export default function Leaderboard() {
   );
   return (
     <>
-      {sortedLeaders.map((leader: Leader) => (
-        <LeadingArtist
-          key={leader.key}
-          image={leader.image}
-          name={leader.name}
-          numberOfSwipes={leader.numberOfSwipes}
-        />
-      ))}
+      <div className="flex items-center visible sm:invisible">
+        <div className="bg-[#e6e6e6] rounded ">
+          {sortedLeaders.map((leader: Leader) => (
+            <LeadingArtist
+              key={leader.key}
+              image={leader.image}
+              name={leader.name}
+              numberOfSwipes={leader.numberOfSwipes}
+            />
+          ))}
+        </div>
+      </div>
     </>
   );
 }
