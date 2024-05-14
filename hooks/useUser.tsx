@@ -3,9 +3,6 @@ import { User } from "@supabase/supabase-js";
 import { createContext } from "react";
 import { createClient } from "@/utils/supabase/server";
 
-const supabase = createClient();
-const sessionContext = await supabase.auth.getSession();
-
 type UserContextType = {
   accessToken: string | null;
   user: User | null;
@@ -22,6 +19,9 @@ export interface Props {
 }
 
 export const MyUserContextProvider = async (props: Props) => {
+  const supabase = createClient();
+  const sessionContext = await supabase.auth.getSession();
+
   const {
     data: { session: Session },
     isLoading: isLoadingUser,

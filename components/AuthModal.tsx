@@ -1,19 +1,16 @@
 import { useState, useEffect } from "react";
-import { createClient } from "@/utils/supabase/component";
-import Modal from "./Modal";
 import { useRouter } from "next/navigation";
 import { Auth } from "@supabase/auth-ui-react";
 import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { Session } from "@supabase/supabase-js";
-import useAuthModal from "@/hooks/useAuthModel";
+import { createClient } from "@/utils/supabase/component";
 
-type SessionState = {
-  session: Session | null;
-};
+import Modal from "./Modal";
+import useAuthModal from "@/hooks/useAuthModal";
 
 const AuthModal = () => {
   const supabase = createClient();
-  const [session, setSession] = useState<SessionState | null>(null);
+  const [session, setSession] = useState<Session | null>(null);
   const [error, setError] = useState<string | null>(null);
   const router = useRouter();
   const { onClose, isOpen } = useAuthModal();
@@ -23,27 +20,31 @@ const AuthModal = () => {
       try {
         const { data, error } = await supabase.auth.getSession();
         if (error) throw error;
-        setSession(data);
+        setSession(data?.session ?? null);
       } catch (error: unknown) {
         if (error instanceof Error) {
-          // For generic errors
           setError(error.message);
         } else {
-          // For unknown errors
           setError("An unknown error occurred");
         }
       }
     };
 
     fetchSession();
-  }, []);
+  }, [supabase]);
 
   useEffect(() => {
-    if (session) {
-      router.refresh();
-      onClose();
-    }
-  }, [session, router, onClose]);
+    const { data: authListener } = supabase.auth.onAuthStateChange((event) => {
+      if (event === "SIGNED_IN") {
+        router.refresh();
+        onClose();
+      }
+    });
+
+    return () => {
+      authListener?.subscription?.unsubscribe();
+    };
+  }, [supabase, router, onClose]);
 
   const onChange = (open: boolean) => {
     if (!open) {
@@ -54,7 +55,7 @@ const AuthModal = () => {
   return (
     <>
       <Modal
-        title="Welcome Back"
+        title="Plugged-In Music"
         description="Login to your account"
         isOpen={isOpen}
         onChange={onChange}
