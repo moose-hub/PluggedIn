@@ -11,9 +11,7 @@ export default function Home({
   return (
     <div className="flex flex-col text-center">
       <h1>Plugged-in</h1>
-      <LoginPanel searchParams={searchParams} />
       <LoginTest />
-      <AuthButton />
     </div>
   );
 }
