@@ -18,7 +18,6 @@ const LoginTest = () => {
           data: { user },
         } = await supabase.auth.getUser();
         setUser(user);
-        console.log(user);
       } catch (error) {
         console.error("Error fetching user data:", error);
       } finally {
