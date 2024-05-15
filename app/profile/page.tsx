@@ -1,9 +1,11 @@
 "use client";
+
 import React, { useEffect, useState } from "react";
+
 import ContributionForm from "@/components/ContributeBtn";
-import UploadedSongs from "@/components/Library";
-import Review from "@/components/Reviews";
 import Followbtn from "@/components/Follow";
+import Review from "@/components/Reviews";
+import UploadedSongs from "@/components/Library";
 
 interface UserProfileProps {
   profileImage: string;
@@ -63,16 +65,22 @@ const Profile = () => {
           justifyContent: "space-between",
         }}
       >
-        <div>
-          <UploadedSongs />
-          <Review />
-          <ContributionForm />
+        <div className="flex flex col-3 ">
+          <div>
+            <UploadedSongs />
+          </div>
+          <div>
+            <Review />
+          </div>
+          <div>
+            <ContributionForm />
+          </div>
         </div>
-        <div className="flex items-center">
+        <div className="flex items-center py-1">
           <Followbtn />
         </div>
       </div>
-      <div className="mt-4 h-1 bg-gray-300 w-full"></div>
+      {/*<div className="mt-4 h-1 bg-gray-300 w-full"></div>*/}
     </div>
   );
 };

@@ -15,8 +15,9 @@ const UploadedSongs: React.FC = () => {
       >
         Library
       </button>
-
-      {showSongs && <h1>Uploaded Songs Go Down Below</h1>}
+      <div className="mt-4 h-1 bg-gray-300 w-full">
+        {showSongs && <h1>Uploaded Songs Go Down Below</h1>}
+      </div>
     </div>
   );
 };

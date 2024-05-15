@@ -29,24 +29,25 @@ const ContributionForm: React.FC = () => {
       >
         Contribute
       </button>
-
-      {showForm && (
-        <form onSubmit={handleSubmit} className="mt-4">
-          <input
-            type="number"
-            placeholder="Enter your contribution amount"
-            value={amount}
-            onChange={handleAmountChange}
-            className="mr-2 px-2 py-1 border rounded"
-          />
-          <button
-            type="submit"
-            className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-          >
-            Submit
-          </button>
-        </form>
-      )}
+      <div className="mt-4 h-1 bg-gray-300 w-full">
+        {showForm && (
+          <form onSubmit={handleSubmit} className="mt-4">
+            <input
+              type="number"
+              placeholder="Enter your contribution amount"
+              value={amount}
+              onChange={handleAmountChange}
+              className="mr-2 px-2 py-1 border rounded"
+            />
+            <button
+              type="submit"
+              className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+            >
+              Submit
+            </button>
+          </form>
+        )}
+      </div>
     </div>
   );
 };
