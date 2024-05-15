@@ -15,9 +15,8 @@ const Review: React.FC = () => {
       >
         Reviews
       </button>
-      <div className="mt-4 h-1 bg-gray-300 w-full">
-        {showReview && <h1>👇🏽Reviews will show up under this line 👇🏽</h1>}
-      </div>
+
+      {showReview && <h1>👇🏽Reviews will show up under this line 👇🏽</h1>}
     </div>
   );
 };

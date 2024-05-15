@@ -53,7 +53,15 @@ const Profile = () => {
         />
         <div className="flex flex-col justify-start mt-5">
           {" "}
-          <h1 className="text-6xl font-bold">{userData.name}</h1>
+          <h1 className="text-6xl font-bold">
+            {userData.name}{" "}
+            <div
+              className="flex items-center py-1"
+              style={{ display: "inline" }}
+            >
+              <Followbtn />
+            </div>
+          </h1>
           <p className="text-sm text-gray-600">@{userData.username}</p>
           <p className="text-md mt-2">{userData.bio}</p>
         </div>
@@ -65,7 +73,7 @@ const Profile = () => {
           justifyContent: "space-between",
         }}
       >
-        <div className="flex flex col-3 ">
+        <div className="flex flex col-3 mt-4 h-1 bg-gray-300 w-full">
           <div>
             <UploadedSongs />
           </div>
@@ -76,11 +84,7 @@ const Profile = () => {
             <ContributionForm />
           </div>
         </div>
-        <div className="flex items-center py-1">
-          <Followbtn />
-        </div>
       </div>
-      {/*<div className="mt-4 h-1 bg-gray-300 w-full"></div>*/}
     </div>
   );
 };
