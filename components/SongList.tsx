@@ -1,4 +1,5 @@
 "use client";
+import useSWR from "swr";
 import fetchSongs from "@/utils/fetchSongs";
 import { useState, useEffect } from "react";
 import { Database } from "@/types_db";
@@ -7,13 +8,12 @@ import Image from "next/image";
 type Song = Database["public"]["Tables"]["songs"]["Row"];
 
 const SongList = () => {
-  const [songList, setSongList] = useState<Song[] | undefined>([]);
+  const { data: songList, error } = useSWR<Song[] | undefined>(
+    "songs",
+    fetchSongs,
+  );
 
-  useEffect(() => {
-    fetchSongs().then((songs) => {
-      return setSongList(songs);
-    });
-  }, []);
+  if (error) return <div>Failed to load song list</div>;
 
   if (!songList)
     return (
