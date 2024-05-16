@@ -10,17 +10,14 @@ const LeadingArtist: FunctionComponent<Leader> = ({
   numberOfSwipes,
 }) => {
   return (
-    <div
-      id="leader-container"
-      className="flex items-center space-x-4 bg-[#e6e6e6] p-4 rounded-lg "
-    >
+    <div id="leader-container" className="flex space-x-4 p-4 rounded-lg ">
       <div id="avatar-container" className="rounded-full ring-2 ring-[#6f42c1]">
         <Image
           className="rounded-full"
           src={image}
           alt="Profile Image"
-          width={50}
-          height={50}
+          width={70}
+          height={70}
         />
       </div>
       <div>

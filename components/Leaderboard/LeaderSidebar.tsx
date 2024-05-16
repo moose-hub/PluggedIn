@@ -1,10 +1,11 @@
 import Link from "next/link";
 import { MdLeaderboard } from "react-icons/md";
+import Leaderboard from "./Leaderboard";
 
 const LeaderSidebar = () => {
   return (
     <aside
-      className="sidebar fixed right-0 top-0 z-40 w-96 min-h-screen bg-white p-4 flex flex-col justify-between shadow-lg"
+      className="sidebar fixed right-0 top-0 z-40 w-96 h-screen bg-white p-4 flex flex-col shadow-lg"
       aria-label="Sidebar navigation"
     >
       <header>
@@ -18,7 +19,11 @@ const LeaderSidebar = () => {
           </Link>
         </nav>
       </header>
-      <footer className="mb-28">{/* Footer content here */}</footer>
+      {/* Scrollable Container for Leaderboard */}
+      <div className="flex-grow overflow-auto">
+        <Leaderboard />
+      </div>
+      <footer className="mt-auto"></footer>
     </aside>
   );
 };
