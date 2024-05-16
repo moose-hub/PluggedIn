@@ -15,6 +15,7 @@ const Followbtn: React.FC = () => {
       >
         {isFollowing ? "✔" : "+"}
       </button>
+      {/*<div className="mt-4 h-1 bg-gray-300 w-full"></div>*/}
     </div>
   );
 };
