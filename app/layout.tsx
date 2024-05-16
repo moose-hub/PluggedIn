@@ -6,6 +6,7 @@ import { Inter } from "next/font/google";
 import MusicBar from "@/components/MusicBar/MusicBar";
 import Sidebar from "@/components/Sidebar";
 import ModalProvider from "@/providers/ModalProvider";
+import LeaderSidebar from "@/components/Leaderboard/LeaderSidebar";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -36,7 +37,9 @@ export default function RootLayout({
         `}
       >
         <Sidebar />
+        <LeaderSidebar />
         <BottomBar />
+
         <main className="min-h-screen flex flex-col">{children}</main>
         <ModalProvider />
       </body>
