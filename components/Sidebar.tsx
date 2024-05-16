@@ -35,12 +35,6 @@ const Sidebar = () => {
       href: "/create-music",
       aria: "Link to upload music",
     },
-    {
-      name: "Leaderboard",
-      icon: <MdLeaderboard className="inline-block mr-2 h-6 w-6" />,
-      href: "/leaderboards",
-      aria: "Link to leaderboard page",
-    },
   ];
   return (
     <aside
