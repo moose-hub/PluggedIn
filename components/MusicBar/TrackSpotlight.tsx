@@ -1,26 +1,31 @@
 import { BsImageFill } from "react-icons/bs";
 import { TrackSpotlightProps } from "@/models/interfaces/musicPlayer";
 import { useEffect, useState } from "react";
+import useCurrentSong from "@/hooks/useCurrentSong";
+import Image from "next/image";
 
 export default function TrackSpotlight({ audioRef }: TrackSpotlightProps) {
-  const [currentTrackData, setCurrentTrackData] = useState({
-    trackName: "",
-    artistName: "placeholder",
-    albumCover: "",
-  });
-
-  useEffect(() => {
-    const trackName = audioRef.current?.title || "Placeholder Track";
-
-    setCurrentTrackData({ ...currentTrackData, trackName: trackName });
-  }, []);
+  const currentSong = useCurrentSong((state) => state.currentSong);
 
   return (
     <div className="flex items-center gap-4">
-      <BsImageFill className="text-4xl" />
+      {currentSong?.image_path ? (
+        <Image
+          src={
+            `https://fpaeregzmenbrqdcpbra.supabase.co/storage/v1/object/public/images/${currentSong?.image_path}` ||
+            ""
+          }
+          alt={currentSong?.title || ""}
+          width={50}
+          height={100}
+          className="aspect-square rounded-md"
+        />
+      ) : (
+        <BsImageFill />
+      )}
       <div>
-        <p className="font-semibold">{currentTrackData.trackName}</p>
-        <p className="text-sm">Artist Name</p>
+        <p className="font-semibold">{currentSong?.title}</p>
+        <p className="text-sm">{currentSong?.author}</p>
       </div>
     </div>
   );

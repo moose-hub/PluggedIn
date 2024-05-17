@@ -55,8 +55,12 @@ const LoginTest = () => {
         </>
       ) : (
         <>
-          <button onClick={handleSignIn}>Login</button>
-          <button onClick={handleSignIn}>Sign Up</button>
+          <button
+            className="font-bold text-pi-purple-main border border-pi-purple-main p-2"
+            onClick={handleSignIn}
+          >
+            Login
+          </button>
         </>
       )}
     </>

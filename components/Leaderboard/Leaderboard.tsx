@@ -8,7 +8,7 @@ export default function Leaderboard() {
 
   return (
     <>
-      <div className="flex items-center mt-8 ">
+      <div className="flex items-center mt-4 ">
         <div className="rounded ">
           {sortedLeaders.map((leader: Leader) => (
             <LeadingArtist
