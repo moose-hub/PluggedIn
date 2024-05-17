@@ -9,7 +9,6 @@ module.exports = {
     return config;
   },
   images: {
-    domains: ["i.pravatar.cc"],
     remotePatterns: [
       {
         protocol: "https",
@@ -20,6 +19,11 @@ module.exports = {
         protocol: "https",
         hostname: "fpaeregzmenbrqdcpbra.supabase.co",
         pathname: "/storage/v1/object/public/songs/**",
+      },
+      {
+        protocol: "https",
+        hostname: "i.pravatar.cc",
+        pathname: "/**",
       },
     ],
   },

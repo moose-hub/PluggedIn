@@ -12,15 +12,15 @@ const LeaderSidebar = () => {
         <nav>
           <Link
             href="/leaderboards"
-            className="block p-3 text-4xl font-bold tracking-normal text-gray-950/50 rounded-lg transition duration-150 ease-in-out w-full transform hover:text-gray-950 hover:bg-gray-100 text-center"
+            className="text-3xl flex items-center gap-2 font-bold p-4"
             aria-label="Link to leaderboard page"
           >
-            <MdLeaderboard className="inline-block mr-2 h-8 w-8" /> Leaderboard
+            <MdLeaderboard className="flex items-start" /> Leaderboard
           </Link>
         </nav>
       </header>
       {/* Scrollable Container for Leaderboard */}
-      <div className="flex-grow overflow-auto">
+      <div className="overflow-y-scroll scroll">
         <Leaderboard />
       </div>
       <footer className="mt-auto"></footer>

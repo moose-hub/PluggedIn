@@ -11,8 +11,6 @@ const fetchSongs = async () => {
       throw new Error(error.message);
     }
 
-    console.log(data);
-
     return data;
   } catch (error) {
     console.error("Error fetching songs", error);

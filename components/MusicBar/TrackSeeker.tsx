@@ -20,7 +20,6 @@ export default function TrackSeeker({
   });
 
   useEffect(() => {
-    console.log("Duration updated:", duration);
     setTrackerData({ ...trackerData, maxDuration: calculateTime(duration) });
   }, [duration]);
 
