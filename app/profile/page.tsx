@@ -1,11 +1,10 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-
-import ContributionForm from "@/components/ContributeBtn";
+import ContributionForm from "@/components/ContributeForm";
 import Followbtn from "@/components/Follow";
-import Review from "@/components/Reviews";
 import UploadedSongs from "@/components/Library";
+import LikedContent from "@/components/Profile/Likes/LikedContent";
 
 interface UserProfileProps {
   profileImage: string;
@@ -17,6 +16,10 @@ interface UserProfileProps {
 const Profile = () => {
   const [activeButton, setActiveButton] = useState<number | null>(null);
   const [userData, setUserData] = useState<UserProfileProps | null>(null);
+  const [showContributionForm, setShowContributionForm] =
+    useState<boolean>(false);
+  const [amount, setAmount] = useState<string>("");
+  const [message, setMessage] = useState<string>("");
 
   useEffect(() => {
     // Simulate fetching data
@@ -42,14 +45,44 @@ const Profile = () => {
     return <div>Loading...</div>;
   }
 
+  const handleAmountChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ): void => {
+    setAmount(event.target.value);
+  };
+
+  const handleMessageChange = (
+    event: React.ChangeEvent<HTMLTextAreaElement>,
+  ): void => {
+    setMessage(event.target.value);
+  };
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
+    event.preventDefault();
+    console.log(`£${amount}, Message: ${message}`);
+    // Optionally close the form after submission
+    setShowContributionForm(false);
+  };
+
+  const handleClose = (): void => {
+    setShowContributionForm(false);
+  };
+
   const content = () => {
     switch (activeButton) {
       case 1:
         return <p>Library content goes here</p>;
       case 2:
-        return <p>reviews go down here</p>;
+        return (
+          <div className="overflow-auto h-[70vh] pb-20 py-4">
+            <div className="flex flex-wrap">
+              <LikedContent />
+            </div>
+          </div>
+        );
       case 3:
-        return <p>contributions go down here</p>;
+        setShowContributionForm(true);
+        return null; // We don't need to return anything, the modal will be displayed
       default:
         return <p> </p>;
     }
@@ -59,17 +92,14 @@ const Profile = () => {
     <>
       <div className="container mx-auto p-4">
         <div className="flex items-start gap-4">
-          {" "}
-          {/* Change to flex for inline layout */}
           <img
             src={userData.profileImage}
             alt="Profile"
-            className="rounded-3xl w-64 h-64 object-cover mb-6 border-4 border-pi-purple-main" // Removed col-span-1
+            className="rounded-3xl w-64 h-64 object-cover mb-6 border-4 border-pi-purple-main"
           />
           <div className="flex flex-col justify-start mt-5">
-            {" "}
             <h1 className="text-6xl font-bold">
-              {userData.name}{" "}
+              {userData.name}
               <div
                 className="flex items-center py-1"
                 style={{ display: "inline" }}
@@ -89,15 +119,15 @@ const Profile = () => {
           }}
         ></div>
       </div>
-      <div className=" justify-center min-h-screen py-2">
-        <div className=" space-x-4">
+      <div className="justify-center min-h-screen py-2">
+        <div className="space-x-4">
           <button
             className="px-4 py-2 border-4"
             onClick={() => {
               setActiveButton(1);
             }}
           >
-            Library{" "}
+            Library
           </button>
           <button
             className="px-4 py-2 border-4"
@@ -105,76 +135,33 @@ const Profile = () => {
               setActiveButton(2);
             }}
           >
-            Reviews
+            Likes
           </button>
           <button
             className="px-4 py-2 border-4"
             onClick={() => {
-              setActiveButton(3);
+              setShowContributionForm(true);
             }}
           >
             Contribute
           </button>
         </div>
         <div className="border-b-2 border-gray-300 w-full my-4"></div>
-        <div className="content mt-4">{content()}</div>
+        <div className="content mt-4 h-full">{content()}</div>
       </div>
+
+      {showContributionForm && (
+        <ContributionForm
+          handleSubmit={handleSubmit}
+          handleAmountChange={handleAmountChange}
+          handleMessageChange={handleMessageChange}
+          handleClose={handleClose}
+          amount={amount}
+          message={message}
+        />
+      )}
     </>
   );
 };
 
 export default Profile;
-
-//   return (
-//     <div className="container mx-auto p-4">
-//       <div className="flex items-start gap-4">
-//         {" "}
-//         {/* Change to flex for inline layout */}
-//         <img
-//           src={userData.profileImage}
-//           alt="Profile"
-//           className="rounded-3xl w-64 h-64 object-cover mb-6 border-4 border-pi-purple-main" // Removed col-span-1
-//         />
-//         <div className="flex flex-col justify-start mt-5">
-//           {" "}
-//           <h1 className="text-6xl font-bold">
-//             {userData.name}{" "}
-//             <div
-//               className="flex items-center py-1"
-//               style={{ display: "inline" }}
-//             >
-//               <Followbtn />
-//             </div>
-//           </h1>
-//           <p className="text-sm text-gray-600">@{userData.username}</p>
-//           <p className="text-md mt-2">{userData.bio}</p>
-//         </div>
-//       </div>
-//       <div
-//         style={{
-//           display: "flex",
-//           flexDirection: "row",
-//           justifyContent: "space-between",
-//         }}
-//       >
-
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Profile;
-
-// <div className="flex flex col-3 mt-4 h-1 bg-gray-300 w-full">
-//           <div>
-//             <UploadedSongs />
-//           </div>
-//           <div>
-//             <Review />
-//           </div>
-//           <div>
-//             <ContributionForm />
-//           </div>
-//         </div>
-
-// const Profile = () => {
