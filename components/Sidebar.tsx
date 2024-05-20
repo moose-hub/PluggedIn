@@ -7,6 +7,21 @@ import { MdLeaderboard } from "react-icons/md";
 import Logo from "./Logo";
 import UserSpotlight from "./UserSpotlight";
 import { usePathname } from "next/navigation";
+import LoginButton from "./LoginButton";
+import { createClient } from "@/utils/supabase/component";
+import useSWR from "swr";
+
+import useAuthModal from "@/stores/useAuthModal";
+import useUploadModal from "@/stores/useUploadModal";
+
+const supabase = createClient();
+
+const fetchUser = async () => {
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  return user;
+};
 
 const Sidebar = () => {
   const pathName = usePathname();
@@ -63,6 +78,7 @@ const Sidebar = () => {
       </header>
       <footer className="mb-28">
         <UserSpotlight />
+        <LoginButton />
       </footer>
     </aside>
   );

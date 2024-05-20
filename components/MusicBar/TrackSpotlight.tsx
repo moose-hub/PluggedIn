@@ -1,6 +1,8 @@
 import { BsImageFill } from "react-icons/bs";
 import { TrackSpotlightProps } from "@/models/interfaces/musicPlayer";
 import { useEffect, useState } from "react";
+import useCurrentSong from "@/stores/useCurrentSong";
+import Image from "next/image";
 
 export default function TrackSpotlight({ audioRef }: TrackSpotlightProps) {
   const [currentTrackData, setCurrentTrackData] = useState({

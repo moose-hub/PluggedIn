@@ -5,6 +5,9 @@ import { GeistSans } from "geist/font/sans";
 import { Inter } from "next/font/google";
 import MusicBar from "@/components/MusicBar/MusicBar";
 import Sidebar from "@/components/Sidebar";
+import ModalProvider from "@/providers/ModalProvider";
+import LeaderSidebar from "@/components/Leaderboard/LeaderSidebar";
+import { Toaster } from "sonner";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -37,6 +40,11 @@ export default function RootLayout({
         <Sidebar />
         <BottomBar />
         <main className="min-h-screen flex flex-col">{children}</main>
+        <LeaderSidebar />
+        <ModalProvider />
+        <MusicBar />
+        <BottomBar />
+        <Toaster />
       </body>
     </html>
   );
