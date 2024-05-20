@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import ContributionForm from "@/components/ContributeBtn";
+import ContributionForm from "@/components/ContributeForm";
 import Followbtn from "@/components/Follow";
 import UploadedSongs from "@/components/Library";
 import LikedContent from "@/components/Profile/Likes/LikedContent";
@@ -16,6 +16,10 @@ interface UserProfileProps {
 const Profile = () => {
   const [activeButton, setActiveButton] = useState<number | null>(null);
   const [userData, setUserData] = useState<UserProfileProps | null>(null);
+  const [showContributionForm, setShowContributionForm] =
+    useState<boolean>(false);
+  const [amount, setAmount] = useState<string>("");
+  const [message, setMessage] = useState<string>("");
 
   useEffect(() => {
     // Simulate fetching data
@@ -41,6 +45,29 @@ const Profile = () => {
     return <div>Loading...</div>;
   }
 
+  const handleAmountChange = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ): void => {
+    setAmount(event.target.value);
+  };
+
+  const handleMessageChange = (
+    event: React.ChangeEvent<HTMLTextAreaElement>,
+  ): void => {
+    setMessage(event.target.value);
+  };
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
+    event.preventDefault();
+    console.log(`£${amount}, Message: ${message}`);
+    // Optionally close the form after submission
+    setShowContributionForm(false);
+  };
+
+  const handleClose = (): void => {
+    setShowContributionForm(false);
+  };
+
   const content = () => {
     switch (activeButton) {
       case 1:
@@ -54,7 +81,8 @@ const Profile = () => {
           </div>
         );
       case 3:
-        return <p>Contributions go down here</p>;
+        setShowContributionForm(true);
+        return null; // We don't need to return anything, the modal will be displayed
       default:
         return <p> </p>;
     }
@@ -112,7 +140,7 @@ const Profile = () => {
           <button
             className="px-4 py-2 border-4"
             onClick={() => {
-              setActiveButton(3);
+              setShowContributionForm(true);
             }}
           >
             Contribute
@@ -121,6 +149,17 @@ const Profile = () => {
         <div className="border-b-2 border-gray-300 w-full my-4"></div>
         <div className="content mt-4 h-full">{content()}</div>
       </div>
+
+      {showContributionForm && (
+        <ContributionForm
+          handleSubmit={handleSubmit}
+          handleAmountChange={handleAmountChange}
+          handleMessageChange={handleMessageChange}
+          handleClose={handleClose}
+          amount={amount}
+          message={message}
+        />
+      )}
     </>
   );
 };
