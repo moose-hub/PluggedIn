@@ -30,7 +30,7 @@ export default function RootLayout({
     <html lang="en" className={GeistSans.className}>
       <body
         className={`
-          grid grid-cols-25/75
+          grid grid-cols-[1fr,3fr,1fr]
           bg-pi-offwhite-main text-black justify-even
           max-w-[100vw]
           ${inter.className}
@@ -38,7 +38,6 @@ export default function RootLayout({
         `}
       >
         <Sidebar />
-        <BottomBar />
         <main className="min-h-screen flex flex-col">{children}</main>
         <LeaderSidebar />
         <ModalProvider />

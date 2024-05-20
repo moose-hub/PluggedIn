@@ -1,24 +1,20 @@
 "use client";
 import React from "react";
-import { UploadDataTypes } from "@/models/interfaces/uploadPanel";
 
-interface UploadFormProps {
-  handleUpload: (path: string, data: UploadDataTypes) => void;
-}
-
-const UploadForm: React.FC<UploadFormProps> = ({ handleUpload }) => {
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+const UploadForm = () => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
     console.log(formData);
-    const uploadData: UploadDataTypes = {
-      audioFile: formData.get("mp3File") as File,
-      albumArt: formData.get("albumArt") as File,
-      songName: formData.get("songName") as string,
-    };
-    console.log(uploadData);
-    handleUpload("songs", uploadData);
+
+    const response = await fetch("/api/upload", {
+      method: "POST",
+      body: formData,
+    });
+
+    const result = await response.json();
+    console.log(result);
   };
 
   return (

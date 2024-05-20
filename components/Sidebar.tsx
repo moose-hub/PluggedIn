@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { FaHeart } from "react-icons/fa";
-import { FaMagnifyingGlass } from "react-icons/fa6";
+import { FaMagnifyingGlass, FaHouse } from "react-icons/fa6";
 import { PiMusicNotesPlusFill } from "react-icons/pi";
 import { MdLeaderboard } from "react-icons/md";
 import Logo from "./Logo";
@@ -27,6 +27,12 @@ const Sidebar = () => {
   const pathName = usePathname();
   const menuList = [
     {
+      name: "Home",
+      icon: <FaHouse className="inline-block mr-2 h-6 w-6" />,
+      href: "/",
+      aria: "Link to home page",
+    },
+    {
       name: "Discover",
       icon: <FaMagnifyingGlass className="inline-block mr-2 h-6 w-6" />,
       href: "/discover",
@@ -41,19 +47,28 @@ const Sidebar = () => {
     {
       name: "Upload Track",
       icon: <PiMusicNotesPlusFill className="inline-block mr-2 h-6 w-6" />,
-      href: "/create-music",
+      href: "",
       aria: "Link to upload music",
     },
-    {
-      name: "Leaderboard",
-      icon: <MdLeaderboard className="inline-block mr-2 h-6 w-6" />,
-      href: "/leaderboards",
-      aria: "Link to leaderboard page",
-    },
   ];
+  const authModal = useAuthModal();
+  const uploadModal = useUploadModal();
+  const { data: user, error } = useSWR("user", fetchUser);
+
+  const handleClick = () => {
+    if (!user) {
+      return authModal.onOpen();
+    } else {
+      return uploadModal.onOpen();
+    }
+  };
+
+  if (error) {
+    return <div>Error loading user data.</div>;
+  }
   return (
     <aside
-      className="sidebar relative z-40 w-96 min-h-screen min-w-80 bg-pi-offwhite-main p-4 flex flex-col justify-between"
+      className="sidebar relative z-40 w-96 min-h-screen max-h-screen min-w-80 bg-white p-4 flex flex-col justify-between"
       aria-label="Sidebar navigation"
     >
       <header>
@@ -66,10 +81,18 @@ const Sidebar = () => {
               <li key={item.name}>
                 <Link
                   href={item.href}
-                  className={` ${pathName === item.href ? "bg-white text-black/100 shadow-sm" : ""} block p-3 text-2xl font-bold tracking-normal text-black/60 rounded-lg transition duration-150 ease-in-out w-full transform hover:text-black hover:bg-white`}
+                  className={`block p-3 text-2xl font-bold tracking-normal text-gray-950/50 rounded-lg transition duration-150 ease-in-out w-full transform hover:text-gray-950/100 hover:bg-white ${pathName === item.href ? "bg-white text-gray-900" : ""}`}
                   aria-label={item.aria}
                 >
-                  {item.icon} {item.name}
+                  {item.name === "Upload Track" ? (
+                    <button onClick={handleClick}>
+                      {item.icon} {item.name}
+                    </button>
+                  ) : (
+                    <span>
+                      {item.icon} {item.name}
+                    </span>
+                  )}
                 </Link>
               </li>
             ))}

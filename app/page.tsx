@@ -1,6 +1,4 @@
-import Link from "next/link";
-import LoginPanel from "../components/LoginPanel";
-import AuthButton from "@/components/AuthButton";
+import SongList from "@/components/SongList";
 
 export default function Home({
   searchParams,
@@ -8,10 +6,11 @@ export default function Home({
   searchParams: { message: string };
 }) {
   return (
-    <div className="flex flex-col text-center">
-      <h1>Plugged-in</h1>
-      <LoginPanel searchParams={searchParams} />
-      <AuthButton />
+    <div>
+      <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold mb-28">
+        Home
+      </h1>
+      <SongList />
     </div>
   );
 }
