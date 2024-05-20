@@ -4,8 +4,8 @@ import React, { useEffect, useState } from "react";
 
 import ContributionForm from "@/components/ContributeBtn";
 import Followbtn from "@/components/Follow";
-import Review from "@/components/Reviews";
 import UploadedSongs from "@/components/Library";
+import Liked from "@/components/Profile/Likes/likesRender";
 
 interface UserProfileProps {
   profileImage: string;
@@ -47,7 +47,7 @@ const Profile = () => {
       case 1:
         return <p>Library content goes here</p>;
       case 2:
-        return <p>reviews go down here</p>;
+        return <Liked />;
       case 3:
         return <p>contributions go down here</p>;
       default:
@@ -105,7 +105,7 @@ const Profile = () => {
               setActiveButton(2);
             }}
           >
-            Reviews
+            Likes
           </button>
           <button
             className="px-4 py-2 border-4"
