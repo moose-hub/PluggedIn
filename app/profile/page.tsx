@@ -1,11 +1,10 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-
 import ContributionForm from "@/components/ContributeBtn";
 import Followbtn from "@/components/Follow";
 import UploadedSongs from "@/components/Library";
-import Liked from "@/components/Profile/Likes/likesRender";
+import LikedContent from "@/components/Profile/Likes/LikedContent";
 
 interface UserProfileProps {
   profileImage: string;
@@ -47,9 +46,15 @@ const Profile = () => {
       case 1:
         return <p>Library content goes here</p>;
       case 2:
-        return <Liked />;
+        return (
+          <div className="overflow-auto h-[70vh] pb-20 py-4">
+            <div className="flex flex-wrap">
+              <LikedContent />
+            </div>
+          </div>
+        );
       case 3:
-        return <p>contributions go down here</p>;
+        return <p>Contributions go down here</p>;
       default:
         return <p> </p>;
     }
@@ -59,17 +64,14 @@ const Profile = () => {
     <>
       <div className="container mx-auto p-4">
         <div className="flex items-start gap-4">
-          {" "}
-          {/* Change to flex for inline layout */}
           <img
             src={userData.profileImage}
             alt="Profile"
-            className="rounded-3xl w-64 h-64 object-cover mb-6 border-4 border-pi-purple-main" // Removed col-span-1
+            className="rounded-3xl w-64 h-64 object-cover mb-6 border-4 border-pi-purple-main"
           />
           <div className="flex flex-col justify-start mt-5">
-            {" "}
             <h1 className="text-6xl font-bold">
-              {userData.name}{" "}
+              {userData.name}
               <div
                 className="flex items-center py-1"
                 style={{ display: "inline" }}
@@ -89,15 +91,15 @@ const Profile = () => {
           }}
         ></div>
       </div>
-      <div className=" justify-center min-h-screen py-2">
-        <div className=" space-x-4">
+      <div className="justify-center min-h-screen py-2">
+        <div className="space-x-4">
           <button
             className="px-4 py-2 border-4"
             onClick={() => {
               setActiveButton(1);
             }}
           >
-            Library{" "}
+            Library
           </button>
           <button
             className="px-4 py-2 border-4"
@@ -117,64 +119,10 @@ const Profile = () => {
           </button>
         </div>
         <div className="border-b-2 border-gray-300 w-full my-4"></div>
-        <div className="content mt-4">{content()}</div>
+        <div className="content mt-4 h-full">{content()}</div>
       </div>
     </>
   );
 };
 
 export default Profile;
-
-//   return (
-//     <div className="container mx-auto p-4">
-//       <div className="flex items-start gap-4">
-//         {" "}
-//         {/* Change to flex for inline layout */}
-//         <img
-//           src={userData.profileImage}
-//           alt="Profile"
-//           className="rounded-3xl w-64 h-64 object-cover mb-6 border-4 border-pi-purple-main" // Removed col-span-1
-//         />
-//         <div className="flex flex-col justify-start mt-5">
-//           {" "}
-//           <h1 className="text-6xl font-bold">
-//             {userData.name}{" "}
-//             <div
-//               className="flex items-center py-1"
-//               style={{ display: "inline" }}
-//             >
-//               <Followbtn />
-//             </div>
-//           </h1>
-//           <p className="text-sm text-gray-600">@{userData.username}</p>
-//           <p className="text-md mt-2">{userData.bio}</p>
-//         </div>
-//       </div>
-//       <div
-//         style={{
-//           display: "flex",
-//           flexDirection: "row",
-//           justifyContent: "space-between",
-//         }}
-//       >
-
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Profile;
-
-// <div className="flex flex col-3 mt-4 h-1 bg-gray-300 w-full">
-//           <div>
-//             <UploadedSongs />
-//           </div>
-//           <div>
-//             <Review />
-//           </div>
-//           <div>
-//             <ContributionForm />
-//           </div>
-//         </div>
-
-// const Profile = () => {
