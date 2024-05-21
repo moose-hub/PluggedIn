@@ -40,13 +40,10 @@ const AuthModal = () => {
     const { data: authListener } = supabase.auth.onAuthStateChange(
       (event, session) => {
         if (event === "SIGNED_IN") {
-          console.log("User signed in, session:", session);
           onClose();
           mutate("/api/auth");
           router.refresh();
-          console.log("page should have refreshed");
         } else if (event === "SIGNED_OUT") {
-          console.log("User signed out");
           setSession(null);
         }
       },
@@ -89,7 +86,6 @@ const AuthModal = () => {
         />
         {error && <p className="text-red-500 mt-2">{error}</p>}
       </Modal>
-      <button onClick={() => router.refresh()}>REFRESH</button>
     </>
   );
 };
