@@ -7,6 +7,7 @@ import MusicBar from "@/components/MusicBar/MusicBar";
 import Sidebar from "@/components/Sidebar";
 import ModalProvider from "@/providers/ModalProvider";
 import LeaderSidebar from "@/components/Leaderboard/LeaderSidebar";
+import { Toaster } from "sonner";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -42,6 +43,7 @@ export default function RootLayout({
         <ModalProvider />
         <MusicBar />
         <BottomBar />
+        <Toaster />
       </body>
     </html>
   );

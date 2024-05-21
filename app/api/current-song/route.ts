@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import useCurrentSong from "@/hooks/useCurrentSong";
+import useCurrentSong from "@/stores/useCurrentSong";
 
 export async function GET(request: NextRequest) {
   const currentSong = useCurrentSong.getState().currentSong;
