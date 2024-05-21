@@ -10,10 +10,10 @@ const Followbtn: React.FC = () => {
   return (
     <div className="container" style={{ display: "inline" }}>
       <button
-        className={`mt-4 font-bold py-2 px-4 rounded transform transition duration-150 ease-in-out hover:scale-105 ${isFollowing ? "bg-white text-pi-purple-main" : "bg-pi-purple-main text-white"}`}
+        className={`mt-4  mr-4 font-bold py-2 px-4 rounded transform transition duration-150 ease-in-out hover:scale-105 ${isFollowing ? "bg-gray-100 text-pi-purple-main text-base" : "bg-pi-purple-main text-white text-base"}`}
         onClick={toggleFollow}
       >
-        {isFollowing ? "✔" : "+"}
+        {isFollowing ? "following" : "follow"}
       </button>
       {/*<div className="mt-4 h-1 bg-gray-300 w-full"></div>*/}
     </div>
