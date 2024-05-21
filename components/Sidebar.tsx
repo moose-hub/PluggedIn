@@ -100,7 +100,6 @@ const Sidebar = () => {
         </nav>
       </header>
       <footer className="mb-28">
-        <UserSpotlight />
         <LoginButton />
       </footer>
     </aside>
