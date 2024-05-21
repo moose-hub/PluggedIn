@@ -10,9 +10,9 @@ const fetcher = async (url: string) => {
 };
 
 export const useAuth = () => {
-  const { data, error, isLoading } = useSWR("/api/auth/route.ts", fetcher, {
+  const { data, error, isLoading } = useSWR("/api/auth", fetcher, {
     onSuccess: (data) => {
-      useUser.setState({ user: data });
+      useUser.setState({ user: data.user });
     },
   });
 
@@ -38,3 +38,5 @@ export const useAuth = () => {
     signOut,
   };
 };
+
+// JUST GOT AUTH WORKING, NEED TO TRIGGER MODAL ON SIDEBAR"z

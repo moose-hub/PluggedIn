@@ -5,11 +5,10 @@ export async function GET() {
   const supabase = createClient();
   try {
     const { data, error } = await supabase.auth.getUser();
-    const user = data;
     if (error) {
       throw new Error(error.message);
     }
-    return NextResponse.json({ user }, { status: 200 });
+    return NextResponse.json({ user: data.user }, { status: 200 });
   } catch (error) {
     console.error("Error fetching user data:", error);
 

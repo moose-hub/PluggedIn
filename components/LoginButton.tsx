@@ -11,29 +11,8 @@ const LoginButton = () => {
 
   const { user, isLoading, error, signOut } = useAuth();
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const {
-  //         data: { user },
-  //       } = await supabase.auth.getUser();
-  //       setUser(user);
-  //     } catch (error) {
-  //       console.error("Error fetching user data:", error);
-  //     } finally {
-  //       setLoading(false); // Set loading to false after fetching
-  //     }
-  //   };
-
-  //   fetchData();
-  // }, [supabase]);
-
   const handleSignIn = () => {
-    authModal.onOpen();
-  };
-
-  const handleSignOut = async () => {
-    const response = await signOut();
+    authModal.onOpen;
   };
 
   if (isLoading) {
@@ -42,26 +21,17 @@ const LoginButton = () => {
 
   return (
     <>
-      {user ? (
-        <>
-          <button onClick={handleSignOut}>Logout</button>
-          <div>Welcome, {user.email}</div> {/* Display user email */}
-        </>
-      ) : (
-        <>
-          <button
-            className="
+      <button
+        className="
               font-bold text-white 
             bg-pi-purple-main 
               p-2 w-full
               rounded-full
             "
-            onClick={() => toast("this a sandwich")}
-          >
-            Login
-          </button>
-        </>
-      )}
+        onClick={handleSignIn}
+      >
+        Login
+      </button>
     </>
   );
 };
