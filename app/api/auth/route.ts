@@ -4,6 +4,18 @@ import { NextResponse } from "next/server";
 export async function GET() {
   const supabase = createClient();
   try {
+    const {
+      data: { session },
+      error: sessionError,
+    } = await supabase.auth.getSession();
+
+    if (sessionError || !session) {
+      return NextResponse.json(
+        { error: "Auth session missing!" },
+        { status: 401 },
+      );
+    }
+
     const { data, error } = await supabase.auth.getUser();
     if (error) {
       throw new Error(error.message);

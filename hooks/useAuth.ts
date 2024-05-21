@@ -4,6 +4,9 @@ import useUser from "@/stores/useUser";
 const fetcher = async (url: string) => {
   const response = await fetch(url);
   if (!response.ok) {
+    if (response.status === 401) {
+      return null;
+    }
     throw new Error("An error occurred while fetching the data.");
   }
   return response.json();
@@ -12,7 +15,11 @@ const fetcher = async (url: string) => {
 export const useAuth = () => {
   const { data, error, isLoading } = useSWR("/api/auth", fetcher, {
     onSuccess: (data) => {
-      useUser.setState({ user: data.user });
+      if (data) {
+        useUser.setState({ user: data.user });
+      } else {
+        useUser.setState({ user: null });
+      }
     },
   });
 
@@ -38,5 +45,3 @@ export const useAuth = () => {
     signOut,
   };
 };
-
-// JUST GOT AUTH WORKING, NEED TO TRIGGER MODAL ON SIDEBAR"z
