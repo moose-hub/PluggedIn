@@ -36,13 +36,13 @@ const DiscoverList = () => {
     );
 
   return (
-    <div className="flex flex-col items-center overflow-x-hidden overflow-y-scroll scroll-smooth h-[85vh] max-w-full">
+    <div className="flex flex-col items-center overflow-x-hidden overflow-y-scroll scroll-smooth h-[100vh] max-w-full p-4 snap-y snap-mandatory">
       {songList?.map((song, index) => (
         <div
           key={index}
-          className="relative flex flex-col items-center p-4 w-full max-w-md"
+          className="relative flex flex-col items-center p-8 w-full max-w-2xl mb-8 snap-start"
         >
-          <div className="absolute inset-0 -z-10 flex justify-center items-center w-full h-full">
+          <div className="absolute inset-0 -z-10 flex justify-center items-center w-[90%] h-[90%]">
             <Image
               src={
                 `https://fpaeregzmenbrqdcpbra.supabase.co/storage/v1/object/public/images/${song.image_path}` ||
@@ -50,12 +50,14 @@ const DiscoverList = () => {
               }
               alt={song.title || ""}
               fill
-              className="object-cover blur-lg"
+              className="object-cover blur-md rounded-lg"
             />
           </div>
-          <div className="relative z-10 flex flex-col items-center bg-white bg-opacity-80 p-4 rounded-lg shadow-lg">
-            <h2 className="font-bold text-lg text-center mb-1">{song.title}</h2>
-            <p className="text-sm text-gray-700 text-center mb-4">
+          <div className="relative z-10 flex flex-col items-center text-white p-8 rounded-lg shadow-lg">
+            <h2 className="font-bold text-2xl text-center mb-2">
+              {song.title}
+            </h2>
+            <p className="text-lg text-gray-200 text-center mb-4">
               {song.author}
             </p>
             <Image
@@ -64,22 +66,22 @@ const DiscoverList = () => {
                 ""
               }
               alt={song.title || ""}
-              width={300}
-              height={300}
-              className="rounded-lg mb-4"
+              width={400}
+              height={400}
+              className="rounded-lg mb-6"
             />
-            <div className="flex items-center justify-between min-w-full">
+            <div className="flex items-center justify-between w-full">
               <button onClick={() => alert("Track Disliked")}>
-                <FaHeartCircleXmark className="text-6xl text-rose-400 p-2 hover:bg-slate-50 transition-colors rounded-full" />
+                <FaHeartCircleXmark className="text-7xl text-rose-400 p-2 hover:bg-slate-50 transition-colors rounded-full" />
               </button>
               <button
-                className="bg-pi-purple-main py-2 px-6 rounded-full text-white"
+                className="bg-pi-purple-main py-3 px-8 rounded-full text-white text-lg"
                 onClick={() => handlePlay(song)}
               >
                 Play
               </button>
               <button onClick={() => alert("Track Liked")}>
-                <FaHeartCircleCheck className="text-6xl text-green-400 p-2 hover:bg-slate-50 transition-colors rounded-full" />
+                <FaHeartCircleCheck className="text-7xl text-green-400 p-2 hover:bg-slate-50 transition-colors rounded-full" />
               </button>
             </div>
           </div>
