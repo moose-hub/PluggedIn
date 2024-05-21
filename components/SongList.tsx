@@ -3,7 +3,7 @@ import useSWR from "swr";
 import fetchSongs from "@/utils/fetchSongs";
 import { Database } from "@/types_db";
 import Image from "next/image";
-import useCurrentSong from "@/hooks/useCurrentSong";
+import useCurrentSong from "@/stores/useCurrentSong";
 
 type Song = Database["public"]["Tables"]["songs"]["Row"];
 

@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState, useRef } from "react";
-import useCurrentSong from "@/hooks/useCurrentSong";
+import useCurrentSong from "@/stores/useCurrentSong";
 import MusicControls from "./MusicControls";
 import TrackSeeker from "./TrackSeeker";
 import TrackSpotlight from "./TrackSpotlight";

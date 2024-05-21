@@ -8,7 +8,7 @@ import { useRouter } from "next/navigation";
 import useSWR from "swr";
 
 import Modal from "./Modal";
-import useUploadModal from "@/hooks/useUploadModal";
+import useUploadModal from "@/stores/useUploadModal";
 import Input from "./Input";
 import Button from "./Button";
 
