@@ -98,7 +98,7 @@ const Profile = () => {
             className="rounded-3xl w-64 h-64 object-cover mb-6 border-4 border-pi-purple-main"
           />
           <div className="flex flex-col justify-start mt-5">
-            <h1 className="text-6xl font-bold">
+            <h1 className="flex flex-row items-end gap-4 text-6xl font-bold">
               {userData.name}
               <div
                 className="flex items-center py-1"
