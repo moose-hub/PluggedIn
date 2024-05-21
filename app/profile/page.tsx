@@ -74,9 +74,9 @@ const Profile = () => {
     switch (activeButton) {
       case 1:
         return (
-          <p>
+          <div>
             <UserSongs />{" "}
-          </p>
+          </div>
         );
       case 2:
         return (
@@ -90,7 +90,7 @@ const Profile = () => {
         setShowContributionForm(true);
         return null; // We don't need to return anything, the modal will be displayed
       default:
-        return <p></p>;
+        return <div></div>;
     }
   };
 

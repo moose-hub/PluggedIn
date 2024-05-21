@@ -7,8 +7,18 @@ type Song = Database["public"]["Tables"]["songs"]["Row"];
 const supabase = createClient();
 
 export async function GET(request: NextRequest) {
+  const { searchParams } = new URL(request.url);
+  const uuid = searchParams.get("uuid");
+
+  if (!uuid) {
+    return NextResponse.json({ error: "Missing user UUID" }, { status: 400 });
+  }
+
   try {
-    const { data, error } = await supabase.from("songs").select("*");
+    const { data, error } = await supabase
+      .from("songs")
+      .select("*")
+      .eq("user_id", uuid);
 
     if (error) {
       throw new Error(error.message);
