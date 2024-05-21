@@ -36,7 +36,7 @@ const DiscoverList = () => {
     );
 
   return (
-    <div className="flex flex-col items-center overflow-x-hidden overflow-y-scroll scroll-smooth h-[85vh] max-w-full">
+    <div className="flex flex-col items-center overflow-x-hidden overflow-y-scroll scroll-smooth h-[100vh] max-w-full">
       {songList?.map((song, index) => (
         <div
           key={index}

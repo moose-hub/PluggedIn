@@ -6,6 +6,7 @@ import Followbtn from "@/components/Follow";
 import UploadedSongs from "@/components/Library";
 import LikedContent from "@/components/Profile/Likes/LikedContent";
 import UserSongs from "@/components/UserSongs";
+import { BiSolidDonateHeart } from "react-icons/bi";
 
 interface UserProfileProps {
   profileImage: string;
@@ -127,7 +128,7 @@ const Profile = () => {
       <div className="justify-center min-h-screen py-2">
         <div className="space-x-4">
           <button
-            className="px-4 py-2 border-4"
+            className="px-4 py-2 text-gray-500 font-bold text-2xl "
             onClick={() => {
               setActiveButton(1);
             }}
@@ -135,7 +136,7 @@ const Profile = () => {
             Library
           </button>
           <button
-            className="px-4 py-2 border-4"
+            className="px-4 py-2 text-gray-500 font-bold text-2xl"
             onClick={() => {
               setActiveButton(2);
             }}
@@ -143,12 +144,12 @@ const Profile = () => {
             Likes
           </button>
           <button
-            className="px-4 py-2 border-4"
+            className="px-4 py-2 "
             onClick={() => {
               setShowContributionForm(true);
             }}
           >
-            Contribute
+            <BiSolidDonateHeart className="w-10 h-10 text-pi-purple-main" />
           </button>
         </div>
         <div className="border-b-2 border-gray-300 w-full my-4"></div>
