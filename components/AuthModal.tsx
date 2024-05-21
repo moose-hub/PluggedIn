@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Auth } from "@supabase/auth-ui-react";
@@ -7,6 +9,7 @@ import { createClient } from "@/utils/supabase/component";
 
 import Modal from "./Modal";
 import useAuthModal from "@/hooks/useAuthModal";
+import { mutate } from "swr";
 
 const AuthModal = () => {
   const supabase = createClient();
@@ -34,12 +37,20 @@ const AuthModal = () => {
   }, [supabase]);
 
   useEffect(() => {
-    const { data: authListener } = supabase.auth.onAuthStateChange((event) => {
-      if (event === "SIGNED_IN") {
-        router.refresh();
-        onClose();
-      }
-    });
+    const { data: authListener } = supabase.auth.onAuthStateChange(
+      (event, session) => {
+        if (event === "SIGNED_IN") {
+          console.log("User signed in, session:", session);
+          onClose();
+          mutate("/api/auth");
+          router.refresh();
+          console.log("page should have refreshed");
+        } else if (event === "SIGNED_OUT") {
+          console.log("User signed out");
+          setSession(null);
+        }
+      },
+    );
 
     return () => {
       authListener?.subscription?.unsubscribe();
@@ -76,7 +87,9 @@ const AuthModal = () => {
             },
           }}
         />
+        {error && <p className="text-red-500 mt-2">{error}</p>}
       </Modal>
+      <button onClick={() => router.refresh()}>REFRESH</button>
     </>
   );
 };

@@ -1,4 +1,4 @@
-import useSWR from "swr";
+import useSWR, { mutate } from "swr";
 import useUser from "@/stores/useUser";
 
 const fetcher = async (url: string) => {
@@ -32,6 +32,7 @@ export const useAuth = () => {
 
     if (response.ok) {
       useUser.getState().resetUser();
+      mutate("/api/auth", null, false);
     } else {
       const errorData = await response.json();
       throw new Error(errorData.error || "Error whilst signing out");

@@ -39,12 +39,6 @@ const Sidebar = () => {
       aria: "Link to discover page",
     },
     {
-      name: "Likes",
-      icon: <FaHeart className="inline-block mr-2 h-6 w-6" />,
-      href: "/likes",
-      aria: "Link to liked tracks",
-    },
-    {
       name: "Upload Track",
       icon: <PiMusicNotesPlusFill className="inline-block mr-2 h-6 w-6" />,
       href: "",
