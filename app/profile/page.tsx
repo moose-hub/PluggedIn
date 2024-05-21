@@ -5,6 +5,7 @@ import ContributionForm from "@/components/ContributeForm";
 import Followbtn from "@/components/Follow";
 import UploadedSongs from "@/components/Library";
 import LikedContent from "@/components/Profile/Likes/LikedContent";
+import UserSongs from "@/components/UserSongs";
 
 interface UserProfileProps {
   profileImage: string;
@@ -71,7 +72,11 @@ const Profile = () => {
   const content = () => {
     switch (activeButton) {
       case 1:
-        return <p>Library content goes here</p>;
+        return (
+          <p>
+            <UserSongs />{" "}
+          </p>
+        );
       case 2:
         return (
           <div className="overflow-auto h-[70vh] pb-20 py-4">
@@ -84,7 +89,7 @@ const Profile = () => {
         setShowContributionForm(true);
         return null; // We don't need to return anything, the modal will be displayed
       default:
-        return <p> </p>;
+        return <p></p>;
     }
   };
 
