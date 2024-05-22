@@ -36,57 +36,34 @@ const UserSongs = () => {
     );
 
   return (
-    <div className="flex flex-col items-center overflow-x-hidden overflow-y-scroll scroll-smooth h-[85vh] max-w-full">
-      {songList?.map((song, index) => (
-        <div
-          key={index}
-          className="relative flex flex-col items-center p-4 w-full max-w-md"
-        >
-          <div className="absolute inset-0 -z-10 flex justify-center items-center w-full h-full">
+    <div>
+      <h2 className="text-2xl mx-4 font-bold">New Releases</h2>
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] p-4">
+        {songList?.map((song, index) => (
+          <div
+            key={index}
+            className="flex flex-col items-start p-4 rounded-md hover:cursor-pointer hover:bg-white transition-colors max-w-48"
+            onClick={() => handlePlay(song)}
+          >
             <Image
               src={
-                song.image_path
-                  ? `https://fpaeregzmenbrqdcpbra.supabase.co/storage/v1/object/public/images/${song.image_path}`
-                  : ""
+                `https://fpaeregzmenbrqdcpbra.supabase.co/storage/v1/object/public/images/${song.image_path}` ||
+                ""
               }
               alt={song.title || ""}
-              fill
-              className="object-cover blur-lg"
+              width={150}
+              height={150}
+              className="aspect-square rounded-md"
             />
-          </div>
-          <div className="relative z-10 flex flex-col items-center bg-white bg-opacity-80 p-4 rounded-lg shadow-lg">
-            <h2 className="font-bold text-lg text-center mb-1">{song.title}</h2>
-            <p className="text-sm text-gray-700 text-center mb-4">
-              {song.author}
-            </p>
-            <Image
-              src={
-                song.image_path
-                  ? `https://fpaeregzmenbrqdcpbra.supabase.co/storage/v1/object/public/images/${song.image_path}`
-                  : ""
-              }
-              alt={song.title || ""}
-              width={300}
-              height={300}
-              className="rounded-lg mb-4"
-            />
-            <div className="flex items-center justify-between min-w-full">
-              <button onClick={() => alert("Track Disliked")}>
-                <FaHeartCircleXmark className="text-6xl text-rose-400 p-2 hover:bg-slate-50 transition-colors rounded-full" />
-              </button>
-              <button
-                className="bg-pi-purple-main py-2 px-6 rounded-full text-white"
-                onClick={() => handlePlay(song)}
-              >
-                Play
-              </button>
-              <button onClick={() => alert("Track Liked")}>
-                <FaHeartCircleCheck className="text-6xl text-green-400 p-2 hover:bg-slate-50 transition-colors rounded-full" />
-              </button>
+            <div className="flex flex-col mt-2 w-full">
+              <p className="text-left font-bold text-nowrap text-ellipsis max-w-[150px] overflow-hidden">
+                {song.title}
+              </p>
+              <p className="text-left text-black/80">{song.author}</p>
             </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 };
