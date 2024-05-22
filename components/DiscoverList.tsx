@@ -24,10 +24,16 @@ const DiscoverList = () => {
     setCurrentSong(song);
   };
 
-  useEffect(() => {
+  const playRandomSong = () => {
     if (songList && songList.length > 0) {
       const randomNum = Math.floor(Math.random() * songList.length);
       handlePlay(songList[randomNum]);
+    }
+  };
+
+  useEffect(() => {
+    if (songList && songList.length > 0) {
+      playRandomSong();
     }
   }, [songList]);
 
@@ -67,10 +73,10 @@ const DiscoverList = () => {
             />
           )}
           <div className="flex items-center justify-between w-full">
-            <button onClick={() => alert("Track Disliked")}>
+            <button onClick={playRandomSong}>
               <FaHeartCircleXmark className="text-7xl text-white p-2 hover:bg-slate-50 transition-colors rounded-full hover:text-rose-400" />
             </button>
-            <button onClick={() => alert("Track Liked")}>
+            <button onClick={playRandomSong}>
               <FaHeartCircleCheck className="text-7xl text-green-400 p-2 hover:bg-slate-50 transition-colors rounded-full" />
             </button>
           </div>
