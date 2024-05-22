@@ -5,19 +5,13 @@ import { PiMusicNotesPlusFill } from "react-icons/pi";
 import Logo from "./Logo";
 import { usePathname } from "next/navigation";
 import LoginButton from "./LoginButton";
-import { createClient } from "@/utils/supabase/component";
-import useSWR from "swr";
-import useAuthModal from "@/stores/useAuthModal";
 import useUploadModal from "@/stores/useUploadModal";
+import { toast } from "sonner";
 
-const supabase = createClient();
-
-const fetchUser = async () => {
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-  return user;
-};
+import { useAuth } from "@/hooks/useAuth";
+import useAuthModal from "@/hooks/useAuthModal";
+import { useEffect } from "react";
+import useUser from "@/stores/useUser";
 
 interface SidebarProps {
   className?: string;
@@ -45,9 +39,11 @@ const Sidebar: React.FC<SidebarProps> = ({ className }) => {
       aria: "Link to upload music",
     },
   ];
+
+  // const { user, isLoading, error, signOut } = useAuth();
+  const { user, setUser, resetUser } = useUser();
   const authModal = useAuthModal();
   const uploadModal = useUploadModal();
-  const { data: user, error } = useSWR("user", fetchUser);
 
   const handleClick = () => {
     if (!user) {
@@ -57,9 +53,11 @@ const Sidebar: React.FC<SidebarProps> = ({ className }) => {
     }
   };
 
-  if (error) {
-    return <div>Error loading user data.</div>;
-  }
+  // useEffect(() => {
+  //   if (error) {
+  //     toast.error("Error loading user data");
+  //   }
+  // }, [error]);
 
   return (
     <aside

@@ -22,7 +22,7 @@ const SongList = () => {
       },
       body: JSON.stringify({ song }),
     });
-    setCurrentSong(song); // Update Zustand state directly
+    setCurrentSong(song);
   };
 
   if (error) return <div>Failed to load song list</div>;

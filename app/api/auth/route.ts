@@ -3,26 +3,21 @@ import { NextResponse } from "next/server";
 
 export async function GET() {
   const supabase = createClient();
-  try {
-    const {
-      data: { session },
-      error: sessionError,
-    } = await supabase.auth.getSession();
 
-    if (sessionError || !session) {
+  try {
+    const { data: userData, error: userError } = await supabase.auth.getUser();
+
+    if (userError) {
+      console.error("Error fetching user data:", userError);
       return NextResponse.json(
-        { error: "Auth session missing!" },
+        { error: "Authentication failed. Please log in." },
         { status: 401 },
       );
     }
 
-    const { data, error } = await supabase.auth.getUser();
-    if (error) {
-      throw new Error(error.message);
-    }
-    return NextResponse.json({ user: data.user }, { status: 200 });
+    return NextResponse.json({ user: userData.user }, { status: 200 });
   } catch (error) {
-    console.error("Error fetching user data:", error);
+    console.error("Unexpected error:", error);
 
     if (error instanceof Error) {
       return NextResponse.json({ error: error.message }, { status: 500 });
