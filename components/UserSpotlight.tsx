@@ -36,6 +36,25 @@ const fetchUserEmail = async (): Promise<string | null> => {
   }
 };
 
+const fetchUserProfile = async (userId: string) => {
+  try {
+    const { data, error } = await supabase
+      .from("users")
+      .select("avatar_url")
+      .eq("id", userId)
+      .single();
+
+    if (error) {
+      throw new Error(error.message);
+    }
+
+    return data;
+  } catch (error) {
+    console.error("Error fetching user profile", error);
+    return null;
+  }
+};
+
 interface MenuItem {
   label: string;
   onClick: () => void;
@@ -48,6 +67,7 @@ const UserSpotlight: React.FC = () => {
   const [loadingEmail, setLoadingEmail] = useState<boolean>(true);
   const [emailError, setEmailError] = useState<Error | null>(null);
   const [swipeCount, setSwipeCount] = useState<number>(0);
+  const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
 
   useEffect(() => {
     const getUserEmail = async () => {
@@ -61,6 +81,15 @@ const UserSpotlight: React.FC = () => {
       }
     };
 
+    const getUserProfile = async () => {
+      if (user) {
+        const profile = await fetchUserProfile(user.id);
+        if (profile) {
+          setAvatarUrl(profile.avatar_url);
+        }
+      }
+    };
+
     const getSwipeCount = async () => {
       if (user) {
         const count = await fetchSwipeCount(user.id);
@@ -70,6 +99,7 @@ const UserSpotlight: React.FC = () => {
 
     if (user) {
       getUserEmail();
+      getUserProfile();
       getSwipeCount();
     }
   }, [user]);
@@ -98,13 +128,16 @@ const UserSpotlight: React.FC = () => {
   }
 
   const userName = userEmail ? userEmail.split("@")[0] : "";
+  const userAvatar =
+    avatarUrl ||
+    "https://fpaeregzmenbrqdcpbra.supabase.co/storage/v1/object/public/images/image-Anon-df9a020f-a94c-42bc-a676-f1ccf0a9cb0c.jpg";
 
   return (
     <div className="flex items-center w-full">
       <div className="flex items-center w-80">
         <Link href={href}>
           <Image
-            src="/avatars/mouse.jpg"
+            src={userAvatar}
             alt="User avatar"
             width={100}
             height={100}
