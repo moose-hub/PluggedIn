@@ -86,9 +86,9 @@ const Profile = () => {
             </div>
           </div>
         );
-      case 3:
-        setShowContributionForm(true);
-        return null; // We don't need to return anything, the modal will be displayed
+      // case 3:
+      //   setShowContributionForm(true);
+      //   return null; // We don't need to return anything, the modal will be displayed
       default:
         return <div></div>;
     }
@@ -104,7 +104,7 @@ const Profile = () => {
             className="rounded-3xl w-64 h-64 object-cover mb-6 border-4 border-pi-purple-main"
           />
           <div className="flex flex-col justify-start mt-5">
-            <h1 className="flex flex-row items-end gap-4 text-6xl font-bold">
+            <h1 className="flex flex-row items-end gap-2 text-6xl font-bold">
               {userData.name}
               <div
                 className="flex items-center py-1"
@@ -126,25 +126,35 @@ const Profile = () => {
         ></div>
       </div>
       <div className="justify-center min-h-screen py-2">
-        <div className="space-x-4">
-          <button
-            className="px-4 py-2 text-gray-500 font-bold text-2xl "
-            onClick={() => {
-              setActiveButton(1);
-            }}
-          >
-            Library
-          </button>
-          <button
-            className="px-4 py-2 text-gray-500 font-bold text-2xl"
-            onClick={() => {
-              setActiveButton(2);
-            }}
-          >
-            Likes
-          </button>
-          <button
+        <div className="flex flex-row justify-between">
+          <div className="space-x-4 inline-block">
+            <button
+              className="px-4 py-2 text-gray-500 font-bold text-2xl "
+              onClick={() => {
+                setActiveButton(1);
+              }}
+            >
+              Library
+            </button>
+            <button
+              className="px-4 py-2 text-gray-500 font-bold text-2xl"
+              onClick={() => {
+                setActiveButton(2);
+              }}
+            >
+              Likes
+            </button>
+            {/* <button
             className="px-4 py-2 "
+            onClick={() => {
+              setShowContributionForm(true);
+            }}
+          >
+            <BiSolidDonateHeart className="w-10 h-10 text-pi-purple-main" />
+          </button> */}
+          </div>
+          <button
+            className="px-4 py-2 pl-1"
             onClick={() => {
               setShowContributionForm(true);
             }}
@@ -152,6 +162,7 @@ const Profile = () => {
             <BiSolidDonateHeart className="w-10 h-10 text-pi-purple-main" />
           </button>
         </div>
+
         <div className="border-b-2 border-gray-300 w-full my-4"></div>
         <div className="content mt-4 h-full">{content()}</div>
       </div>
