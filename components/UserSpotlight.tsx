@@ -88,6 +88,8 @@ const UserSpotlight: React.FC = () => {
     return <div>Error: {error?.message ?? emailError?.message}</div>;
   }
 
+  const userName = userEmail ? userEmail.split("@")[0] : "";
+
   return (
     <div className="flex items-center w-full">
       <div className="flex items-center w-80">
@@ -102,7 +104,7 @@ const UserSpotlight: React.FC = () => {
         </Link>
         <div className="flex flex-col">
           <span className="text-1xl font-bold tracking-normal text-black/80">
-            {userEmail}
+            {userName}
           </span>
           <span className="text-sm font-normal tracking-normal text-black/70">
             London, UK
