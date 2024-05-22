@@ -22,26 +22,29 @@ export const metadata = {
 
 const inter = Inter({ subsets: ["latin"] });
 
-export default function RootLayout({
-  children,
-}: {
+interface RootLayoutProps {
   children: React.ReactNode;
-}) {
+}
+
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en" className={GeistSans.className}>
-      <body className="flex flex-col">
+      <body className="flex flex-col h-screen">
         <div
           className={`
           ${inter.className}
-          grid 2xl:grid-cols-[1fr,3fr,1fr] lg:grid-cols-[1fr,4fr] grid-cols-1
+          grid lg:grid-cols-[minmax(200px,320px),1fr,minmax(200px,320px)]
+          grid-cols-1
+          gap-4
           bg-pi-offwhite-main text-black
-          max-w-100vw min-h-[100vh]
-          overflow-hidden
+          h-[100vh]
         `}
         >
-          <Sidebar />
-          <main className="flex flex-col p-4 min-w-100vw">{children}</main>
-          <LeaderSidebar />
+          <Sidebar className="fixed top-0 left-0 h-full lg:col-span-1" />
+          <main className="flex flex-col p-4 col-span-3 lg:col-span-1 lg:min-w-0 overflow-y-auto">
+            {children}
+          </main>
+          <LeaderSidebar className="hidden lg:block lg:col-span-1 h-full overflow-y-auto" />
         </div>
         <MusicBar />
         <BottomBar />
