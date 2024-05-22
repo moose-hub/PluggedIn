@@ -1,11 +1,69 @@
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import DropDown from "./DropDown";
 import { useAuth } from "@/hooks/useAuth";
+import { createClient } from "@/utils/supabase/component";
+import { Database } from "@/types_db";
 
-export default function UserSpotlight() {
+const supabase = createClient();
+
+const fetchUserEmail = async (): Promise<string | null> => {
+  try {
+    const {
+      data: { user },
+      error: userError,
+    } = await supabase.auth.getUser();
+
+    if (userError) {
+      throw new Error(userError.message);
+    }
+
+    if (!user) {
+      throw new Error("User is not logged in");
+    }
+
+    const userEmail = user.email;
+
+    if (!userEmail) {
+      throw new Error("User email not found");
+    }
+
+    return userEmail;
+  } catch (error) {
+    console.error("Error fetching user email", error);
+    return null;
+  }
+};
+
+interface MenuItem {
+  label: string;
+  onClick: () => void;
+}
+
+const UserSpotlight: React.FC = () => {
   const href = "/profile";
   const { user, isLoading, error, signOut } = useAuth();
+  const [userEmail, setUserEmail] = useState<string | null>(null);
+  const [loadingEmail, setLoadingEmail] = useState<boolean>(true);
+  const [emailError, setEmailError] = useState<Error | null>(null);
+
+  useEffect(() => {
+    const getUserEmail = async () => {
+      try {
+        const email = await fetchUserEmail();
+        setUserEmail(email);
+      } catch (error) {
+        setEmailError(error as Error);
+      } finally {
+        setLoadingEmail(false);
+      }
+    };
+
+    if (user) {
+      getUserEmail();
+    }
+  }, [user]);
 
   const handleEditProfile = () => {};
 
@@ -17,13 +75,17 @@ export default function UserSpotlight() {
     }
   };
 
-  const menuItems = [
+  const menuItems: MenuItem[] = [
     { label: "Edit Profile", onClick: handleEditProfile },
     { label: "Sign Out", onClick: handleSignOut },
   ];
 
-  if (isLoading) {
+  if (isLoading || loadingEmail) {
     return <div>Loading...</div>;
+  }
+
+  if (error || emailError) {
+    return <div>Error: {error?.message ?? emailError?.message}</div>;
   }
 
   return (
@@ -40,19 +102,18 @@ export default function UserSpotlight() {
         </Link>
         <div className="flex flex-col">
           <span className="text-1xl font-bold tracking-normal text-black/80">
-            Gizmo
+            {userEmail}
           </span>
           <span className="text-sm font-normal tracking-normal text-black/70">
             London, UK
           </span>
         </div>
       </div>
-      <div
-        className="
-        "
-      >
+      <div>
         <DropDown menuItems={menuItems} />
       </div>
     </div>
   );
-}
+};
+
+export default UserSpotlight;
