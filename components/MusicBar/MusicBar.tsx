@@ -42,7 +42,7 @@ export default function MusicBar() {
   }, [currentSong]);
 
   return (
-    <div className="min-w-[100vw] absolute bottom-4 left-0 z-50">
+    <div className="w-screen fixed bottom-0 left-0 z-50">
       <div className="flex justify-between items-center bg-white border-gray-200 rounded-lg border shadow-md mx-4 p-4">
         <TrackSpotlight audioRef={audioRef} />
         <div className="flex flex-col items-center gap-2">

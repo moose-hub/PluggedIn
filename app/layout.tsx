@@ -16,7 +16,8 @@ const defaultUrl = process.env.VERCEL_URL
 export const metadata = {
   metadataBase: new URL(defaultUrl),
   title: "PluggedIn Music",
-  description: "The fastest way to build apps with Next.js and Supabase",
+  description:
+    "A music platform supporting new artists connecting with their audience",
 };
 
 const inter = Inter({ subsets: ["latin"] });
@@ -28,21 +29,23 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={GeistSans.className}>
-      <body
-        className={`
-          grid grid-cols-[1fr,3fr,1fr]
-          bg-pi-offwhite-main text-black justify-even
-          max-w-[100vw]
+      <body className="flex flex-col">
+        <div
+          className={`
           ${inter.className}
+          grid grid-cols-[1fr,3fr,1fr]
+          bg-pi-offwhite-main text-black
+          max-w-full min-h-[100vh]
           overflow-hidden
         `}
-      >
-        <Sidebar />
-        <main className="min-h-screen flex flex-col">{children}</main>
-        <LeaderSidebar />
-        <ModalProvider />
+        >
+          <Sidebar />
+          <main className="flex flex-col">{children}</main>
+          <LeaderSidebar />
+        </div>
         <MusicBar />
         <BottomBar />
+        <ModalProvider />
         <Toaster />
       </body>
     </html>

@@ -40,7 +40,7 @@ const BottomBar = () => {
     },
   ];
   return (
-    <nav className="bottom-bar fixed bottom-0 left-0 z-50 w-[100vw]  flex justify-around items-center h-16 hidden">
+    <nav className="bottom-bar fixed bottom-0 left-0 z-50 w-[100vw] justify-around items-center h-16 hidden">
       {/* <ul className="flex flex-row justify-evenly"> */}
       {menuList.map((item) => (
         <Link

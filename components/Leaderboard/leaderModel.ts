@@ -1,5 +1,6 @@
 export interface Leader {
   key: number;
+  index?: number;
   image: string;
   name: string;
   numberOfSwipes: number;
