@@ -2,17 +2,14 @@ import Link from "next/link";
 import { MdLeaderboard } from "react-icons/md";
 import Leaderboard from "./Leaderboard";
 
-const LeaderSidebar = () => {
+interface LeaderSidebarProps {
+  className?: string;
+}
+
+const LeaderSidebar: React.FC<LeaderSidebarProps> = ({ className }) => {
   return (
     <aside
-      className="
-        sidebar 
-        z-40 
-        bg-white 
-        p-4
-        hidden 
-        2xl:flex flex-col 
-        shadow-lg"
+      className={`z-40 bg-white p-4 hidden lg:flex flex-col shadow-lg ${className}`}
       aria-label="leaderboard sidebar"
     >
       <header>
@@ -27,7 +24,7 @@ const LeaderSidebar = () => {
           </Link>
         </nav>
       </header>
-      <div className="overflow-hidden">
+      <div className="overflow-y-auto flex-1">
         <Leaderboard />
       </div>
     </aside>

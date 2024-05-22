@@ -1,16 +1,12 @@
 "use client";
 import Link from "next/link";
-import { FaHeart } from "react-icons/fa";
 import { FaMagnifyingGlass, FaHouse } from "react-icons/fa6";
 import { PiMusicNotesPlusFill } from "react-icons/pi";
-import { MdLeaderboard } from "react-icons/md";
 import Logo from "./Logo";
-import UserSpotlight from "./UserSpotlight";
 import { usePathname } from "next/navigation";
 import LoginButton from "./LoginButton";
 import { createClient } from "@/utils/supabase/component";
 import useSWR from "swr";
-
 import useAuthModal from "@/stores/useAuthModal";
 import useUploadModal from "@/stores/useUploadModal";
 
@@ -23,7 +19,11 @@ const fetchUser = async () => {
   return user;
 };
 
-const Sidebar = () => {
+interface SidebarProps {
+  className?: string;
+}
+
+const Sidebar: React.FC<SidebarProps> = ({ className }) => {
   const pathName = usePathname();
   const menuList = [
     {
@@ -60,9 +60,10 @@ const Sidebar = () => {
   if (error) {
     return <div>Error loading user data.</div>;
   }
+
   return (
     <aside
-      className="sidebar relative z-40 min-w-80 bg-white p-4 hidden lg:flex flex-col justify-between"
+      className={`relative z-40 min-w-80 bg-white p-4 hidden lg:flex flex-col justify-between ${className}`}
       aria-label="Sidebar navigation"
     >
       <header>
@@ -70,12 +71,14 @@ const Sidebar = () => {
           <Logo />
         </div>
         <nav>
-          <ul className="flex flex-col gap-4 ">
+          <ul className="flex flex-col gap-4">
             {menuList.map((item) => (
               <li key={item.name}>
                 <Link
                   href={item.href}
-                  className={`block p-3 text-2xl font-bold tracking-normal text-gray-950/50 rounded-lg transition duration-150 ease-in-out w-full transform hover:text-gray-950/100 hover:bg-white ${pathName === item.href ? "bg-white text-gray-900" : ""}`}
+                  className={`block p-3 text-2xl font-bold tracking-normal text-gray-950/50 rounded-lg transition duration-150 ease-in-out w-full transform hover:text-gray-950/100 hover:bg-white ${
+                    pathName === item.href ? "bg-white text-gray-900" : ""
+                  }`}
                   aria-label={item.aria}
                 >
                   {item.name === "Upload Track" ? (
