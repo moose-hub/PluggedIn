@@ -35,12 +35,12 @@ export default function RootLayout({
           ${inter.className}
           grid grid-cols-[1fr,3fr,1fr]
           bg-pi-offwhite-main text-black
-          max-w-full min-h-[100vh]
+          max-w-100vw min-h-[100vh]
           overflow-hidden
         `}
         >
           <Sidebar />
-          <main className="flex flex-col">{children}</main>
+          <main className="flex flex-col p-4">{children}</main>
           <LeaderSidebar />
         </div>
         <MusicBar />
