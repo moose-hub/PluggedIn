@@ -30,7 +30,7 @@ export default function TrackSeeker({
   };
 
   return (
-    <div className="flex gap-2 text-sm">
+    <div className="hidden lg:flex gap-2 text-sm">
       <span>{calculateTime(timeProgress)}</span>
       <input
         className="w-96 accent-pi-purple-main transition-all border-none"

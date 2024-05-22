@@ -58,7 +58,7 @@ const VolumeSlider: React.FC<VolumeSliderProps> = ({ audioRef }) => {
   };
 
   return (
-    <div className="flex items-center space-x-2">
+    <div className="hidden lg:flex items-center space-x-2">
       {getVolumeIcon()}
       <input
         type="range"
