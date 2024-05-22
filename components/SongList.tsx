@@ -35,30 +35,28 @@ const SongList = () => {
     );
 
   return (
-    <div className="grid grid-flow-col gap-8">
+    <div className="flex flex-wrap gap-2 max-w-full">
       {songList?.map((song, index) => (
-        <div key={index} className="flex flex-col items-start p-2">
+        <div
+          key={index}
+          className="flex flex-col items-start p-4 rounded-md hover:cursor-pointer hover:bg-white transition-colors"
+          onClick={() => handlePlay(song)}
+        >
           <Image
             src={
               `https://fpaeregzmenbrqdcpbra.supabase.co/storage/v1/object/public/images/${song.image_path}` ||
               ""
             }
             alt={song.title || ""}
-            width={250}
-            height={250}
+            width={150}
+            height={150}
             className="aspect-square rounded-md gap-4 max-w-48"
           />
-          <div className="flex flex-col mt-2 min-w-full items-start">
-            <p className="text-left font-bold text-nowrap text-ellipsis">
+          <div className="flex flex-col mt-2 min-w-full items-start max-w-4">
+            <p className="text-left font-bold text-nowrap text-ellipsis max-w-[150px] overflow-hidden">
               {song.title}
             </p>
             <p className="text-left text-black/80">{song.author}</p>
-            <button
-              className="bg-pi-purple-main p-2 min-w-full rounded-md text-white"
-              onClick={() => handlePlay(song)}
-            >
-              Play
-            </button>
           </div>
         </div>
       ))}

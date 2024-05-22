@@ -49,6 +49,8 @@ const DiscoverList = () => {
               src={`https://fpaeregzmenbrqdcpbra.supabase.co/storage/v1/object/public/images/${currentSong.image_path}`}
               alt={currentSong.title || "Current Song"}
               className="object-cover blur-md rounded-lg"
+              width={100}
+              height={100}
             />
           )}
         </div>

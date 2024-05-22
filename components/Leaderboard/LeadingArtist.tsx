@@ -22,9 +22,9 @@ const LeadingArtist: FunctionComponent<Leader> = ({
           index === 0
             ? "border-2 border-solid border-pi-purple-main shadow-md shadow-pi-purple-main"
             : index === 1
-              ? "border-2 border-solid border-pi-purple-shadow shadow-md shadow-pi-purple-shadow"
+              ? "border-2 border-solid border-pi-purple-main shadow-md shadow-pi-purple-main/70"
               : index === 2
-                ? "border-2 border-solid border-pi-purple-dark shadow-md shadow-pi-purple-dark"
+                ? "border-2 border-solid border-pi-purple-main shadow-md shadow-pi-purple-main/40"
                 : ""
         }`}
       >
