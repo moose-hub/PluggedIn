@@ -10,7 +10,9 @@ export default function Home({
       <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold mb-28">
         Music
       </h1>
-      <SongList />
+      <div className="overflow-y-auto">
+        <SongList />
+      </div>
     </div>
   );
 }
