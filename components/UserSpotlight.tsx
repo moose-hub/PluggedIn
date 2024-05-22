@@ -3,8 +3,8 @@ import Link from "next/link";
 import Image from "next/image";
 import DropDown from "./DropDown";
 import { useAuth } from "@/hooks/useAuth";
+import fetchSwipeCount from "@/utils/fetchSwipes";
 import { createClient } from "@/utils/supabase/component";
-import { Database } from "@/types_db";
 
 const supabase = createClient();
 
@@ -47,6 +47,7 @@ const UserSpotlight: React.FC = () => {
   const [userEmail, setUserEmail] = useState<string | null>(null);
   const [loadingEmail, setLoadingEmail] = useState<boolean>(true);
   const [emailError, setEmailError] = useState<Error | null>(null);
+  const [swipeCount, setSwipeCount] = useState<number>(0);
 
   useEffect(() => {
     const getUserEmail = async () => {
@@ -60,8 +61,16 @@ const UserSpotlight: React.FC = () => {
       }
     };
 
+    const getSwipeCount = async () => {
+      if (user) {
+        const count = await fetchSwipeCount(user.id);
+        setSwipeCount(count);
+      }
+    };
+
     if (user) {
       getUserEmail();
+      getSwipeCount();
     }
   }, [user]);
 
@@ -107,7 +116,7 @@ const UserSpotlight: React.FC = () => {
             {userName}
           </span>
           <span className="text-sm font-normal tracking-normal text-black/70">
-            London, UK
+            Swipes: {swipeCount}
           </span>
         </div>
       </div>

@@ -1,48 +1,29 @@
-import React from "react";
+import Leaderboard from "@/components/Leaderboard/Leaderboard";
+import Link from "next/link";
+import { MdLeaderboard } from "react-icons/md";
 
-const Leaderboard = () => {
+const LeaderboardMobile = () => {
   return (
-    <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl p-8 font-extrabold">
-      Leaderboards
-    </h1>
+    <>
+      <header>
+        <nav className="mb-14">
+          <Link
+            href="/leaderboards"
+            className="text-3xl flex items-center gap-2 font-bold p-4"
+            aria-label="Leaderboard sidebar title"
+          >
+            <MdLeaderboard className="flex items-start" />
+            Leaderboard
+          </Link>
+        </nav>
+      </header>
+      <div className="flex justify-center items-center overflow-y-auto flex-1 h-screen mt-16">
+        <div className="w-full max-w-7xl mx-auto p-4">
+          <Leaderboard />
+        </div>
+      </div>
+    </>
   );
 };
 
-export default Leaderboard;
-
-// import Leaderboard from "@/components/Leaderboard/Leaderboard";
-
-// const Leaderboards = () => {
-//   return (
-//     <>
-//       <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl p-8 font-extrabold">
-//         Leaderboards
-//       </h1>
-//       <div className="grid grid-cols-3 space-x-2">
-//         <div>
-//           <h2 className="text-1xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl p-2 font-extrabold">
-//             {" "}
-//             Today{" "}
-//           </h2>
-//           <Leaderboard />
-//         </div>
-//         <div>
-//           <h2 className="text-1xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl p-2 font-extrabold">
-//             {" "}
-//             Weekly{" "}
-//           </h2>
-//           <Leaderboard />
-//         </div>
-//         <div>
-//           <h2 className="text-1xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl p-2 font-extrabold">
-//             {" "}
-//             Yearly{" "}
-//           </h2>
-//           <Leaderboard />
-//         </div>
-//       </div>
-//     </>
-//   );
-// };
-
-// export default Leaderboards;
+export default LeaderboardMobile;
