@@ -61,7 +61,7 @@ const Sidebar: React.FC<SidebarProps> = ({ className }) => {
 
   return (
     <aside
-      className={`relative z-40 min-w-80 bg-white p-4 hidden lg:flex flex-col justify-between ${className}`}
+      className={`z-40 bg-white p-4 hidden lg:flex flex-col justify-between ${className}`}
       aria-label="Sidebar navigation"
     >
       <header>

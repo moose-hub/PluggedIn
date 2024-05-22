@@ -33,8 +33,6 @@ const Modal: React.FC<ModalProps> = ({
           className="
                         fixed
                         drop-shadow-md
-                        border
-                        border-pi-offwhite-shadow
                         top-[50%]
                         left-[50%]
                         max-h-full
@@ -47,7 +45,7 @@ const Modal: React.FC<ModalProps> = ({
                         translate-x-[-50%]
                         translate-y-[-50%]
                         rounded-md
-                        bg-pi-offwhite-main
+                        bg-white
                         p-8
                         focus:outline-none
                         z-50

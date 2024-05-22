@@ -33,18 +33,18 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <div
           className={`
           ${inter.className}
-          grid lg:grid-cols-[minmax(200px,320px),1fr,minmax(200px,320px)]
-          grid-cols-1
-          gap-4
+          grid grid-cols-1 lg:grid-cols-[minmax(200px,320px),1fr,minmax(200px,320px)]
           bg-pi-offwhite-main text-black
-          h-[100vh]
+          h-full
         `}
         >
-          <Sidebar className="fixed top-0 left-0 h-full lg:col-span-1" />
-          <main className="flex flex-col p-4 col-span-3 lg:col-span-1 lg:min-w-0 overflow-y-auto">
+          <Sidebar className="fixed top-0 left-0 h-screen w-[200px] lg:w-[320px] hidden lg:block overflow-hidden" />
+          <main
+            className={`flex flex-col p-4 col-span-1 lg:col-start-2 lg:col-end-3 overflow-y-auto h-full lg:max-w-[calc(100vw-640px)]`}
+          >
             {children}
           </main>
-          <LeaderSidebar className="hidden lg:block lg:col-span-1 h-full overflow-y-auto" />
+          <LeaderSidebar className="fixed top-0 right-0 h-screen w-[200px] lg:w-[320px] hidden lg:block overflow-y-auto" />
         </div>
         <MusicBar />
         <BottomBar />

@@ -151,6 +151,7 @@ const UploadModal = () => {
             accept="image/*"
             {...register("image", { required: true })}
             placeholder="Song File"
+            className="border-dashed"
           />
         </div>
         <Button disabled={isLoading} type="submit">
