@@ -1,5 +1,3 @@
-const usertemp = () => {
+export async function GET () {
   return;
-};
-
-export default usertemp;
+}
