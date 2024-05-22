@@ -5,9 +5,13 @@ const fetcher = async (url: string) => {
   const response = await fetch(url);
   if (!response.ok) {
     if (response.status === 401) {
+      console.error("You are not logged in");
       return null;
     }
-    throw new Error("An error occurred while fetching the data.");
+    const errorData = await response.json();
+    throw new Error(
+      errorData.error || "An error occurred while fetching the data.",
+    );
   }
   return response.json();
 };
@@ -21,6 +25,14 @@ export const useAuth = () => {
         useUser.setState({ user: null });
       }
     },
+    onError: (data) => {
+      if (!data) {
+        console.log("not logged in");
+        return null;
+      }
+    },
+    shouldRetryOnError: false,
+    revalidateOnFocus: true,
   });
 
   const user = useUser((state) => state.user);

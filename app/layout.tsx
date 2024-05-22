@@ -49,7 +49,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <MusicBar />
         <BottomBar />
         <ModalProvider />
-        <Toaster />
+        <Toaster richColors />
       </body>
     </html>
   );

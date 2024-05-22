@@ -1,6 +1,7 @@
 import { useAuth } from "@/hooks/useAuth";
 import useAuthModal from "@/hooks/useAuthModal";
 import UserSpotlight from "./UserSpotlight";
+import { toast } from "sonner";
 
 const LoginButton = () => {
   const { user, isLoading, error, signOut } = useAuth();
@@ -11,7 +12,7 @@ const LoginButton = () => {
   };
 
   if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
+  if (error) return toast.error(error.message);
 
   return user ? (
     <UserSpotlight />
