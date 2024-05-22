@@ -82,7 +82,7 @@ export const leaders: Leader[] = [
   {
     key: 13,
     image: "/avatars/hamster.jpg",
-    name: "Gizmo",
+    name: "mo",
     numberOfSwipes: Math.floor(Math.random() * 5000),
   },
   {
