@@ -8,7 +8,7 @@ export default function Home({
   return (
     <div>
       <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold mb-28">
-        Home
+        Music
       </h1>
       <SongList />
     </div>

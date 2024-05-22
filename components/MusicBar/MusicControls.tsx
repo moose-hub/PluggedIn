@@ -43,12 +43,12 @@ export default function MusicControls({
   }, [isPlaying, audioRef, repeat]);
 
   return (
-    <div className="flex items-center gap-4 text-3xl">
+    <div className="flex items-center lg:gap-4 text-3xl">
       <button>
-        <FaShuffle className="text-2xl" />
+        <FaShuffle className="text-2xl hidden lg:block" />
       </button>
       <button>
-        <IoPlaySkipBack className="text-2xl" />
+        <IoPlaySkipBack className="text-2xl hidden lg:block" />
       </button>
       <button>
         {isPlaying ? (
@@ -64,10 +64,10 @@ export default function MusicControls({
         )}
       </button>
       <button>
-        <IoPlaySkipForward className="text-2xl" />
+        <IoPlaySkipForward className="text-2xl hidden lg:block" />
       </button>
       <button>
-        <FaRepeat className="text-2xl" />
+        <FaRepeat className="text-2xl hidden lg:block" />
       </button>
     </div>
   );

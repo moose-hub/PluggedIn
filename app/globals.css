@@ -2,14 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-@media (max-width: 640px) {
+/* @media (max-width: 640px) {
   .sidebar {
     display: none;
   }
   .bottom-bar {
     display: flex;
   }
-}
+} */
 
 /* @layer base {
   :root {

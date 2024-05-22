@@ -33,14 +33,14 @@ export default function RootLayout({
         <div
           className={`
           ${inter.className}
-          grid grid-cols-[1fr,3fr,1fr]
+          grid 2xl:grid-cols-[1fr,3fr,1fr] lg:grid-cols-[1fr,4fr] grid-cols-1
           bg-pi-offwhite-main text-black
           max-w-100vw min-h-[100vh]
           overflow-hidden
         `}
         >
           <Sidebar />
-          <main className="flex flex-col p-4">{children}</main>
+          <main className="flex flex-col p-4 min-w-100vw">{children}</main>
           <LeaderSidebar />
         </div>
         <MusicBar />

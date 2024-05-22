@@ -35,31 +35,34 @@ const SongList = () => {
     );
 
   return (
-    <div className="flex flex-wrap gap-2 max-w-full">
-      {songList?.map((song, index) => (
-        <div
-          key={index}
-          className="flex flex-col items-start p-4 rounded-md hover:cursor-pointer hover:bg-white transition-colors"
-          onClick={() => handlePlay(song)}
-        >
-          <Image
-            src={
-              `https://fpaeregzmenbrqdcpbra.supabase.co/storage/v1/object/public/images/${song.image_path}` ||
-              ""
-            }
-            alt={song.title || ""}
-            width={150}
-            height={150}
-            className="aspect-square rounded-md gap-4 max-w-48"
-          />
-          <div className="flex flex-col mt-2 min-w-full items-start max-w-4">
-            <p className="text-left font-bold text-nowrap text-ellipsis max-w-[150px] overflow-hidden">
-              {song.title}
-            </p>
-            <p className="text-left text-black/80">{song.author}</p>
+    <div>
+      <h2 className="text-2xl mx-4 font-bold">New Releases</h2>
+      <div className="grid xl:grid-cols-5 lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 grid-cols-2 max-w-full gap-4">
+        {songList?.map((song, index) => (
+          <div
+            key={index}
+            className="flex flex-col items-start p-4 rounded-md hover:cursor-pointer hover:bg-white transition-colors max-w-44"
+            onClick={() => handlePlay(song)}
+          >
+            <Image
+              src={
+                `https://fpaeregzmenbrqdcpbra.supabase.co/storage/v1/object/public/images/${song.image_path}` ||
+                ""
+              }
+              alt={song.title || ""}
+              width={150}
+              height={150}
+              className="aspect-square rounded-md gap-4 max-w-48"
+            />
+            <div className="flex flex-col mt-2 min-w-full items-start">
+              <p className="text-left font-bold text-nowrap text-ellipsis max-w-[150px] overflow-hidden">
+                {song.title}
+              </p>
+              <p className="text-left text-black/80">{song.author}</p>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 };

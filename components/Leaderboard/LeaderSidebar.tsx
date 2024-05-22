@@ -9,8 +9,9 @@ const LeaderSidebar = () => {
         sidebar 
         z-40 
         bg-white 
-        p-4 
-        flex flex-col 
+        p-4
+        hidden 
+        2xl:flex flex-col 
         shadow-lg"
       aria-label="leaderboard sidebar"
     >
