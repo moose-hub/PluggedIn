@@ -1,26 +1,66 @@
-import { Leader, leaders } from "./leaderModel";
+"use client";
+import { useEffect, useState } from "react";
+import { fetchLeaderboardData } from "@/utils/fetchLeaderboardData"; // Import the function
 import LeadingArtist from "./LeadingArtist";
 
+type LeaderboardEntry = {
+  song_id: number;
+  title: string;
+  author: string;
+  user_id: string;
+  like_count: number;
+  image_path: string | null;
+};
+
 export default function Leaderboard() {
-  const sortedLeaders = [...leaders].sort(
-    (a, b) => b.numberOfSwipes - a.numberOfSwipes,
-  );
+  const [leaderboard, setLeaderboard] = useState<LeaderboardEntry[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await fetchLeaderboardData();
+        setLeaderboard(data);
+      } catch (err) {
+        setError("Failed to fetch leaderboard data");
+        console.error(err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
+
+  const sortedLeaders = leaderboard.map((leader, index) => ({
+    index,
+    image: `https://fpaeregzmenbrqdcpbra.supabase.co/storage/v1/object/public/images/${leader.image_path}`,
+    name: leader.title,
+    numberOfSwipes: leader.like_count,
+  }));
 
   return (
-    <>
-      <div className="flex items-center mt-4 ">
-        <div className="rounded">
-          {sortedLeaders.map((leader: Leader, index: number) => (
-            <LeadingArtist
-              key={index}
-              index={index}
-              image={`https://i.pravatar.cc/300?img=${leader.key}`}
-              name={leader.name}
-              numberOfSwipes={leader.numberOfSwipes}
-            />
-          ))}
-        </div>
+    <div className="flex items-center mt-4">
+      <div className="rounded">
+        {sortedLeaders.map((leader) => (
+          <LeadingArtist
+            key={leader.index}
+            index={leader.index}
+            image={leader.image}
+            name={leader.name}
+            numberOfSwipes={leader.numberOfSwipes}
+          />
+        ))}
       </div>
-    </>
+    </div>
   );
 }
