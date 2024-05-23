@@ -1,18 +1,25 @@
-import { Leader, leaders } from "./leaderModel";
-
 import { FunctionComponent } from "react";
 import Image from "next/image";
 
-const LeadingArtist: FunctionComponent<Leader> = ({
+type LeadingArtistProps = {
+  index: number;
+  image: string;
+  name: string;
+  author: string;
+  numberOfSwipes: number;
+};
+
+const LeadingArtist: FunctionComponent<LeadingArtistProps> = ({
   index,
   image,
   name,
+  author,
   numberOfSwipes,
 }) => {
   return (
     <div
       id={`leader-container-${index}`}
-      className="flex space-x-4 p-4 rounded-lg "
+      className="flex space-x-4 p-4 rounded-lg"
     >
       <div
         id="avatar-container"
@@ -43,7 +50,10 @@ const LeadingArtist: FunctionComponent<Leader> = ({
         >
           {name}
         </div>
-        <div id="swipe-number-container" className="text-sm text-gray-500 ">
+        <div id="author-name" className="text-sm text-gray-700">
+          {author}
+        </div>
+        <div id="swipe-number-container" className="text-sm text-gray-500">
           {numberOfSwipes}
         </div>
       </div>
