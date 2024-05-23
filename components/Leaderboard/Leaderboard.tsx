@@ -45,11 +45,12 @@ export default function Leaderboard() {
     index,
     image: `https://fpaeregzmenbrqdcpbra.supabase.co/storage/v1/object/public/images/${leader.image_path}`,
     name: leader.title,
+    author: leader.author,
     numberOfSwipes: leader.like_count,
   }));
 
   return (
-    <div className="flex items-center mt-4">
+    <div className="flex items-center mt-4 mb-24">
       <div className="rounded">
         {sortedLeaders.map((leader) => (
           <LeadingArtist
@@ -57,6 +58,7 @@ export default function Leaderboard() {
             index={leader.index}
             image={leader.image}
             name={leader.name}
+            author={leader.author}
             numberOfSwipes={leader.numberOfSwipes}
           />
         ))}
