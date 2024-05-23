@@ -1,20 +1,21 @@
 "use client";
 import { useEffect, useState, useRef } from "react";
-import useCurrentSong from "@/stores/useCurrentSong";
 import MusicControls from "./MusicControls";
 import TrackSeeker from "./TrackSeeker";
 import TrackSpotlight from "./TrackSpotlight";
 import VolumeSlider from "./VolumeSlider";
 
-export default function MusicBar() {
-  const currentSong = useCurrentSong((state) => state.currentSong);
-  const [timeProgress, setTimeProgress] = useState(0);
-  const [duration, setDuration] = useState(10);
+import { currentSong as useCurrentSong } from "@/hooks/useCurrentSong";
 
+export default function MusicBar() {
+  const { currentSong, setCurrentSong } = useCurrentSong();
+  const [timeProgress, setTimeProgress] = useState(0);
+  const [duration, setDuration] = useState(0);
   const audioRef = useRef<HTMLAudioElement>(null);
   const seekerRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
+    console.log(currentSong);
     const currentAudio = audioRef.current;
 
     if (currentAudio) {

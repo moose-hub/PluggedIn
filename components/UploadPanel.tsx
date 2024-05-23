@@ -3,8 +3,8 @@
 import { createClient } from "@/utils/supabase/component";
 import useSWR from "swr";
 
-import useAuthModal from "@/hooks/useAuthModal";
-import useUploadModal from "@/hooks/useUploadModal";
+import useAuthModal from "@/stores/useAuthModal";
+import useUploadModal from "@/stores/useUploadModal";
 import UploadForm from "./UploadPanel/UploadForm";
 
 const supabase = createClient();

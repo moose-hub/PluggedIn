@@ -8,7 +8,7 @@ import { Session } from "@supabase/supabase-js";
 import { createClient } from "@/utils/supabase/component";
 
 import Modal from "./Modal";
-import useAuthModal from "@/hooks/useAuthModal";
+import useAuthModal from "@/stores/useAuthModal";
 import { mutate } from "swr";
 
 const AuthModal = () => {
