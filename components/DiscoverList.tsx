@@ -62,7 +62,7 @@ const DiscoverList = () => {
 
   return (
     <div className="flex flex-col items-center overflow-x-hidden overflow-y-scroll scroll-smooth h-[100vh] w-full p-4 snap-y snap-mandatory">
-      <div className="relative flex flex-col items-center p-8 w-full max-w-2xl h-[600px] mb-4 snap-start border-4 border-gray-300 rounded-lg shadow-xl">
+      <div className="relative flex flex-col items-center p-8 w-full max-w-2xl h-[800px] bg-gradient-to-r from-violet-200 via-purple-250 to-fuchsia-200 mb-4 snap-start border-4 border-gray-300 rounded-lg shadow-xl">
         <div className="absolute top-4 left-4 text-left p-2 rounded-lg">
           <h2 className="font-bold text-2xl">{currentSong?.title}</h2>
           <p className="text-lg">{currentSong?.author}</p>
@@ -75,7 +75,7 @@ const DiscoverList = () => {
                 alt={currentSong.title || "Current Song"}
                 width={300}
                 height={300}
-                className="rounded-lg object-cover"
+                className="rounded-lg object-cover shadow-2xl"
               />
             </div>
           )}
