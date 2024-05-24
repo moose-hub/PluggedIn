@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Database } from "../types_db";
-import { fetchLikedSongs } from "../utils/fetchLikes"; // Import the fetch function
+import fetchUserLikedSongs from "../utils/fetchUserLikedSongs"; // Import the fetch function
 import { useAuth } from "../hooks/useAuth";
-import useCurrentSong from "../hooks/useCurrentSong";
+import { currentSong as useCurrentSong } from "../hooks/useCurrentSong";
 import Image from "next/image";
 import { FaHeart, FaTimes } from "react-icons/fa";
 import { createClient } from "../utils/supabase/component";
@@ -17,10 +17,10 @@ const LikedSongs = () => {
   const [likedSongs, setLikedSongs] = useState<Song[]>([]);
 
   useEffect(() => {
-    const fetchUserLikedSongs = async () => {
+    const fetchSongs = async () => {
       if (user) {
         try {
-          const songs = await fetchLikedSongs(user.id);
+          const songs = await fetchUserLikedSongs();
           setLikedSongs(songs);
           if (songs.length > 0) {
             setCurrentSong(songs[0]); // Set the first liked song as the current song
@@ -30,7 +30,7 @@ const LikedSongs = () => {
         }
       }
     };
-    fetchUserLikedSongs();
+    fetchSongs();
   }, [user, setCurrentSong]);
 
   const handlePlay = async (song: Song) => {
