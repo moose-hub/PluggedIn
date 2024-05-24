@@ -5,16 +5,20 @@ import { Database } from "@/types_db";
 import Image from "next/image";
 import { useState } from "react";
 import { FaHeartCircleCheck, FaHeartCircleXmark } from "react-icons/fa6";
+
 type Song = Database["public"]["Tables"]["songs"]["Row"];
+
 const UserLikedSongs = () => {
   const { data: songList, error } = useSWR<Song[] | undefined>(
     "userLikedSongs",
     fetchUserLikedSongs,
   );
   const [currentSong, setCurrentSong] = useState<Song | null>(null);
+
   const handlePlay = (song: Song) => {
     setCurrentSong(song);
   };
+
   if (error) return <div>Failed to load liked songs: {error.message}</div>;
   if (!songList)
     return (
@@ -22,6 +26,7 @@ const UserLikedSongs = () => {
         <h1>Loading...</h1>
       </div>
     );
+
   return (
     <div>
       <h2 className="text-2xl mx-4 font-bold">Liked Songs</h2>
@@ -60,4 +65,5 @@ const UserLikedSongs = () => {
     </div>
   );
 };
+
 export default UserLikedSongs;
