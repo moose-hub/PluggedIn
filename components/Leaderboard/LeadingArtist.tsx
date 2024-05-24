@@ -46,7 +46,7 @@ const LeadingArtist: FunctionComponent<LeadingArtistProps> = ({
       <div>
         <div
           id="artist-name"
-          className="text-xl font-semibold text-nowrap text-ellipsis"
+          className="text-xl font-semibold overflow-hidden max-w-[200px] text-nowrap text-ellipsis"
         >
           {name}
         </div>

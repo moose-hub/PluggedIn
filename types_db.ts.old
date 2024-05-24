@@ -9,45 +9,6 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      comments: {
-        Row: {
-          author_id: string | null;
-          comment_details: string | null;
-          created_at: string;
-          id: string;
-          song_id: number | null;
-        };
-        Insert: {
-          author_id?: string | null;
-          comment_details?: string | null;
-          created_at?: string;
-          id?: string;
-          song_id?: number | null;
-        };
-        Update: {
-          author_id?: string | null;
-          comment_details?: string | null;
-          created_at?: string;
-          id?: string;
-          song_id?: number | null;
-        };
-        Relationships: [
-          {
-            foreignKeyName: "comments_author_id_fkey";
-            columns: ["author_id"];
-            isOneToOne: false;
-            referencedRelation: "users";
-            referencedColumns: ["id"];
-          },
-          {
-            foreignKeyName: "comments_song_id_fkey";
-            columns: ["song_id"];
-            isOneToOne: false;
-            referencedRelation: "songs";
-            referencedColumns: ["id"];
-          },
-        ];
-      };
       customers: {
         Row: {
           id: string;
@@ -296,26 +257,23 @@ export type Database = {
         Row: {
           avatar_url: string | null;
           billing_address: Json | null;
-          description: string | null;
+          full_name: string | null;
           id: string;
           payment_method: Json | null;
-          username: string | null;
         };
         Insert: {
           avatar_url?: string | null;
           billing_address?: Json | null;
-          description?: string | null;
+          full_name?: string | null;
           id: string;
           payment_method?: Json | null;
-          username?: string | null;
         };
         Update: {
           avatar_url?: string | null;
           billing_address?: Json | null;
-          description?: string | null;
+          full_name?: string | null;
           id?: string;
           payment_method?: Json | null;
-          username?: string | null;
         };
         Relationships: [
           {
@@ -332,15 +290,7 @@ export type Database = {
       [_ in never]: never;
     };
     Functions: {
-      fetch_leaderboard: {
-        Args: Record<PropertyKey, never>;
-        Returns: {
-          user_id: string;
-          name: string;
-          avatar_url: string;
-          numberofswipes: number;
-        }[];
-      };
+      [_ in never]: never;
     };
     Enums: {
       pricing_plan_interval: "day" | "week" | "month" | "year";

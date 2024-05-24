@@ -5,6 +5,9 @@ import DropDown from "./DropDown";
 import { useAuth } from "@/hooks/useAuth";
 import fetchSwipeCount from "@/utils/fetchSwipes";
 import { createClient } from "@/utils/supabase/component";
+import useEditProfileModal from "@/stores/useEditProfileModal";
+import { useUserData } from "@/hooks/useUserData";
+import { useUserDataStore } from "@/stores/useUserData";
 
 const supabase = createClient();
 
@@ -62,12 +65,16 @@ interface MenuItem {
 
 const UserSpotlight: React.FC = () => {
   const href = "/profile";
-  const { user, isLoading, error, signOut } = useAuth();
+  const { user, isLoading: authLoading, error: authError, signOut } = useAuth();
   const [userEmail, setUserEmail] = useState<string | null>(null);
   const [loadingEmail, setLoadingEmail] = useState<boolean>(true);
   const [emailError, setEmailError] = useState<Error | null>(null);
   const [swipeCount, setSwipeCount] = useState<number>(0);
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
+
+  const setUser = useUserDataStore((state) => state.setUser);
+  const editProfileModal = useEditProfileModal();
+  const { userData, loading, error } = useUserData();
 
   useEffect(() => {
     const getUserEmail = async () => {
@@ -98,13 +105,16 @@ const UserSpotlight: React.FC = () => {
     };
 
     if (user) {
+      setUser(user); // Set user in Zustand store
       getUserEmail();
       getUserProfile();
       getSwipeCount();
     }
-  }, [user]);
+  }, [user, setUser]);
 
-  const handleEditProfile = () => {};
+  const handleEditProfile = () => {
+    editProfileModal.onOpen();
+  };
 
   const handleSignOut = async () => {
     try {
@@ -119,17 +129,25 @@ const UserSpotlight: React.FC = () => {
     { label: "Sign Out", onClick: handleSignOut },
   ];
 
-  if (isLoading || loadingEmail) {
+  if (authLoading || loadingEmail || loading) {
     return <div>Loading...</div>;
   }
 
-  if (error || emailError) {
-    return <div>Error: {error?.message ?? emailError?.message}</div>;
+  if (authError || emailError || error) {
+    return (
+      <div>
+        Error: {authError?.message ?? emailError?.message ?? error.message}
+      </div>
+    );
   }
 
-  const userName = userEmail ? userEmail.split("@")[0] : "";
+  const userName = userData?.username
+    ? userData.username
+    : userEmail
+      ? userEmail.split("@")[0]
+      : "";
   const userAvatar =
-    avatarUrl ||
+    `https://fpaeregzmenbrqdcpbra.supabase.co/storage/v1/object/public/images/${userData?.avatar_url}` ||
     "https://fpaeregzmenbrqdcpbra.supabase.co/storage/v1/object/public/images/image-Anon-df9a020f-a94c-42bc-a676-f1ccf0a9cb0c.jpg";
 
   return (

@@ -8,6 +8,7 @@ import Sidebar from "@/components/Sidebar";
 import ModalProvider from "@/providers/ModalProvider";
 import LeaderSidebar from "@/components/Leaderboard/LeaderSidebar";
 import { Toaster } from "sonner";
+import PageHeader from "@/components/PageHeader";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -40,9 +41,12 @@ export default function RootLayout({ children }: RootLayoutProps) {
         >
           <Sidebar className="fixed top-0 left-0 h-screen w-[200px] lg:w-[320px] hidden lg:block overflow-hidden" />
           <main
-            className={`flex flex-col p-4 col-span-1 lg:col-start-2 lg:col-end-3 overflow-y-auto h-full lg:max-w-[calc(100vw-640px)]`}
+            className={`flex flex-col col-span-1 lg:col-start-2 lg:col-end-3 overflow-y-auto h-full lg:max-w-[calc(100vw-640px)] flex-grow mb-36`}
           >
-            {children}
+            <div className="mb-28">
+              <PageHeader />
+              {children}
+            </div>
           </main>
           <LeaderSidebar className="fixed top-0 right-0 h-screen w-[200px] lg:w-[320px] hidden lg:block overflow-y-auto" />
         </div>
@@ -54,3 +58,4 @@ export default function RootLayout({ children }: RootLayoutProps) {
     </html>
   );
 }
+``;

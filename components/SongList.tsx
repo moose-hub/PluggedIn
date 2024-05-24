@@ -32,7 +32,7 @@ const SongList = () => {
     );
 
   return (
-    <div>
+    <>
       <h2 className="text-2xl mx-4 font-bold">New Releases</h2>
       <div className="grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))]">
         {songList?.map((song, index) => (
@@ -60,7 +60,7 @@ const SongList = () => {
           </div>
         ))}
       </div>
-    </div>
+    </>
   );
 };
 

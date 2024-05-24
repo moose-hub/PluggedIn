@@ -3,7 +3,7 @@ import useSWR from "swr";
 import fetchUserSongs from "@/utils/fetchUserSongs";
 import { Database } from "@/types_db";
 import Image from "next/image";
-import useCurrentSong from "@/hooks/useCurrentSong";
+import { currentSong as useCurrentSong } from "@/hooks/useCurrentSong";
 import { FaHeartCircleCheck, FaHeartCircleXmark } from "react-icons/fa6";
 
 type Song = Database["public"]["Tables"]["songs"]["Row"];
@@ -13,16 +13,9 @@ const UserSongs = () => {
     "userSongs",
     fetchUserSongs,
   );
-  const setCurrentSong = useCurrentSong((state) => state.setCurrentSong);
+  const { currentSong, setCurrentSong } = useCurrentSong();
 
   const handlePlay = async (song: Song) => {
-    await fetch("/api/current-song", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ song }),
-    });
     setCurrentSong(song);
   };
 

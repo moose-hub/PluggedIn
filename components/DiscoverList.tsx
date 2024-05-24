@@ -2,11 +2,12 @@
 import { useEffect } from "react";
 import { Database } from "@/types_db";
 import Image from "next/image";
-import useCurrentSong from "@/stores/useCurrentSong";
 import { FaHeartCircleCheck, FaHeartCircleXmark } from "react-icons/fa6";
-import { useSongs } from "@/hooks/useSongs";
-import { useAuth } from "@/hooks/useAuth";
 import { createClient } from "@/utils/supabase/component";
+
+import { currentSong as useCurrentSong } from "@/hooks/useCurrentSong";
+import { useAuth } from "@/hooks/useAuth";
+import { useSongs } from "@/hooks/useSongs";
 
 const supabase = createClient();
 
@@ -18,13 +19,6 @@ const DiscoverList = () => {
   const { currentSong, setCurrentSong } = useCurrentSong();
 
   const handlePlay = async (song: Song) => {
-    await fetch("/api/current-song", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ song }),
-    });
     setCurrentSong(song);
   };
 
