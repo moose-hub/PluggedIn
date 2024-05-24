@@ -81,9 +81,7 @@ const Profile = () => {
       case 2:
         return (
           <div className="overflow-auto h-[70vh] pb-20 py-4">
-            <div className="flex flex-wrap">
-              <LikedContent />
-            </div>
+            <LikedContent />
           </div>
         );
       // case 3:
