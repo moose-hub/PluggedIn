@@ -9,7 +9,7 @@ interface LeaderSidebarProps {
 const LeaderSidebar: React.FC<LeaderSidebarProps> = ({ className }) => {
   return (
     <aside
-      className={`z-40 bg-white p-4 hidden lg:flex flex-col shadow-lg ${className}`}
+      className={`z-40 bg-white hidden lg:flex flex-col shadow-lg ${className}`}
       aria-label="leaderboard sidebar"
     >
       <header>

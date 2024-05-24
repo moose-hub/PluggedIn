@@ -1,9 +1,11 @@
 "use client";
 import useSWR from "swr";
+import Image from "next/image";
+
+import { currentSong as useCurrentSong } from "@/hooks/useCurrentSong";
+import useAuthModal from "@/stores/useAuthModal";
 import fetchSongs from "@/utils/fetchSongs";
 import { Database } from "@/types_db";
-import Image from "next/image";
-import useCurrentSong from "@/stores/useCurrentSong";
 
 type Song = Database["public"]["Tables"]["songs"]["Row"];
 
@@ -12,16 +14,11 @@ const SongList = () => {
     "songs",
     fetchSongs,
   );
-  const setCurrentSong = useCurrentSong((state) => state.setCurrentSong);
+
+  const { setCurrentSong } = useCurrentSong();
+  const authModal = useAuthModal();
 
   const handlePlay = async (song: Song) => {
-    await fetch("/api/current-song", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ song }),
-    });
     setCurrentSong(song);
   };
 
@@ -35,9 +32,9 @@ const SongList = () => {
     );
 
   return (
-    <div>
+    <>
       <h2 className="text-2xl mx-4 font-bold">New Releases</h2>
-      <div className="grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-4">
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))]">
         {songList?.map((song, index) => (
           <div
             key={index}
@@ -63,7 +60,7 @@ const SongList = () => {
           </div>
         ))}
       </div>
-    </div>
+    </>
   );
 };
 

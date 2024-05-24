@@ -9,7 +9,7 @@ import useUploadModal from "@/stores/useUploadModal";
 import { toast } from "sonner";
 
 import { useAuth } from "@/hooks/useAuth";
-import useAuthModal from "@/hooks/useAuthModal";
+import useAuthModal from "@/stores/useAuthModal";
 import { useEffect } from "react";
 import useUser from "@/stores/useUser";
 
@@ -40,8 +40,7 @@ const Sidebar: React.FC<SidebarProps> = ({ className }) => {
     },
   ];
 
-  // const { user, isLoading, error, signOut } = useAuth();
-  const { user, setUser, resetUser } = useUser();
+  const { user, isLoading, error, signOut } = useAuth();
   const authModal = useAuthModal();
   const uploadModal = useUploadModal();
 
@@ -52,12 +51,6 @@ const Sidebar: React.FC<SidebarProps> = ({ className }) => {
       return uploadModal.onOpen();
     }
   };
-
-  // useEffect(() => {
-  //   if (error) {
-  //     toast.error("Error loading user data");
-  //   }
-  // }, [error]);
 
   return (
     <aside

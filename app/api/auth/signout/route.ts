@@ -16,9 +16,9 @@ export const POST = async () => {
     console.error("Error signing out", error);
 
     if (error instanceof Error) {
-      NextResponse.json({ error: error.message }, { status: 500 });
+      return NextResponse.json({ error: error.message }, { status: 500 });
     } else {
-      NextResponse.json(
+      return NextResponse.json(
         { error: "An unknown error occurred" },
         { status: 500 },
       );
