@@ -24,7 +24,7 @@ const LeaderSidebar: React.FC<LeaderSidebarProps> = ({ className }) => {
           </Link>
         </nav>
       </header>
-      <div className="overflow-y-auto flex-1">
+      <div className="flex-1">
         <Leaderboard />
       </div>
     </aside>

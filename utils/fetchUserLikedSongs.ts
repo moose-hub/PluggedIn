@@ -21,7 +21,8 @@ const fetchUserLikedSongs = async (): Promise<Song[]> => {
           id,
           title,
           author,
-          image_path
+          image_path,
+          song_path
         )
       `,
       )
@@ -29,7 +30,11 @@ const fetchUserLikedSongs = async (): Promise<Song[]> => {
     if (likedSongsError) {
       throw new Error(likedSongsError.message);
     }
-    return likedSongs.map((entry: any) => entry.songs);
+
+    const songs = likedSongs
+      .map((entry: any) => entry.songs)
+      .filter((song) => song !== null);
+    return songs;
   } catch (error) {
     console.error("Error fetching user liked songs", error);
     return [];

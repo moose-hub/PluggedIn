@@ -25,6 +25,11 @@ const fetchUser = async () => {
 
 const BottomBar = () => {
   const pathName = usePathname();
+  const authModal = useAuthModal();
+  const uploadModal = useUploadModal();
+  const { data: user, error } = useSWR("user", fetchUser);
+  const profileLink = `/profile/${user?.id}`;
+
   const menuList = [
     {
       name: "Home",
@@ -47,26 +52,28 @@ const BottomBar = () => {
     {
       name: "Leaderboard",
       icon: <MdLeaderboard className="inline-block mr-2 h-6 w-6" />,
-      href: "/leaderboards",
+      href: "/leaderboard",
       aria: "Link to leaderboard page",
     },
     {
       name: "Profile",
       icon: <IoPersonSharp className="inline-block mr-2 h-6 w-6" />,
-      href: "/profile",
+      href: profileLink,
       aria: "Link to profile",
     },
   ];
 
-  const authModal = useAuthModal();
-  const uploadModal = useUploadModal();
-  const { data: user, error } = useSWR("user", fetchUser);
-
-  const handleClick = () => {
+  const handleUploadClick = () => {
     if (!user) {
       return authModal.onOpen();
     } else {
       return uploadModal.onOpen();
+    }
+  };
+
+  const handleLoginClick = () => {
+    if (!user) {
+      return authModal.onOpen();
     }
   };
 
@@ -75,21 +82,26 @@ const BottomBar = () => {
   }
   return (
     <nav className="flex bg-white fixed bottom-0 left-0 z-50 w-[100vw] justify-around items-center h-16 lg:hidden">
-      {/* <ul className="flex flex-row justify-evenly"> */}
       {menuList.map((item) => (
-        <Link
+        <div
           key={item.href}
-          href={item.href}
           className={`flex items-center justify-center h-full w-full ${pathName === item.href ? "text-pi-purple-main" : "text-gray-500"} hover:text-pi-purple-main transition duration-150 ease-in-out`}
         >
           {item.name === "Upload Track" ? (
-            <button onClick={handleClick}>{item.icon}</button>
+            <button onClick={handleUploadClick} aria-label={item.aria}>
+              {item.icon}
+            </button>
+          ) : item.name === "Profile" ? (
+            <button onClick={handleLoginClick} aria-label={item.aria}>
+              {item.icon}
+            </button>
           ) : (
-            <span>{item.icon}</span>
+            <Link href={item.href} aria-label={item.aria}>
+              {item.icon}
+            </Link>
           )}
-        </Link>
+        </div>
       ))}
-      {/* </ul> */}
     </nav>
   );
 };

@@ -50,8 +50,8 @@ export default function Leaderboard() {
   }));
 
   return (
-    <div className="flex items-center mb-28 overflow-hidden">
-      <div className="rounded">
+    <div className="flex items-center overflow-hidden">
+      <div className="rounded mb-28">
         {sortedLeaders.map((leader) => (
           <LeadingArtist
             key={leader.index}

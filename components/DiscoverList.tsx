@@ -61,9 +61,9 @@ const DiscoverList = () => {
     );
 
   return (
-    <div className="flex flex-col items-center overflow-x-hidden overflow-y-scroll scroll-smooth h-[100vh] w-full p-4 snap-y snap-mandatory">
-      <div className="relative flex flex-col items-center p-8 w-full max-w-2xl h-[800px] bg-gradient-to-r from-violet-200 via-purple-250 to-fuchsia-200 mb-4 snap-start border-4 border-gray-300 rounded-lg shadow-xl">
-        <div className="absolute top-4 left-4 text-left p-2 rounded-lg">
+    <div className="flex flex-col items-center overflow-x-hidden overflow-y-scroll scroll-smooth w-full p-4">
+      <div className="relative flex flex-col p-8 gap-4">
+        <div className="text-left p-2 rounded-lg">
           <h2 className="font-bold text-2xl">{currentSong?.title}</h2>
           <p className="text-lg">{currentSong?.author}</p>
         </div>
@@ -80,9 +80,9 @@ const DiscoverList = () => {
             </div>
           )}
         </div>
-        <div className="absolute bottom-4 flex items-center justify-center w-full space-x-32 z-10">
+        <div className="flex items-center justify-between w-full z-10">
           <button onClick={playRandomSong}>
-            <FaHeartCircleXmark className="text-7xl text-white p-2 hover:bg-slate-50 transition-colors rounded-full hover:text-rose-400" />
+            <FaHeartCircleXmark className="text-7xl text-pi-purple-shadow p-2 hover:bg-slate-50 transition-colors rounded-full hover:text-pi-purple-dark" />
           </button>
           <button
             onClick={() => {
@@ -92,7 +92,7 @@ const DiscoverList = () => {
               }
             }}
           >
-            <FaHeartCircleCheck className="text-7xl text-green-400 p-2 hover:bg-slate-50 transition-colors rounded-full" />
+            <FaHeartCircleCheck className="text-7xl text-pi-purple-main p-2 hover:bg-slate-50 transition-colors rounded-full" />
           </button>
         </div>
       </div>

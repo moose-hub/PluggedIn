@@ -13,7 +13,6 @@ const UserSongs = () => {
     "userSongs",
     fetchUserLibrary,
   );
-  console.log(songList);
   const { currentSong, setCurrentSong } = useCurrentSong();
 
   const handlePlay = (song: Song) => {

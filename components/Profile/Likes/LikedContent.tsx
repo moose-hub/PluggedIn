@@ -3,17 +3,18 @@ import useSWR from "swr";
 import fetchUserLikedSongs from "../../../utils/fetchUserLikedSongs";
 import { Database } from "@/types_db";
 import Image from "next/image";
-import { useState } from "react";
+import { currentSong as useCurrentSong } from "@/hooks/useCurrentSong";
 import { FaHeartCircleCheck, FaHeartCircleXmark } from "react-icons/fa6";
 
 type Song = Database["public"]["Tables"]["songs"]["Row"];
 
 const UserLikedSongs = () => {
-  const { data: songList, error } = useSWR<Song[] | undefined>(
+  const { data: songList, error } = useSWR<Song[] | []>(
     "userLikedSongs",
     fetchUserLikedSongs,
   );
-  const [currentSong, setCurrentSong] = useState<Song | null>(null);
+
+  const { currentSong, setCurrentSong } = useCurrentSong();
 
   const handlePlay = (song: Song) => {
     setCurrentSong(song);
@@ -30,17 +31,14 @@ const UserLikedSongs = () => {
   return (
     <>
       <div className="grid grid-cols-[repeat(auto-fit,minmax(150px,max-content))]">
-        {songList?.map((song, index) => (
+        {songList.map((song, index) => (
           <div
             key={index}
             className="flex flex-col items-start p-4 rounded-md hover:cursor-pointer hover:bg-white transition-colors max-w-48"
             onClick={() => handlePlay(song)}
           >
             <Image
-              src={
-                `https://fpaeregzmenbrqdcpbra.supabase.co/storage/v1/object/public/images/${song.image_path}` ||
-                ""
-              }
+              src={`https://fpaeregzmenbrqdcpbra.supabase.co/storage/v1/object/public/images/${song.image_path}`}
               alt={song.title || ""}
               width={150}
               height={150}
@@ -55,12 +53,6 @@ const UserLikedSongs = () => {
           </div>
         ))}
       </div>
-      {currentSong && (
-        <div className="fixed bottom-0 left-0 right-0 bg-gray-900 text-white p-4">
-          <h3 className="text-xl font-bold">{currentSong.title}</h3>
-          <p className="text-lg">{currentSong.author}</p>
-        </div>
-      )}
     </>
   );
 };

@@ -13,7 +13,7 @@ const PageHeader = () => {
   }
 
   return (
-    <h1 className="p-4 text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold mb-14">
+    <h1 className="p-4 text-6xl lg:text-7xl xl:text-8xl font-extrabold mb-14">
       {header}
     </h1>
   );

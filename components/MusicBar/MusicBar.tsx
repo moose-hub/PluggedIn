@@ -15,7 +15,6 @@ export default function MusicBar() {
   const seekerRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    console.log(currentSong);
     const currentAudio = audioRef.current;
 
     if (currentAudio) {
