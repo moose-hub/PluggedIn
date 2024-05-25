@@ -30,7 +30,7 @@ const UserSongs = () => {
 
   return (
     <div>
-      <h2 className="text-2xl mx-4 font-bold">New Releases</h2>
+      <h2 className="text-2xl mx-4 font-bold">My Library</h2>
       <div className="grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] p-4">
         {songList?.map((song, index) => (
           <div

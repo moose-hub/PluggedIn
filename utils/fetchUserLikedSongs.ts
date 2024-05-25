@@ -1,10 +1,7 @@
 import { createClient } from "./supabase/component";
 import { Database } from "../types_db";
-
 const supabase = createClient();
-
 type Song = Database["public"]["Tables"]["songs"]["Row"];
-
 const fetchUserLikedSongs = async (): Promise<Song[]> => {
   try {
     const { data, error: userError } = await supabase.auth.getUser();
@@ -38,5 +35,4 @@ const fetchUserLikedSongs = async (): Promise<Song[]> => {
     return [];
   }
 };
-
 export default fetchUserLikedSongs;
