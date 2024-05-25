@@ -22,8 +22,8 @@ const Profile: React.FC<ProfileProps> = ({ user }) => {
   };
 
   return (
-    <div className="flex flex-col p-4 mx-2 gap-y-12">
-      <div className="flex flex-col xl:flex-row gap-4">
+    <div className="flex flex-col p-4 mx-2">
+      <div className="flex flex-col xl:flex-row gap-4 mb-12">
         <Image
           src={`https://fpaeregzmenbrqdcpbra.supabase.co/storage/v1/object/public/images/${user?.avatar_url}`}
           alt="User profile picture"
@@ -41,7 +41,7 @@ const Profile: React.FC<ProfileProps> = ({ user }) => {
         </div>
       </div>
       <div>
-        <ul className="flex gap-8 text-2xl font-bold items-center">
+        <ul className="flex gap-8 text-2xl font-bold items-center px-4 mb-4">
           <li
             className={`py-2 border-b-2 cursor-pointer ${activeTab === 0 ? "border-pi-purple-main" : "border-transparent transition-colors"}`}
             onClick={() => handleClick(0)}
@@ -56,7 +56,6 @@ const Profile: React.FC<ProfileProps> = ({ user }) => {
           </li>
           <li className="ml-auto">
             <Button className="p-2 flex gap-4 items-baseline font-semibold">
-              Contribute
               <BiSolidDonateHeart />
             </Button>
           </li>

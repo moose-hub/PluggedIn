@@ -5,7 +5,7 @@ const supabase = createClient();
 
 type Song = Database["public"]["Tables"]["songs"]["Row"];
 
-const fetchUserLikedSongs = async (): Promise<Song[]> => {
+const fetchUserLibrary = async (): Promise<Song[]> => {
   try {
     const { data, error: userError } = await supabase.auth.getUser();
     if (userError) {
@@ -15,28 +15,18 @@ const fetchUserLikedSongs = async (): Promise<Song[]> => {
       throw new Error("User is not logged in");
     }
     const userId = data.user.id;
-    const { data: likedSongs, error: likedSongsError } = await supabase
-      .from("liked_songs")
-      .select(
-        `
-        song_id,
-        songs (
-          id,
-          title,
-          author,
-          image_path
-        )
-      `,
-      )
+    const { data: librarySongs, error: librarySongsError } = await supabase
+      .from("songs")
+      .select("*")
       .eq("user_id", userId);
-    if (likedSongsError) {
-      throw new Error(likedSongsError.message);
+    if (librarySongsError) {
+      throw new Error(librarySongsError.message);
     }
-    return likedSongs.map((entry: any) => entry.songs);
+    return librarySongs || [];
   } catch (error) {
     console.error("Error fetching user liked songs", error);
     return [];
   }
 };
 
-export default fetchUserLikedSongs;
+export default fetchUserLibrary;
