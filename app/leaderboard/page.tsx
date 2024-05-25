@@ -1,6 +1,4 @@
 import Leaderboard from "@/components/Leaderboard/Leaderboard";
-import Link from "next/link";
-import { MdLeaderboard } from "react-icons/md";
 
 const LeaderboardMobile = () => {
   return (

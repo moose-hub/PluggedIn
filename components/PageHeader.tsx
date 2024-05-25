@@ -7,7 +7,7 @@ const PageHeader = () => {
   if (pathName === "/") {
     header = "Music";
   } else {
-    const pageTitle = pathName.slice(1);
+    const pageTitle = pathName.split("/")[1];
     const firstLetter = pageTitle[0].toUpperCase();
     header = firstLetter + pageTitle.slice(1);
   }

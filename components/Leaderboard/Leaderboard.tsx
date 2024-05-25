@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { fetchLeaderboardData } from "@/utils/fetchLeaderboardData"; // Import the function
+import { fetchLeaderboardData } from "@/utils/fetchLeaderboardData";
 import LeadingArtist from "./LeadingArtist";
 
 type LeaderboardEntry = {
