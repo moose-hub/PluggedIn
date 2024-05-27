@@ -1,8 +1,8 @@
 "use client";
 import useSWR from "swr";
 import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
 import { currentSong as useCurrentSong } from "@/hooks/useCurrentSong";
-import useAuthModal from "@/stores/useAuthModal";
 import fetchSongs from "@/utils/fetchSongs";
 import { Database } from "@/types_db";
 
@@ -13,12 +13,41 @@ const NewReleases = () => {
     "songs",
     fetchSongs,
   );
-
   const { setCurrentSong } = useCurrentSong();
+  const containerRef = useRef<HTMLDivElement>(null);
+  const itemRef = useRef<HTMLDivElement>(null);
+  const [maxSongColumns, setMaxSongColumns] = useState(10);
 
   const handlePlay = async (song: Song) => {
     setCurrentSong(song);
   };
+
+  useEffect(() => {
+    const updateMaxColumns = () => {
+      if (containerRef.current && itemRef.current) {
+        const containerWidth = containerRef.current.offsetWidth;
+        const itemWidth = itemRef.current.offsetWidth;
+        const newMaxColumns = Math.floor(containerWidth / itemWidth);
+        setMaxSongColumns(newMaxColumns);
+      }
+    };
+
+    updateMaxColumns();
+    window.addEventListener("resize", updateMaxColumns);
+
+    return () => {
+      window.removeEventListener("resize", updateMaxColumns);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (containerRef.current && itemRef.current) {
+      const containerWidth = containerRef.current.offsetWidth;
+      const itemWidth = itemRef.current.offsetWidth;
+      const newMaxColumns = Math.floor(containerWidth / itemWidth);
+      setMaxSongColumns(newMaxColumns);
+    }
+  }, [songList]);
 
   if (error) return <div>Failed to load song list</div>;
 
@@ -34,16 +63,20 @@ const NewReleases = () => {
       (a, b) =>
         new Date(b.created_at).getTime() - new Date(a.created_at).getTime(),
     )
-    .slice(0, 5);
+    .slice(0, maxSongColumns);
 
   return (
     <>
       <div className="p-4">
         <h2 className="text-2xl mx-4 font-bold">New Releases</h2>
-        <div className="grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-4">
+        <div
+          ref={containerRef}
+          className="grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-4"
+        >
           {newSongList.map((song, index) => (
             <div
-              key={index}
+              ref={index === 0 ? itemRef : null}
+              key={song.id}
               className="flex flex-col items-start p-4 rounded-md hover:cursor-pointer hover:bg-white transition-colors max-w-48"
               onClick={() => handlePlay(song)}
             >
