@@ -73,7 +73,7 @@ const UserSpotlight: React.FC = () => {
 
   const setUser = useUserDataStore((state) => state.setUser);
   const editProfileModal = useEditProfileModal();
-  const { userData, loading, error } = useUserData();
+  const { userData, loading, error } = useUserData(user?.id || "");
 
   const profileLink = `/profile/${user?.id}`;
 
@@ -149,7 +149,7 @@ const UserSpotlight: React.FC = () => {
       : "";
   const userAvatar =
     `https://fpaeregzmenbrqdcpbra.supabase.co/storage/v1/object/public/images/${userData?.avatar_url}` ||
-    "https://fpaeregzmenbrqdcpbra.supabase.co/storage/v1/object/public/images/image-Anon-df9a020f-a94c-42bc-a676-f1ccf0a9cb0c.jpg";
+    "https://fpaeregzmenbrqdcpbra.supabase.co/storage/v1/object/public/images/image-placeholder-profile.png";
 
   return (
     <div className="flex items-center w-full">

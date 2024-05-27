@@ -5,7 +5,6 @@ import { useState } from "react";
 import { createClient } from "@/utils/supabase/component";
 import { v4 as uuidv4 } from "uuid";
 import { useRouter } from "next/navigation";
-import useSWR from "swr";
 
 import Modal from "./Modal";
 import Input from "./Input";
@@ -13,20 +12,23 @@ import Button from "./Button";
 import useEditProfileModal from "@/stores/useEditProfileModal";
 import { useAuth } from "@/hooks/useAuth";
 import { toast } from "sonner";
+import { useUserData } from "@/hooks/useUserData";
 
 const supabase = createClient();
 
 const EditProfileModal = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const { user, error, signOut } = useAuth();
+  const { user } = useAuth();
+  const { userData } = useUserData(user?.id || "");
+
   const editProfileModal = useEditProfileModal();
   const router = useRouter();
 
   const { register, handleSubmit, reset } = useForm<FieldValues>({
     defaultValues: {
-      username: "",
-      description: "",
-      avatar: null,
+      username: userData?.username || "",
+      description: userData?.description || "",
+      avatar: userData?.avatar_url || null,
     },
   });
 
@@ -41,47 +43,68 @@ const EditProfileModal = () => {
     try {
       setIsLoading(true);
 
-      const avatarFile = values.avatar?.[0];
+      let avatar_url = userData?.avatar_url;
 
-      if (!avatarFile || !user) {
-        throw new Error("Missing required fields");
+      if (values.avatar && values.avatar.length > 0) {
+        const avatarFile = values.avatar[0];
+        const uniqueID = uuidv4();
+
+        const { data: imageData, error: imageError } = await supabase.storage
+          .from("images")
+          .upload(`image-${values.username}-${uniqueID}.jpg`, avatarFile, {
+            cacheControl: "3600",
+            upsert: false,
+          });
+
+        if (imageError) {
+          setIsLoading(false);
+          throw new Error("Error uploading image file");
+        }
+
+        avatar_url = imageData.path;
       }
 
-      const uniqueID = uuidv4();
+      const updateData: Partial<{
+        username: string;
+        description: string;
+        avatar_url: string | null;
+      }> = {};
 
-      const { data: imageData, error: imageError } = await supabase.storage
-        .from("images")
-        .upload(`image-${values.username}-${uniqueID}.jpg`, avatarFile, {
-          cacheControl: "3600",
-          upsert: false,
-        });
-
-      if (imageError) {
-        setIsLoading(false);
-        throw new Error("Error uploading image file");
+      if (values.username !== "" && values.username !== userData?.username) {
+        updateData.username = values.username;
       }
 
-      const { error: supabaseError } = await supabase
-        .from("users")
-        .update({
-          username: values.username,
-          description: values.description,
-          avatar_url: imageData.path,
-        })
-        .eq("id", user.id);
-
-      if (supabaseError) {
-        setIsLoading(false);
-        throw new Error(supabaseError.message);
+      if (
+        values.description !== "" &&
+        values.description !== userData?.description
+      ) {
+        updateData.description = values.description;
       }
 
-      router.refresh();
+      if (avatar_url !== userData?.avatar_url) {
+        updateData.avatar_url = avatar_url;
+      }
+
+      if (Object.keys(updateData).length > 0) {
+        const { error: supabaseError } = await supabase
+          .from("users")
+          .update(updateData)
+          .eq("id", user?.id || "");
+
+        if (supabaseError) {
+          setIsLoading(false);
+          throw new Error(supabaseError.message);
+        }
+      }
+
       setIsLoading(false);
+      window.location.reload();
       toast.success("Upload Success");
       reset();
       editProfileModal.onClose();
     } catch (error) {
       console.log("something went wrong", error);
+      toast.error("Something went wrong");
     } finally {
       setIsLoading(false);
     }
@@ -105,7 +128,7 @@ const EditProfileModal = () => {
           <Input
             id="username"
             disabled={isLoading}
-            {...register("username", { required: true })}
+            {...register("username", { required: false })}
             placeholder="Username"
           />
         </div>
@@ -114,7 +137,7 @@ const EditProfileModal = () => {
           <Input
             id="description"
             disabled={isLoading}
-            {...register("description", { required: true })}
+            {...register("description", { required: false })}
             placeholder="Profile Description"
             type="longtext"
           />
@@ -126,7 +149,7 @@ const EditProfileModal = () => {
             type="file"
             disabled={isLoading}
             accept="image/*"
-            {...register("avatar", { required: true })}
+            {...register("avatar", { required: false })}
             placeholder="Avatar File"
             className="border-dashed"
           />

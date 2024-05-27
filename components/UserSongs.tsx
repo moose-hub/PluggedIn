@@ -1,26 +1,37 @@
 "use client";
 import useSWR from "swr";
-import fetchUserLibrary from "@/utils/fetchUserSongs";
+import fetchUserLibrary from "@/utils/fetchUserLibrary";
 import { Database } from "@/types_db";
 import Image from "next/image";
 import { currentSong as useCurrentSong } from "@/hooks/useCurrentSong";
-import { FaHeartCircleCheck, FaHeartCircleXmark } from "react-icons/fa6";
+import { useUserData } from "@/hooks/useUserData";
+import { useParams } from "next/navigation";
 
 type Song = Database["public"]["Tables"]["songs"]["Row"];
 
 const UserSongs = () => {
+  const { userid } = useParams();
+  const profileId = userid?.toString() || "";
+
+  const { userData, loading, error: userError } = useUserData(profileId);
+
+  const fetcher = () => fetchUserLibrary(userData?.id || "");
+
   const { data: songList, error } = useSWR<Song[] | undefined>(
-    "userSongs",
-    fetchUserLibrary,
+    userData ? "userSongs" : null,
+    fetcher,
   );
+
   const { currentSong, setCurrentSong } = useCurrentSong();
 
   const handlePlay = (song: Song) => {
     setCurrentSong(song);
   };
 
+  if (userError)
+    return <div>Failed to load user data: {userError.message}</div>;
+  if (!userData || loading) return <div>Loading user data...</div>;
   if (error) return <div>Failed to load song list: {error.message}</div>;
-
   if (!songList)
     return (
       <div>

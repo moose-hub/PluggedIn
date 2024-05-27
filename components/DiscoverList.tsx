@@ -64,18 +64,20 @@ const DiscoverList = () => {
     <div className="flex flex-col items-center overflow-x-hidden overflow-y-scroll scroll-smooth w-full p-4">
       <div className="relative flex flex-col p-8 gap-4">
         <div className="text-left p-2 rounded-lg">
-          <h2 className="font-bold text-2xl">{currentSong?.title}</h2>
+          <h2 className="font-bold text-2xl max-w-full text-pretty">
+            {currentSong?.title}
+          </h2>
           <p className="text-lg">{currentSong?.author}</p>
         </div>
-        <div className="relative z-10 flex flex-col items-center justify-center h-full w-full">
+        <div className="relative z-10 flex flex-col justify-center h-full w-full">
           {currentSong?.image_path && (
-            <div className="flex justify-center items-center w-[300px] h-[300px]">
+            <div className="flex justify-center w-[300px] h-[300px]">
               <Image
                 src={`https://fpaeregzmenbrqdcpbra.supabase.co/storage/v1/object/public/images/${currentSong.image_path}`}
                 alt={currentSong.title || "Current Song"}
                 width={300}
                 height={300}
-                className="rounded-lg object-cover shadow-2xl"
+                className="rounded-lg object-cover shadow-2xl aspect-square"
               />
             </div>
           )}

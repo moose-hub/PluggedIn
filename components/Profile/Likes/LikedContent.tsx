@@ -1,17 +1,22 @@
 "use client";
 import useSWR from "swr";
-import fetchUserLikedSongs from "../../../utils/fetchUserLikedSongs";
+import fetchUserLikedSongs from "@/utils/fetchUserLikedSongs";
 import { Database } from "@/types_db";
 import Image from "next/image";
 import { currentSong as useCurrentSong } from "@/hooks/useCurrentSong";
-import { FaHeartCircleCheck, FaHeartCircleXmark } from "react-icons/fa6";
+import { useParams } from "next/navigation";
 
 type Song = Database["public"]["Tables"]["songs"]["Row"];
 
 const UserLikedSongs = () => {
+  const { userid } = useParams();
+  const profileId = userid?.toString() || "";
+
+  const fetcher = () => fetchUserLikedSongs(profileId);
+
   const { data: songList, error } = useSWR<Song[] | []>(
-    "userLikedSongs",
-    fetchUserLikedSongs,
+    profileId ? `userLikedSongs-${profileId}` : null,
+    fetcher,
   );
 
   const { currentSong, setCurrentSong } = useCurrentSong();

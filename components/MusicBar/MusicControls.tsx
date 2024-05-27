@@ -24,7 +24,7 @@ export default function MusicControls({
     if (seekerRef.current) {
       seekerRef.current.value = currentTime.toString();
       seekerRef.current.style.setProperty(
-        "--seeker-progresS",
+        "--seeker-progress",
         `${(Number(seekerRef.current.value) / duration) * 100}%`,
       );
     }
@@ -33,13 +33,26 @@ export default function MusicControls({
   }, [audioRef, seekerRef, duration, setTimeProgress]);
 
   useEffect(() => {
-    if (isPlaying) {
-      audioRef.current?.play();
-      playAnimationRef.current = requestAnimationFrame(repeat);
-    } else {
-      audioRef.current?.pause();
-      cancelAnimationFrame(Number(playAnimationRef.current));
-    }
+    const handlePlayPause = async () => {
+      if (isPlaying) {
+        try {
+          if (audioRef.current) {
+            await audioRef.current.play();
+            playAnimationRef.current = requestAnimationFrame(repeat);
+          }
+        } catch (error) {
+          console.error("Error playing the audio:", error);
+          setIsPlaying(false);
+        }
+      } else {
+        if (audioRef.current) {
+          audioRef.current.pause();
+          cancelAnimationFrame(Number(playAnimationRef.current));
+        }
+      }
+    };
+
+    handlePlayPause();
   }, [isPlaying, audioRef, repeat]);
 
   return (
@@ -50,17 +63,11 @@ export default function MusicControls({
       <button>
         <IoPlaySkipBack className="text-2xl hidden lg:block" />
       </button>
-      <button>
+      <button onClick={() => setIsPlaying(!isPlaying)}>
         {isPlaying ? (
-          <FaCirclePause
-            onClick={() => setIsPlaying(!isPlaying)}
-            className="text-pi-purple-main/90 hover:text-pi-purple-main/100 transition-all"
-          />
+          <FaCirclePause className="text-pi-purple-main/90 hover:text-pi-purple-main/100 transition-all" />
         ) : (
-          <FaCirclePlay
-            onClick={() => setIsPlaying(!isPlaying)}
-            className="text-pi-purple-main/90 hover:text-pi-purple-main/100 transition-all"
-          />
+          <FaCirclePlay className="text-pi-purple-main/90 hover:text-pi-purple-main/100 transition-all" />
         )}
       </button>
       <button>
