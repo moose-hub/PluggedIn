@@ -4,7 +4,6 @@ import MusicControls from "./MusicControls";
 import TrackSeeker from "./TrackSeeker";
 import TrackSpotlight from "./TrackSpotlight";
 import VolumeSlider from "./VolumeSlider";
-
 import { currentSong as useCurrentSong } from "@/hooks/useCurrentSong";
 
 export default function MusicBar() {
@@ -14,8 +13,17 @@ export default function MusicBar() {
   const audioRef = useRef<HTMLAudioElement>(null);
   const seekerRef = useRef<HTMLInputElement>(null);
 
+  const playAudio = async () => {
+    try {
+      if (audioRef.current) {
+        // await audioRef.current.play();
+      }
+    } catch (error) {
+      console.error("Error playing the audio:", error);
+    }
+  };
+
   useEffect(() => {
-    console.log(currentSong);
     const currentAudio = audioRef.current;
 
     if (currentAudio) {
@@ -34,12 +42,18 @@ export default function MusicBar() {
   }, [audioRef]);
 
   useEffect(() => {
-    if (audioRef.current && currentSong) {
-      audioRef.current.src =
-        `https://fpaeregzmenbrqdcpbra.supabase.co/storage/v1/object/public/songs/${currentSong.song_path}` ||
-        "";
-      audioRef.current.play();
-    }
+    const setAudioSource = async () => {
+      if (audioRef.current && currentSong) {
+        audioRef.current.pause();
+        audioRef.current.src =
+          `https://fpaeregzmenbrqdcpbra.supabase.co/storage/v1/object/public/songs/${currentSong.song_path}` ||
+          "";
+        audioRef.current.load();
+        audioRef.current.oncanplaythrough = playAudio;
+      }
+    };
+
+    setAudioSource();
   }, [currentSong]);
 
   return (

@@ -3,13 +3,11 @@ import { Database } from "@/types_db";
 
 const supabase = createClient();
 
+type Song = Database["public"]["Tables"]["songs"]["Row"];
+
 type LeaderboardEntry = {
-  song_id: number;
-  title: string;
-  author: string;
-  user_id: string;
+  song: Song;
   like_count: number;
-  image_path: string | null;
 };
 
 export const fetchLeaderboardData = async (): Promise<LeaderboardEntry[]> => {
@@ -17,7 +15,7 @@ export const fetchLeaderboardData = async (): Promise<LeaderboardEntry[]> => {
     // Fetch all songs
     const { data: songs, error: songsError } = await supabase
       .from("songs")
-      .select("id, title, author, user_id, image_path");
+      .select("*");
 
     if (songsError) {
       throw new Error(songsError.message);
@@ -47,12 +45,8 @@ export const fetchLeaderboardData = async (): Promise<LeaderboardEntry[]> => {
 
     // Merge songs with their like counts
     const leaderboard: LeaderboardEntry[] = songs.map((song) => ({
-      song_id: song.id,
-      title: song.title || "Unknown Title",
-      author: song.author || "Unknown Author",
-      user_id: song.user_id || "Unknown User",
+      song,
       like_count: likeCounts[song.id] || 0,
-      image_path: song.image_path,
     }));
 
     // Sort by like_count in descending order

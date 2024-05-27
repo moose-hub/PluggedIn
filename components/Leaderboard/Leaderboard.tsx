@@ -1,15 +1,14 @@
 "use client";
 import { useEffect, useState } from "react";
-import { fetchLeaderboardData } from "@/utils/fetchLeaderboardData"; // Import the function
+import { fetchLeaderboardData } from "@/utils/fetchLeaderboardData";
 import LeadingArtist from "./LeadingArtist";
+import { Database } from "@/types_db";
+
+type Song = Database["public"]["Tables"]["songs"]["Row"];
 
 type LeaderboardEntry = {
-  song_id: number;
-  title: string;
-  author: string;
-  user_id: string;
+  song: Song;
   like_count: number;
-  image_path: string | null;
 };
 
 export default function Leaderboard() {
@@ -42,23 +41,18 @@ export default function Leaderboard() {
   }
 
   const sortedLeaders = leaderboard.map((leader, index) => ({
-    index,
-    image: `https://fpaeregzmenbrqdcpbra.supabase.co/storage/v1/object/public/images/${leader.image_path}`,
-    name: leader.title,
-    author: leader.author,
+    song: leader.song,
     numberOfSwipes: leader.like_count,
   }));
 
   return (
-    <div className="flex items-center mb-28 overflow-hidden">
-      <div className="rounded">
-        {sortedLeaders.map((leader) => (
+    <div className="flex items-center overflow-hidden">
+      <div className="rounded mb-28">
+        {sortedLeaders.map((leader, index) => (
           <LeadingArtist
-            key={leader.index}
-            index={leader.index}
-            image={leader.image}
-            name={leader.name}
-            author={leader.author}
+            key={index}
+            index={index}
+            song={leader.song}
             numberOfSwipes={leader.numberOfSwipes}
           />
         ))}

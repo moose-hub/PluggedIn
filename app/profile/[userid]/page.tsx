@@ -3,16 +3,11 @@ import { useParams } from "next/navigation";
 import Profile from "@/components/ProfilePage/Profile";
 import { toast } from "sonner";
 import { useUserData } from "@/hooks/useUserData";
-import { useAuth } from "@/hooks/useAuth";
 
-const DefaultProfilePage = () => {
-  const { user } = useAuth();
+const ProfilePage = () => {
   const { userid } = useParams();
-  const profileId = userid?.toString();
-  const userId = user?.id.toString();
-  const { userData, loading, error } = useUserData(
-    profileId ? profileId : userId || "",
-  );
+  const profileId = userid.toString();
+  const { userData, loading, error } = useUserData(profileId);
 
   if (error) {
     toast.error("Failed to load user data");
@@ -26,4 +21,4 @@ const DefaultProfilePage = () => {
   return <Profile user={userData} />;
 };
 
-export default DefaultProfilePage;
+export default ProfilePage;

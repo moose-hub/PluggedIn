@@ -7,13 +7,13 @@ const PageHeader = () => {
   if (pathName === "/") {
     header = "Music";
   } else {
-    const pageTitle = pathName.slice(1);
+    const pageTitle = pathName.split("/")[1];
     const firstLetter = pageTitle[0].toUpperCase();
     header = firstLetter + pageTitle.slice(1);
   }
 
   return (
-    <h1 className="p-4 text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold mb-14">
+    <h1 className="p-4 text-6xl lg:text-7xl xl:text-8xl font-extrabold mb-14">
       {header}
     </h1>
   );

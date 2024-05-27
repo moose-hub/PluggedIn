@@ -18,7 +18,7 @@ export default function TrackSpotlight({ audioRef }: TrackSpotlightProps) {
           alt={currentSong?.title || ""}
           width={50}
           height={100}
-          className="aspect-square rounded-md"
+          className="w-auto h-auto aspect-square rounded-md"
         />
       ) : (
         <BsImageFill />

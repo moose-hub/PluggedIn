@@ -1,26 +1,37 @@
 "use client";
 import useSWR from "swr";
-import fetchUserSongs from "@/utils/fetchUserSongs";
+import fetchUserLibrary from "@/utils/fetchUserLibrary";
 import { Database } from "@/types_db";
 import Image from "next/image";
 import { currentSong as useCurrentSong } from "@/hooks/useCurrentSong";
-import { FaHeartCircleCheck, FaHeartCircleXmark } from "react-icons/fa6";
+import { useUserData } from "@/hooks/useUserData";
+import { useParams } from "next/navigation";
 
 type Song = Database["public"]["Tables"]["songs"]["Row"];
 
 const UserSongs = () => {
+  const { userid } = useParams();
+  const profileId = userid?.toString() || "";
+
+  const { userData, loading, error: userError } = useUserData(profileId);
+
+  const fetcher = () => fetchUserLibrary(userData?.id || "");
+
   const { data: songList, error } = useSWR<Song[] | undefined>(
-    "userSongs",
-    fetchUserSongs,
+    userData ? "userSongs" : null,
+    fetcher,
   );
+
   const { currentSong, setCurrentSong } = useCurrentSong();
 
-  const handlePlay = async (song: Song) => {
+  const handlePlay = (song: Song) => {
     setCurrentSong(song);
   };
 
+  if (userError)
+    return <div>Failed to load user data: {userError.message}</div>;
+  if (!userData || loading) return <div>Loading user data...</div>;
   if (error) return <div>Failed to load song list: {error.message}</div>;
-
   if (!songList)
     return (
       <div>
@@ -29,20 +40,16 @@ const UserSongs = () => {
     );
 
   return (
-    <div>
-      <h2 className="text-2xl mx-4 font-bold">My Library</h2>
-      <div className="grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] p-4">
-        {songList?.map((song, index) => (
+    <>
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(150px,max-content))]">
+        {songList.map((song, index) => (
           <div
             key={index}
             className="flex flex-col items-start p-4 rounded-md hover:cursor-pointer hover:bg-white transition-colors max-w-48"
             onClick={() => handlePlay(song)}
           >
             <Image
-              src={
-                `https://fpaeregzmenbrqdcpbra.supabase.co/storage/v1/object/public/images/${song.image_path}` ||
-                ""
-              }
+              src={`https://fpaeregzmenbrqdcpbra.supabase.co/storage/v1/object/public/images/${song.image_path}`}
               alt={song.title || ""}
               width={150}
               height={150}
@@ -57,7 +64,7 @@ const UserSongs = () => {
           </div>
         ))}
       </div>
-    </div>
+    </>
   );
 };
 

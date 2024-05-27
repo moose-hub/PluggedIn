@@ -194,6 +194,7 @@ export type Database = {
           song_path: string | null;
           title: string | null;
           user_id: string | null;
+          genre: string | null;
         };
         Insert: {
           author?: string | null;
@@ -203,6 +204,7 @@ export type Database = {
           song_path?: string | null;
           title?: string | null;
           user_id?: string | null;
+          genre: string | null;
         };
         Update: {
           author?: string | null;
@@ -212,6 +214,7 @@ export type Database = {
           song_path?: string | null;
           title?: string | null;
           user_id?: string | null;
+          genre: string | null;
         };
         Relationships: [
           {
@@ -329,7 +332,14 @@ export type Database = {
       };
     };
     Views: {
-      [_ in never]: never;
+      users_view: {
+        Row: {
+          id: string;
+          username: string | null;
+          description: string | null;
+          avatar_url: string | null;
+        };
+      };
     };
     Functions: {
       fetch_leaderboard: {

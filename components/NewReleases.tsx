@@ -1,7 +1,6 @@
 "use client";
 import useSWR from "swr";
 import Image from "next/image";
-
 import { currentSong as useCurrentSong } from "@/hooks/useCurrentSong";
 import useAuthModal from "@/stores/useAuthModal";
 import fetchSongs from "@/utils/fetchSongs";
@@ -9,7 +8,7 @@ import { Database } from "@/types_db";
 
 type Song = Database["public"]["Tables"]["songs"]["Row"];
 
-const SongList = () => {
+const NewReleases = () => {
   const { data: songList, error } = useSWR<Song[] | undefined>(
     "songs",
     fetchSongs,
@@ -30,12 +29,19 @@ const SongList = () => {
       </div>
     );
 
+  const newSongList = [...songList]
+    .sort(
+      (a, b) =>
+        new Date(b.created_at).getTime() - new Date(a.created_at).getTime(),
+    )
+    .slice(0, 5);
+
   return (
     <>
       <div className="p-4">
-        <h2 className="text-2xl mx-4 font-bold">All Songs</h2>
-        <div className="grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))]">
-          {songList?.map((song, index) => (
+        <h2 className="text-2xl mx-4 font-bold">New Releases</h2>
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-4">
+          {newSongList.map((song, index) => (
             <div
               key={index}
               className="flex flex-col items-start p-4 rounded-md hover:cursor-pointer hover:bg-white transition-colors max-w-48"
@@ -65,4 +71,4 @@ const SongList = () => {
   );
 };
 
-export default SongList;
+export default NewReleases;

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Database } from "../types_db";
-import fetchUserLikedSongs from "../utils/fetchUserLikedSongs"; // Import the fetch function
+import fetchUserLikedSongs from "../utils/fetchUserLikedSongs";
 import { useAuth } from "../hooks/useAuth";
 import { currentSong as useCurrentSong } from "../hooks/useCurrentSong";
 import Image from "next/image";
@@ -20,10 +20,10 @@ const LikedSongs = () => {
     const fetchSongs = async () => {
       if (user) {
         try {
-          const songs = await fetchUserLikedSongs();
+          const songs = await fetchUserLikedSongs(user?.id || "");
           setLikedSongs(songs);
           if (songs.length > 0) {
-            setCurrentSong(songs[0]); // Set the first liked song as the current song
+            setCurrentSong(songs[0]);
           }
         } catch (error) {
           console.error("Error fetching liked songs:", error);

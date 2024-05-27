@@ -1,21 +1,57 @@
-import { FunctionComponent } from "react";
+import { FunctionComponent, useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
+import { useAuth } from "@/hooks/useAuth";
+import { createClient } from "@/utils/supabase/component";
+import { currentSong as useCurrentSong } from "@/hooks/useCurrentSong";
+import { Database } from "@/types_db";
+
+type Song = Database["public"]["Tables"]["songs"]["Row"];
+
+const supabase = createClient();
 
 type LeadingArtistProps = {
   index: number;
-  image: string;
-  name: string;
-  author: string;
+  song: Song;
   numberOfSwipes: number;
 };
 
 const LeadingArtist: FunctionComponent<LeadingArtistProps> = ({
   index,
-  image,
-  name,
-  author,
+  song,
   numberOfSwipes,
 }) => {
+  const { user, isLoading, error, signOut } = useAuth();
+  const [profileId, setProfileId] = useState<string | null>(null);
+  const { setCurrentSong } = useCurrentSong();
+
+  useEffect(() => {
+    const fetchUserId = async () => {
+      if (song.author) {
+        const { data, error } = await supabase
+          .from("songs")
+          .select("user_id")
+          .eq("author", song.author);
+
+        if (error) {
+          console.error("Error fetching user ID:", error);
+        } else if (data && data.length > 0) {
+          setProfileId(data[0].user_id);
+        } else {
+          setProfileId(null);
+        }
+      }
+    };
+
+    fetchUserId();
+  }, [song.author]);
+
+  const handlePlay = async (song: Song) => {
+    setCurrentSong(song);
+  };
+
+  const profileLink = profileId ? `/profile/${profileId}` : "#";
+
   return (
     <div
       id={`leader-container-${index}`}
@@ -36,11 +72,12 @@ const LeadingArtist: FunctionComponent<LeadingArtistProps> = ({
         }`}
       >
         <Image
-          className="min-w-[70px] rounded-md aspect-square object-cover"
-          src={image}
+          className="min-w-[70px] rounded-md aspect-square object-cover hover:cursor-pointer"
+          src={`https://fpaeregzmenbrqdcpbra.supabase.co/storage/v1/object/public/images/${song.image_path}`}
           alt="Profile Image"
           width={70}
           height={70}
+          onClick={() => handlePlay(song)}
         />
       </div>
       <div>
@@ -48,10 +85,14 @@ const LeadingArtist: FunctionComponent<LeadingArtistProps> = ({
           id="artist-name"
           className="text-xl font-semibold overflow-hidden max-w-[200px] text-nowrap text-ellipsis"
         >
-          {name}
+          {song.title}
         </div>
         <div id="author-name" className="text-sm text-gray-700">
-          {author}
+          {profileId ? (
+            <Link href={profileLink}>{song.author}</Link>
+          ) : (
+            <span>{song.author}</span>
+          )}
         </div>
         <div id="swipe-number-container" className="text-sm text-gray-500">
           {numberOfSwipes}

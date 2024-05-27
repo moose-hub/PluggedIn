@@ -1,19 +1,25 @@
 "use client";
 import useSWR from "swr";
-import fetchUserLikedSongs from "../../../utils/fetchUserLikedSongs";
+import fetchUserLikedSongs from "@/utils/fetchUserLikedSongs";
 import { Database } from "@/types_db";
 import Image from "next/image";
-import { useState } from "react";
-import { FaHeartCircleCheck, FaHeartCircleXmark } from "react-icons/fa6";
+import { currentSong as useCurrentSong } from "@/hooks/useCurrentSong";
+import { useParams } from "next/navigation";
 
 type Song = Database["public"]["Tables"]["songs"]["Row"];
 
 const UserLikedSongs = () => {
-  const { data: songList, error } = useSWR<Song[] | undefined>(
-    "userLikedSongs",
-    fetchUserLikedSongs,
+  const { userid } = useParams();
+  const profileId = userid?.toString() || "";
+
+  const fetcher = () => fetchUserLikedSongs(profileId);
+
+  const { data: songList, error } = useSWR<Song[] | []>(
+    profileId ? `userLikedSongs-${profileId}` : null,
+    fetcher,
   );
-  const [currentSong, setCurrentSong] = useState<Song | null>(null);
+
+  const { currentSong, setCurrentSong } = useCurrentSong();
 
   const handlePlay = (song: Song) => {
     setCurrentSong(song);
@@ -28,20 +34,16 @@ const UserLikedSongs = () => {
     );
 
   return (
-    <div>
-      <h2 className="text-2xl mx-4 font-bold">Liked Songs</h2>
-      <div className="grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] p-4">
-        {songList?.map((song, index) => (
+    <>
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(150px,max-content))]">
+        {songList.map((song, index) => (
           <div
             key={index}
             className="flex flex-col items-start p-4 rounded-md hover:cursor-pointer hover:bg-white transition-colors max-w-48"
             onClick={() => handlePlay(song)}
           >
             <Image
-              src={
-                `https://fpaeregzmenbrqdcpbra.supabase.co/storage/v1/object/public/images/${song.image_path}` ||
-                ""
-              }
+              src={`https://fpaeregzmenbrqdcpbra.supabase.co/storage/v1/object/public/images/${song.image_path}`}
               alt={song.title || ""}
               width={150}
               height={150}
@@ -56,13 +58,7 @@ const UserLikedSongs = () => {
           </div>
         ))}
       </div>
-      {currentSong && (
-        <div className="fixed bottom-0 left-0 right-0 bg-gray-900 text-white p-4">
-          <h3 className="text-xl font-bold">{currentSong.title}</h3>
-          <p className="text-lg">{currentSong.author}</p>
-        </div>
-      )}
-    </div>
+    </>
   );
 };
 

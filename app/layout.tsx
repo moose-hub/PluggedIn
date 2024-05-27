@@ -19,6 +19,9 @@ export const metadata = {
   title: "PluggedIn Music",
   description:
     "A music platform supporting new artists connecting with their audience",
+  icons: {
+    icon: "/plug.png",
+  },
 };
 
 const inter = Inter({ subsets: ["latin"] });

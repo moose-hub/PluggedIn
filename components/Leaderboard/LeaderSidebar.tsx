@@ -15,7 +15,7 @@ const LeaderSidebar: React.FC<LeaderSidebarProps> = ({ className }) => {
       <header>
         <nav>
           <Link
-            href="/leaderboards"
+            href="/leaderboard"
             className="text-3xl flex items-center gap-2 font-bold p-4"
             aria-label="Leaderboard sidebar title"
           >
@@ -24,7 +24,7 @@ const LeaderSidebar: React.FC<LeaderSidebarProps> = ({ className }) => {
           </Link>
         </nav>
       </header>
-      <div className="overflow-y-auto flex-1">
+      <div className="flex-1">
         <Leaderboard />
       </div>
     </aside>

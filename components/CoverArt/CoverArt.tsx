@@ -11,14 +11,9 @@ const CoverArt: FunctionComponent<Cover> = ({ image, coverName }) => {
         </h3>
         <Image
           alt={coverName}
-          className="rounded-lg "
+          className="rounded-lg object-cover aspect-square m-0"
           height="250"
           src={image}
-          style={{
-            aspectRatio: "250/250",
-            objectFit: "cover",
-            margin: 0,
-          }}
           width="250"
         />
       </div>
