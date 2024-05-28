@@ -10,7 +10,7 @@ import { toast } from "sonner";
 
 import { useAuth } from "@/hooks/useAuth";
 import useAuthModal from "@/stores/useAuthModal";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import useUser from "@/stores/useUser";
 
 interface SidebarProps {
@@ -18,6 +18,7 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ className }) => {
+  const [activeTab, setActiveTab] = useState(1);
   const pathName = usePathname();
   const menuList = [
     {
@@ -52,9 +53,23 @@ const Sidebar: React.FC<SidebarProps> = ({ className }) => {
     }
   };
 
+  const handleActiveTab = () => {
+    if (pathName === "/") {
+      setActiveTab(0);
+    } else if (pathName === "/discover") {
+      setActiveTab(1);
+    } else {
+      setActiveTab(-1);
+    }
+  };
+
+  useEffect(() => {
+    handleActiveTab();
+  }, [activeTab]);
+
   return (
     <aside
-      className={`z-40 bg-white p-4 hidden lg:flex flex-col justify-between ${className}`}
+      className={`z-40 bg-pi-offwhite-main p-4 hidden lg:flex flex-col justify-between ${className}`}
       aria-label="Sidebar navigation"
     >
       <header>
@@ -66,11 +81,12 @@ const Sidebar: React.FC<SidebarProps> = ({ className }) => {
             {menuList.map((item, index) => (
               <Link
                 href={item.href}
-                className={`block p-3 text-2xl font-bold tracking-normal text-gray-950/50 rounded-lg transition duration-150 ease-in-out w-full transform hover:text-gray-950/100 hover:bg-white ${
-                  pathName === item.href ? "bg-white text-gray-900" : ""
-                }`}
+                className={`
+                ${activeTab === index ? "bg-white text-black" : "text-gray-400"}
+                block p-3 text-2xl font-bold tracking-normal  rounded-lg transition duration-150 ease-in-out w-full transform hover:text-gray-950/100 hover:bg-white `}
                 aria-label={item.aria}
                 key={`${index}-${item.name}`}
+                onClick={() => handleActiveTab()}
               >
                 <li>
                   {item.name === "Upload Track" ? (
