@@ -34,6 +34,7 @@
 - <a href="#Problems-faced-and-solutions" style="color: #8962ed;">Problems faced and solutions</a>
 - <a href="#Future-scope" style="color: #8962ed;">Future Scope</a>
 - <a href="#Acknowledgments" style="color: #8962ed;">Acknowledgments</a>
+- <a href="The-Process" style="color: #8962ed;">The Process</a>
 
 ## Problem Statement
 
@@ -98,6 +99,45 @@ Our solution is a Tinder-swipe style application that presents random music from
   </tr>
 </table>
 
+## The Process
+
+#### Story Point Poker Decision Making:
+
+##### Deciding whether or not we used TypeScript
+
+Initial Decisions:
+<img src="./public/story-point-poker-1.png">
+
+Decisions after an open dialog:
+<img src="./public/story-point-poker-2.png">
+
+#### Mood Boarding:
+
+<img src="./public/Screenshot 2024-05-28 160300.png">
+
+#### High and Low Fidelaty Wireframing:
+
+<img src="./public/lowFidelaty.png" width=300 style="display: inline-block;">
+<img src="./public/highFidelaty.png" width=325 height=381.21 style="display: inline-block;">
+
+#### Surveys and Questionairs:
+
+<img src="./public/survey1.png" width=315>
+<img src="./public/survey3.png" width=322>
+<img src="./public/survey2.png">
+
+#### Trello Tickets:
+
+<img src="./public/trello-tickets.png">
+
+#### Daily Standups:
+
+<img src="./public/standups.png">
+
+#### Weekly Goals:
+
+<img src="./public/weekly-goals.png">
+
 ## Future Scope
 
 <table>
@@ -133,11 +173,11 @@ Our solution is a Tinder-swipe style application that presents random music from
 
 ### School of Code:
 
-Big thank you to school of code for the all the support thus far! 
+Big thank you to school of code for the all the support thus far!
 
 ### Nathan & Nasa (Stakeholders):
 
-A Very big thank you to <a href="https://www.linkedin.com/in/nathan-anderson-5613a6162/">Nathan</a> and Nasa for giving us the trust and opportunity to work on this project. 
+A Very big thank you to <a href="https://www.linkedin.com/in/nathan-anderson-5613a6162/">Nathan</a> and Nasa for giving us the trust and opportunity to work on this project.
 
 ### Nadeem:
 
@@ -146,8 +186,9 @@ Thank you to <a href="https://www.linkedin.com/in/nadeemshabir/">Nadeem</a> for 
 ### Our respective Mentors
 
 We also want to express our gratitude towards our mentors for helping us along the way and being that voice in our corner:
+
 - <a href="https://www.linkedin.com/search/results/all/?fetchDeterministicClustersOnly=true&heroEntityKey=urn%3Ali%3Afsd_profile%3AACoAACwLBQsBTgfHCqQtaf1fA--CukPS6rfSfgg&keywords=guy%20dunton&origin=RICH_QUERY_SUGGESTION&position=0&searchId=ce3b62f9-0615-4098-b112-e9583516e62c&sid=bhi&spellCorrectionEnabled=false">Guy Dunton</a>
 - <a href="https://www.linkedin.com/in/azlancuttilan/">Azlan Cuttilan
-</a>
+  </a>
 - <a href="https://www.linkedin.com/in/bashley1/">Ben Ashle</a>
 - <a href="https://www.linkedin.com/in/fitzpatrickandrew/">Andrew Fitzpatrick</a>
