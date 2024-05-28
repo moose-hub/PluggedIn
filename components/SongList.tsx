@@ -34,7 +34,7 @@ const SongList = () => {
     <>
       <div className="p-4">
         <h2 className="text-2xl mx-4 font-bold">All Songs</h2>
-        <div className="grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))]">
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] mb-8">
           {songList?.map((song, index) => (
             <div
               key={index}

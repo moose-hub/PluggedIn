@@ -25,7 +25,7 @@ const Profile: React.FC<ProfileProps> = ({ user }) => {
 
   return (
     <>
-      <div className="flex flex-col p-4 mx-2">
+      <div className="flex flex-col p-4 mx-2 mb-8">
         <div className="flex flex-col xl:flex-row gap-4 mb-12 z-10">
           {user?.avatar_url !== null && user?.avatar_url !== undefined ? (
             <Image
@@ -34,7 +34,7 @@ const Profile: React.FC<ProfileProps> = ({ user }) => {
               width={250}
               height={250}
               quality={100}
-              className="rounded-full max-h-[250px] w-auto h-auto"
+              className="rounded-full max-h-[250px]"
               priority
             />
           ) : (

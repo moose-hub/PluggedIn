@@ -63,15 +63,16 @@ const Sidebar: React.FC<SidebarProps> = ({ className }) => {
         </div>
         <nav>
           <ul className="flex flex-col gap-4">
-            {menuList.map((item) => (
-              <li key={item.name}>
-                <Link
-                  href={item.href}
-                  className={`block p-3 text-2xl font-bold tracking-normal text-gray-950/50 rounded-lg transition duration-150 ease-in-out w-full transform hover:text-gray-950/100 hover:bg-white ${
-                    pathName === item.href ? "bg-white text-gray-900" : ""
-                  }`}
-                  aria-label={item.aria}
-                >
+            {menuList.map((item, index) => (
+              <Link
+                href={item.href}
+                className={`block p-3 text-2xl font-bold tracking-normal text-gray-950/50 rounded-lg transition duration-150 ease-in-out w-full transform hover:text-gray-950/100 hover:bg-white ${
+                  pathName === item.href ? "bg-white text-gray-900" : ""
+                }`}
+                aria-label={item.aria}
+                key={`${index}-${item.name}`}
+              >
+                <li>
                   {item.name === "Upload Track" ? (
                     <button onClick={handleClick}>
                       {item.icon} {item.name}
@@ -81,8 +82,8 @@ const Sidebar: React.FC<SidebarProps> = ({ className }) => {
                       {item.icon} {item.name}
                     </span>
                   )}
-                </Link>
-              </li>
+                </li>
+              </Link>
             ))}
           </ul>
         </nav>
