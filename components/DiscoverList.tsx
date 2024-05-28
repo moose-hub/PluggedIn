@@ -61,7 +61,7 @@ const DiscoverList = () => {
     );
 
   return (
-    <div className="flex flex-col md:items-center overflow-x-hidden w-full mb-28">
+    <div className="flex flex-col items-center overflow-x-hidden w-full mb-28">
       <div className="relative flex flex-col p-4 gap-4 max-w-96">
         <div className="text-left p-2 rounded-lg">
           <h2 className="font-bold text-2xl max-w-full text-pretty">
