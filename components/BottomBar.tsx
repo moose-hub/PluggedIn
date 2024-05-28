@@ -1,18 +1,19 @@
 "use client";
-
+import Link from "next/link";
+import Logo from "./Logo";
 import { FaHeart } from "react-icons/fa";
 import { FaHouse, FaMagnifyingGlass } from "react-icons/fa6";
 import { IoPersonSharp } from "react-icons/io5";
-import Link from "next/link";
-import Logo from "./Logo";
 import { MdLeaderboard } from "react-icons/md";
 import { PiMusicNotesPlusFill } from "react-icons/pi";
-import UserSpotlight from "./UserSpotlight";
-import { usePathname } from "next/navigation";
-import useAuthModal from "@/stores/useAuthModal";
-import useUploadModal from "@/stores/useUploadModal";
+
+import { usePathname, useRouter } from "next/navigation";
 import useSWR from "swr";
 import { createClient } from "@/utils/supabase/component";
+
+import useAuthModal from "@/stores/useAuthModal";
+import useUploadModal from "@/stores/useUploadModal";
+import UserSpotlight from "./UserSpotlight";
 
 const supabase = createClient();
 
@@ -25,10 +26,11 @@ const fetchUser = async () => {
 
 const BottomBar = () => {
   const pathName = usePathname();
+  const router = useRouter();
   const authModal = useAuthModal();
   const uploadModal = useUploadModal();
   const { data: user, error } = useSWR("user", fetchUser);
-  const profileLink = `/profile/${user?.id}`;
+  const profileLink = user ? `/profile/${user?.id}` : "profile";
 
   const menuList = [
     {
@@ -58,7 +60,7 @@ const BottomBar = () => {
     {
       name: "Profile",
       icon: <IoPersonSharp className="inline-block mr-2 h-6 w-6" />,
-      href: profileLink,
+      href: "profile",
       aria: "Link to profile",
     },
   ];
@@ -74,6 +76,8 @@ const BottomBar = () => {
   const handleLoginClick = () => {
     if (!user) {
       return authModal.onOpen();
+    } else {
+      return router.push(profileLink);
     }
   };
 
