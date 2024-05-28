@@ -101,6 +101,16 @@ Our solution is a Tinder-swipe style application that presents random music from
 
 ## The Process
 
+#### Story Point Poker Decision Making:
+
+##### Deciding whether or not we used TypeScript
+
+Initial Decisions:
+<img src="./public/story-point-poker-1.png">
+
+Decisions after an open dialog:
+<img src="./public/story-point-poker-2.png">
+
 #### Mood Boarding:
 
 <img src="./public/Screenshot 2024-05-28 160300.png">
@@ -115,6 +125,18 @@ Our solution is a Tinder-swipe style application that presents random music from
 <img src="./public/survey1.png" width=315>
 <img src="./public/survey3.png" width=322>
 <img src="./public/survey2.png">
+
+#### Trello Tickets:
+
+<img src="./public/trello-tickets.png">
+
+#### Daily Standups:
+
+<img src="./public/standups.png">
+
+#### Weekly Goals:
+
+<img src="./public/weekly-goals.png">
 
 ## Future Scope
 
