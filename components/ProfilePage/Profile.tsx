@@ -25,7 +25,7 @@ const Profile: React.FC<ProfileProps> = ({ user }) => {
 
   return (
     <>
-      <div className="flex flex-col p-4 mx-2 mb-24">
+      <div className="flex flex-col p-4 mx-2 mb-8">
         <div className="flex flex-col xl:flex-row gap-4 mb-12 z-10">
           {user?.avatar_url !== null && user?.avatar_url !== undefined ? (
             <Image
