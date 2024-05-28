@@ -33,6 +33,7 @@ export const useAuth = () => {
     },
     shouldRetryOnError: false,
     revalidateOnFocus: true,
+    refreshInterval: 0,
   });
 
   const user = useUser((state) => state.user);

@@ -61,15 +61,15 @@ const DiscoverList = () => {
     );
 
   return (
-    <div className="flex flex-col items-center overflow-x-hidden overflow-y-scroll scroll-smooth w-full p-4">
-      <div className="relative flex flex-col p-8 gap-4">
+    <div className="flex flex-col md:items-center overflow-x-hidden w-full">
+      <div className="relative flex flex-col p-4 gap-4 max-w-96">
         <div className="text-left p-2 rounded-lg">
           <h2 className="font-bold text-2xl max-w-full text-pretty">
             {currentSong?.title}
           </h2>
           <p className="text-lg">{currentSong?.author}</p>
         </div>
-        <div className="relative z-10 flex flex-col justify-center h-full w-full">
+        <div className="relative z-10 flex flex-col justify-center h-full w-full items-center">
           {currentSong?.image_path && (
             <div className="flex justify-center w-[300px] h-[300px]">
               <Image
