@@ -44,7 +44,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         >
           <Sidebar className="fixed top-0 left-0 h-screen w-[200px] lg:w-[320px] hidden lg:block overflow-hidden" />
           <main
-            className={`flex flex-col col-span-1 lg:col-start-2 lg:col-end-3 overflow-y-auto h-full lg:max-w-[calc(100vw-640px)] flex-grow mb-36`}
+            className={`flex flex-col col-span-1 lg:col-start-2 lg:col-end-3 overflow-y-auto h-full lg:max-w-[calc(100vw-640px)] flex-grow mb-[200px] md:mb-[150px]`}
           >
             <div className="mb-28">
               <PageHeader />
