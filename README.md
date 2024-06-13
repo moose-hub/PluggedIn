@@ -182,8 +182,8 @@ Due to time constraints we were not able to develop certain features or function
   </td>
 </tr>
 <tr>
-  <td><img src="./public/lowFidelityWireframes.png"></td>
-  <td><img src="./public/highFidelityWireframes.png"></td>
+  <td><img src="./public/LowFidelityWireframes.png"></td>
+  <td><img src="./public/HighFidelityWireframes.png"></td>
 </tr>
 </table>
 
@@ -240,8 +240,8 @@ Due to time constraints we were not able to develop certain features or function
 &nbsp;
 
 ## Documentation:
-- [Our Team Manifesto](https://github.com/moose-hub/PluggedIn/documentation/manifesto.md)
-- [Brand Styleguide](https://github.com/moose-hub/PluggedIn/documentation/styleguide.md)
+- [Our Team Manifesto](https://github.com/moose-hub/PluggedIn/blob/main/documentation/manifesto.md)
+- [Brand Styleguide](https://github.com/moose-hub/PluggedIn/blob/main/documentation/styleguide.md)
 
 ## 🎉 Acknowledgments
 
