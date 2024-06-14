@@ -13,7 +13,7 @@
 - <a href="#-problem-statement" style="color: #8962ed; text-decoration: underline;">Problem Statement</a>
 - <a href="#-solution" style="color: #8962ed; text-decoration: underline;">Solution</a>
 - <a href="#-future-scope" style="color: #8962ed; text-decoration: underline;">Future Scope</a>
-- <a href="#-dependencies-/-limitations" style="color: #8962ed; text-decoration: underline;">Dependencies and Limitations</a>
+- <a href="#-dependencies--limitations" style="color: #8962ed; text-decoration: underline;">Dependencies and Limitations</a>
 - <a href="#-tech-stack" style="color: #8962ed; text-decoration: underline;">Tech Stack</a>
 - <a href="#-lessons-learned" style="color: #8962ed; text-decoration: underline;">Lessons Learned</a>
 - <a href="#-the-process" style="color: #8962ed; text-decoration: underline;">The Process</a>
