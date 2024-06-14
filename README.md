@@ -10,13 +10,15 @@
 
 ## 📋 Contents
 
-- <a href="#Problem-Statement" style="color: #8962ed; text-decoration: underline;">Problem Statement</a>
-- <a href="#Solution" style="color: #8962ed; text-decoration: underline;">Solution</a>
-- <a href="#Tech-Stack" style="color: #8962ed; text-decoration: underline;">Tech Stack</a>
-- <a href="#Problems-faced-and-solutions" style="color: #8962ed; text-decoration: underline;">Problems faced and solutions</a>
-- <a href="#Future-scope" style="color: #8962ed; text-decoration: underline;">Future Scope</a>
-- <a href="🎉 #Acknowledgments" style="color: #8962ed; text-decoration: underline;">Acknowledgments</a>
-- <a href="The-Process" style="color: #8962ed; text-decoration: underline;">The Process</a>
+- <a href="#-problem-statement" style="color: #8962ed; text-decoration: underline;">Problem Statement</a>
+- <a href="#-solution" style="color: #8962ed; text-decoration: underline;">Solution</a>
+- <a href="#-future-scope" style="color: #8962ed; text-decoration: underline;">Future Scope</a>
+- <a href="#-dependencies-/-limitations" style="color: #8962ed; text-decoration: underline;">Dependencies and Limitations</a>
+- <a href="#-tech-stack" style="color: #8962ed; text-decoration: underline;">Tech Stack</a>
+- <a href="#-lessons-learned" style="color: #8962ed; text-decoration: underline;">Lessons Learned</a>
+- <a href="#-the-process" style="color: #8962ed; text-decoration: underline;">The Process</a>
+- <a href="#-documentation" style="color: #8962ed; text-decoration: underline;">Documentation</a>
+- <a href="#-acknowledgments" style="color: #8962ed; text-decoration: underline;">Acknowledgments</a>
 
 ## ⛔ Problem Statement
 Emerging artists need a platform that supports engagement, and discovery, enabling artists and fans to build a direct connection for listening, feedback and contribution.
